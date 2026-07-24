@@ -3,13 +3,13 @@ const path = require('path');
 
 // Ensure correct primary green color (#19E680)
 const BASE_URL = 'https://unblockedgameszone.com';
-const dateNow = new Date().toISOString().split('T')[0];
+// Use full ISO string for more precise lastmod, similar to reference sitemap
+const dateNow = new Date().toISOString();
 
 const publicDir = path.join(__dirname, 'public');
 const dataDir = path.join(publicDir, 'data');
 
 const staticPages = [
-  '/',
   '/about',
   '/contact',
   '/privacy',
@@ -26,30 +26,42 @@ const staticPages = [
 ];
 
 function generate() {
-  console.log('Starting sitemap generation...');
+  console.log('Starting SEO-optimized sitemap generation...');
   let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
   xml += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n';
 
+  // 1. Home Page (Highest Priority)
+  xml += `  <url>\n    <loc>${BASE_URL}/</loc>\n    <lastmod>${dateNow}</lastmod>\n    <changefreq>daily</changefreq>\n    <priority>1.0</priority>\n  </url>\n`;
+
+  // 2. Static / SEO Landing Pages (High Priority)
   staticPages.forEach(page => {
     xml += `  <url>\n    <loc>${BASE_URL}${page}</loc>\n    <lastmod>${dateNow}</lastmod>\n    <changefreq>weekly</changefreq>\n    <priority>0.8</priority>\n  </url>\n`;
   });
 
-  const categoriesRaw = fs.readFileSync(path.join(dataDir, 'categories.json'), 'utf8');
-  const categories = JSON.parse(categoriesRaw);
-  categories.forEach(cat => {
-    xml += `  <url>\n    <loc>${BASE_URL}/category/${cat.slug}</loc>\n    <lastmod>${dateNow}</lastmod>\n    <changefreq>weekly</changefreq>\n    <priority>0.7</priority>\n  </url>\n`;
-  });
+  // 3. Category Pages (Medium-High Priority)
+  if (fs.existsSync(path.join(dataDir, 'categories.json'))) {
+    const categoriesRaw = fs.readFileSync(path.join(dataDir, 'categories.json'), 'utf8');
+    const categories = JSON.parse(categoriesRaw);
+    categories.forEach(cat => {
+      xml += `  <url>\n    <loc>${BASE_URL}/category/${cat.slug}</loc>\n    <lastmod>${dateNow}</lastmod>\n    <changefreq>weekly</changefreq>\n    <priority>0.8</priority>\n  </url>\n`;
+    });
+  }
 
-  const slugMapRaw = fs.readFileSync(path.join(dataDir, 'slug-map.json'), 'utf8');
-  const slugMap = JSON.parse(slugMapRaw);
-  Object.keys(slugMap).forEach(slug => {
-    xml += `  <url>\n    <loc>${BASE_URL}/game/${slug}</loc>\n    <lastmod>${dateNow}</lastmod>\n    <changefreq>monthly</changefreq>\n    <priority>0.6</priority>\n  </url>\n`;
-  });
+  // 4. Individual Game Pages (High Priority - These are the money pages)
+  if (fs.existsSync(path.join(dataDir, 'slug-map.json'))) {
+    const slugMapRaw = fs.readFileSync(path.join(dataDir, 'slug-map.json'), 'utf8');
+    const slugMap = JSON.parse(slugMapRaw);
+    Object.keys(slugMap).forEach(slug => {
+      // Changed priority from 0.6 to 0.9 to match cpsspeedtest game priorities
+      xml += `  <url>\n    <loc>${BASE_URL}/game/${slug}</loc>\n    <lastmod>${dateNow}</lastmod>\n    <changefreq>monthly</changefreq>\n    <priority>0.9</priority>\n  </url>\n`;
+    });
+    console.log(`Included ${Object.keys(slugMap).length} games in sitemap.`);
+  }
 
   xml += '</urlset>';
 
   fs.writeFileSync(path.join(publicDir, 'sitemap.xml'), xml);
-  console.log(`Sitemap generated successfully in public/sitemap.xml with ${Object.keys(slugMap).length} games.`);
+  console.log(`Sitemap generated successfully in public/sitemap.xml`);
 }
 
 try {

@@ -1,4 +1,4 @@
-import { Helmet } from "react-helmet-async";
+﻿import { Helmet } from "react-helmet-async";
 
 export interface BreadcrumbItem {
   name: string;
@@ -18,7 +18,7 @@ interface SEOProps {
   noindex?: boolean;
 }
 
-const BASE_URL = "https://unblockedgameszone.com";
+const BASE_URL = "https://CloudPlayHub.com";
 
 export function buildBreadcrumbSchema(items: BreadcrumbItem[]) {
   return {
@@ -37,7 +37,7 @@ export function buildWebSiteSchema() {
   return {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    "name": "UnblockedGamesZone",
+    "name": "CloudPlayHub",
     "url": `${BASE_URL}/`,
     "description": "Play thousands of free unblocked games for school. No download required. Works on Chromebooks.",
     "potentialAction": {
@@ -50,7 +50,7 @@ export function buildWebSiteSchema() {
     },
     "publisher": {
       "@type": "Organization",
-      "name": "UnblockedGamesZone",
+      "name": "CloudPlayHub",
       "url": `${BASE_URL}/`,
       "logo": {
         "@type": "ImageObject",
@@ -72,13 +72,13 @@ export default function SEO({
   robots,
   noindex = false,
 }: SEOProps) {
-  const siteName = "UnblockedGamesZone";
+  const siteName = "CloudPlayHub";
   const fullTitle = title
     ? `${title} | ${siteName}`
     : `${siteName} - Play Free Online Games No Download`;
   const fullDescription =
     description ||
-    "Play the best free unblocked games for school. No download required. Works on Chromebooks. UnblockedGamesZone features action, puzzle, and racing games.";
+    "Play the best free unblocked games for school. No download required. Works on Chromebooks. CloudPlayHub features action, puzzle, and racing games.";
   const url = canonical
     ? `${BASE_URL}${canonical}`
     : `${BASE_URL}/`;
@@ -138,3 +138,4 @@ export default function SEO({
     </Helmet>
   );
 }
+

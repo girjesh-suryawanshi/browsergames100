@@ -15,7 +15,7 @@ import { getOptimizedImage } from "@/lib/image-utils";
 import { gameDescriptions } from "@/data/game-descriptions";
 import { useToast } from "@/hooks/use-toast";
 
-const BASE_URL = "https://unblockedgameszone.com";
+const BASE_URL = "https://CloudPlayHub.com";
 
 export default function GamePage() {
   const { slug } = useParams<{ slug: string }>();
@@ -49,7 +49,7 @@ export default function GamePage() {
   const handleShare = async () => {
     const pageUrl = `${BASE_URL}/game/${slug}`;
     const title = `🎮 Play ${game?.t} Unblocked - Free Online Game`;
-    const text = `Check out ${game?.t} — free unblocked game, no download needed! Play now on UnblockedGamesZone.`;
+    const text = `Check out ${game?.t} — free unblocked game, no download needed! Play now on CloudPlayHub.`;
 
     // On mobile: use native Web Share API (no file, just URL + text)
     const isMobile = /android|iphone|ipad|ipod/i.test(navigator.userAgent);
@@ -155,7 +155,7 @@ export default function GamePage() {
     "isAccessibleForFree": true,
     "publisher": {
       "@type": "Organization",
-      "name": "UnblockedGamesZone",
+      "name": "CloudPlayHub",
       "url": BASE_URL,
     },
     "aggregateRating": {
@@ -370,7 +370,7 @@ export default function GamePage() {
               )}
             </div>
 
-            <AdPlacement size="728x90" className="mb-8" slot="leaderboard-below-game" />
+            <AdPlacement size="728x90" className="mt-[150px] mb-8" slot="leaderboard-below-game" />
 
             {/* About & Instructions */}
             <div className="grid md:grid-cols-2 gap-8 mb-12">
@@ -412,12 +412,14 @@ export default function GamePage() {
                     Tips &amp; Tricks
                   </h2>
                   <ul className="space-y-3">
-                    {[
-                      "Start with easier levels to master the controls before advancing",
-                      "Use your browser's full-screen mode (F11) for the best experience",
-                      "Look for power-ups or hidden bonuses in every level",
-                      "Practice regularly to improve your score and climb the ranks",
-                    ].map((tip, i) => (
+                    {(
+                      (slug && gameDescriptions[slug]?.tips) || [
+                        "Start with easier levels to master the controls before advancing to harder stages.",
+                        "Use your browser's full-screen mode (F11 on desktop) for the most immersive experience.",
+                        "Look for hidden power-ups and bonus collectibles in every level to boost your score.",
+                        "Practice the core mechanics in early levels and study how top players approach difficult sections.",
+                      ]
+                    ).map((tip: string, i: number) => (
                       <li key={i} className="flex gap-3 text-sm text-muted-foreground">
                         <span className="flex-shrink-0 w-5 h-5 rounded-full bg-secondary flex items-center justify-center text-[10px] font-bold text-primary">
                           {i + 1}
@@ -430,7 +432,7 @@ export default function GamePage() {
 
                 <div className="p-6 bg-primary/5 rounded-xl border border-primary/10">
                   <h2 className="text-lg font-bold text-foreground mb-2">
-                    ✅ Why Play on UnblockedGamesZone?
+                    ✅ Why Play on CloudPlayHub?
                   </h2>
                   <ul className="space-y-1.5 text-sm text-muted-foreground">
                     <li>⚡ Fast loading — optimized for school WiFi</li>
@@ -503,3 +505,4 @@ export default function GamePage() {
     </div>
   );
 }
+

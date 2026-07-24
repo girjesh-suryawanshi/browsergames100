@@ -4,36 +4,27 @@ export default function ContactUs() {
   return (
     <div className="min-h-screen py-12">
       <SEO 
-        title="Contact Us - UnblockedGamesZone" 
-        description="Have a suggestion? Found a broken game? Get in touch with us at UnblockedGamesZone."
+        title="Contact Us - CloudPlayHub" 
+        description="Reach out to the CloudPlayHub team for support, business inquiries, or DMCA notices."
       />
       <div className="container max-w-4xl">
-        <h1 className="text-4xl font-black mb-8">Contact Us</h1>
+        <h1 className="text-4xl font-black mb-8">Contact the Team</h1>
         <div className="prose prose-invert max-w-none space-y-6 text-muted-foreground">
           <p>
-            We’d love to hear from you. Whether you’ve found a bug, want to suggest a new game, or just want to say hi, feel free to reach out.
+            Whether you're a developer looking to publish your game, an advertiser seeking partnership opportunities, or a user reporting a technical glitch, we want to hear from you.
           </p>
 
-          <h2 className="text-2xl font-bold text-foreground">1. Game Submissions</h2>
+          <h2 className="text-2xl font-bold text-foreground">Direct Communication</h2>
           <p>
-            Are you a game developer? We love hosting new games. If you want your title to be played by thousands of students worldwide, send us a link to your game’s JSON-LD or iframe URL.
+            For all inquiries, including DMCA notices and technical support, please direct your correspondence to our official communication channel:
           </p>
-
-          <h2 className="text-2xl font-bold text-foreground">2. Reporting a Problem</h2>
-          <p>
-            Found a broken game or an ad that feels out of place? We’re on it. Please tell us the name of the game and the device you’re using so we can fix it quickly.
-          </p>
-
-          <h2 className="text-2xl font-bold text-foreground">3. How to Reach Us</h2>
-          <p>
-            You can email us directly at:
-          </p>
-          <div className="p-6 bg-card border border-border/50 rounded-xl max-w-sm">
-            <p className="font-bold text-primary text-xl">contact@unblockedgameszone.com</p>
+          <div className="p-6 bg-card rounded-xl border border-border/50 text-center">
+            <p className="font-bold text-primary text-xl">support@cloudplayhub.com</p>
           </div>
 
-          <p className="pt-8">
-            We aim to respond to all emails within 48 hours.
+          <h2 className="text-2xl font-bold text-foreground">Response Times</h2>
+          <p>
+            Our administrative team operates Monday through Friday. We strive to process all copyright and technical queries within 48-72 business hours. For advertising inquiries, please allow up to one week for a comprehensive response.
           </p>
         </div>
       </div>

@@ -1,4 +1,4 @@
-import { useParams, Link } from "react-router-dom";
+﻿import { useParams, Link } from "react-router-dom";
 import { useState, useEffect, useMemo } from "react";
 import { Loader2, ArrowUpDown, TrendingUp, Star, Clock, ChevronUp } from "lucide-react";
 import {
@@ -22,7 +22,7 @@ const SORT_OPTIONS: { value: SortOption; label: string; icon: React.ReactNode }[
   { value: "newest", label: "Newest", icon: <Clock className="w-3.5 h-3.5" /> },
 ];
 
-const BASE_URL = "https://unblockedgameszone.com";
+const BASE_URL = "https://CloudPlayHub.com";
 
 // SEO blurbs per category slug — used for the on-page text block
 const CATEGORY_SEO_CONTENT: Record<string, string> = {
@@ -266,3 +266,4 @@ export default function CategoryPage() {
     </div>
   );
 }
+

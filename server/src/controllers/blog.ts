@@ -1,4 +1,4 @@
-import { Request, Response } from 'express';
+﻿import { Request, Response } from 'express';
 import { PrismaClient } from '@prisma/client';
 import { submitToIndexNow } from '../lib/indexnow';
 
@@ -36,7 +36,7 @@ export const createPost = async (req: Request, res: Response) => {
     const post = await prisma.blogPost.create({ data });
     
     if (post.isPublished) {
-      await submitToIndexNow(`https://www.unblockedgameszone.com/blog/${post.slug}`);
+      await submitToIndexNow(`https://www.CloudPlayHub.com/blog/${post.slug}`);
     }
     
     res.status(201).json(post);
@@ -52,7 +52,7 @@ export const updatePost = async (req: Request, res: Response) => {
     const post = await prisma.blogPost.update({ where: { id }, data });
     
     if (post.isPublished) {
-      await submitToIndexNow(`https://www.unblockedgameszone.com/blog/${post.slug}`);
+      await submitToIndexNow(`https://www.CloudPlayHub.com/blog/${post.slug}`);
     }
     
     res.json(post);
@@ -68,7 +68,7 @@ export const deletePost = async (req: Request, res: Response) => {
     await prisma.blogPost.delete({ where: { id } });
     
     if (post && post.isPublished) {
-      await submitToIndexNow(`https://www.unblockedgameszone.com/blog/${post.slug}`);
+      await submitToIndexNow(`https://www.CloudPlayHub.com/blog/${post.slug}`);
     }
     
     res.json({ success: true });
@@ -85,3 +85,4 @@ export const getCategories = async (req: Request, res: Response) => {
     res.status(500).json({ error: 'Failed to fetch categories' });
   }
 };
+

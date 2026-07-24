@@ -1,6 +1,6 @@
-{
+﻿{
   "short_name": "UnblockedGames",
-  "name": "UnblockedGamesZone — Free Unblocked Games",
+  "name": "CloudPlayHub — Free Unblocked Games",
   "description": "Play 28,000+ free unblocked games for school. No downloads, no installs. Works on Chromebooks and any browser.",
   "icons": [
     {
@@ -33,7 +33,7 @@
       "sizes": "1200x630",
       "type": "image/png",
       "form_factor": "wide",
-      "label": "UnblockedGamesZone Homepage"
+      "label": "CloudPlayHub Homepage"
     }
   ],
   "shortcuts": [
@@ -53,3 +53,4 @@
     }
   ]
 }
+

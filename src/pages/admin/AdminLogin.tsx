@@ -1,4 +1,4 @@
-import { useState } from "react";
+﻿import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { Button } from "@/components/ui/button";
@@ -42,7 +42,7 @@ export default function AdminLogin() {
 
   return (
     <div className="min-h-screen bg-background flex items-center justify-center p-4">
-      <Helmet><meta name="robots" content="noindex, nofollow" /><title>Admin Login | UnblockedGamesZone</title></Helmet>
+      <Helmet><meta name="robots" content="noindex, nofollow" /><title>Admin Login | CloudPlayHub</title></Helmet>
       <div className="max-w-md w-full bg-card border border-border rounded-2xl shadow-xl p-8">
         <div className="text-center mb-8">
           <h1 className="text-3xl font-extrabold mb-2">Admin Portal</h1>
@@ -88,3 +88,4 @@ export default function AdminLogin() {
     </div>
   );
 }
+

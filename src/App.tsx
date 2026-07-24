@@ -21,8 +21,10 @@ import TermsOfService from "./pages/TermsOfService";
 import AboutUs from "./pages/AboutUs";
 import ContactUs from "./pages/ContactUs";
 import Disclaimer from "./pages/Disclaimer";
+import DMCAPolicy from "./pages/DMCAPolicy";
 import NotFound from "./pages/NotFound";
 import StickyBottomAd from "@/components/StickyBottomAd";
+import CookieConsent from "@/components/CookieConsent";
 import BlogList from "./pages/BlogList";
 import BlogPost from "./pages/BlogPost";
 import AdminBlogList from "./pages/admin/AdminBlogList";
@@ -49,19 +51,17 @@ const App = () => (
               <Route path="/categories" element={<CategoriesPage />} />
               <Route path="/search" element={<SearchPage />} />
               <Route path="/favorites" element={<FavoritesPage />} />
-              <Route path="/unblocked-games-for-school" element={<LandingPage {...landingPages['unblocked-games-for-school']} />} />
-              <Route path="/chromebook-games" element={<LandingPage {...landingPages['chromebook-games']} />} />
+              <Route path="/play-html5-games" element={<LandingPage {...landingPages['play-html5-games']} />} />
               <Route path="/free-browser-games" element={<LandingPage {...landingPages['free-browser-games']} />} />
-              <Route path="/games-to-play-at-school" element={<LandingPage {...landingPages['games-to-play-at-school']} />} />
+              <Route path="/cloud-gaming-unblocked" element={<LandingPage {...landingPages['cloud-gaming-unblocked']} />} />
+              <Route path="/poki-alternative" element={<LandingPage {...landingPages['poki-alternative']} />} />
               <Route path="/unblocked-racing-games" element={<LandingPage {...landingPages['unblocked-racing-games']} />} />
-              <Route path="/unblocked-puzzle-games" element={<LandingPage {...landingPages['unblocked-puzzle-games']} />} />
-              <Route path="/unblocked-2-player-games" element={<LandingPage {...landingPages['unblocked-2-player-games']} />} />
-              <Route path="/multiplayer-games" element={<LandingPage {...landingPages['multiplayer-games']} />} />
               <Route path="/privacy" element={<PrivacyPolicy />} />
               <Route path="/terms" element={<TermsOfService />} />
               <Route path="/about" element={<AboutUs />} />
               <Route path="/contact" element={<ContactUs />} />
               <Route path="/disclaimer" element={<Disclaimer />} />
+              <Route path="/dmca" element={<DMCAPolicy />} />
               <Route path="/blog" element={<BlogList />} />
               <Route path="/blog/:slug" element={<BlogPost />} />
               <Route path="/admin/login" element={<AdminLogin />} />
@@ -72,6 +72,7 @@ const App = () => (
             </Routes>
             <Footer />
             <StickyBottomAd />
+            <CookieConsent />
           </BrowserRouter>
         </TooltipProvider>
       </ThemeProvider>

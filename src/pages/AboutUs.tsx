@@ -4,33 +4,28 @@ export default function AboutUs() {
   return (
     <div className="min-h-screen py-12">
       <SEO 
-        title="About Us - UnblockedGamesZone" 
-        description="Learn more about our mission to provide free, unblocked games for students and gamers worldwide."
+        title="About CloudPlayHub - Free Browser Games" 
+        description="Discover the story behind CloudPlayHub, the ultimate destination for premium HTML5 games and cloud gaming without downloads."
       />
       <div className="container max-w-4xl">
-        <h1 className="text-4xl font-black mb-8 text-gradient-gaming">About UnblockedGamesZone</h1>
+        <h1 className="text-4xl font-black mb-8 text-gradient-gaming">Our Story</h1>
         <div className="prose prose-invert max-w-none space-y-6 text-muted-foreground">
           <p>
-            Welcome to the home of free, unblocked, and high-quality browser gaming. UnblockedGamesZone was created by a small team of passionate developers who spent way too much time playing games in school and wanted to build a portal that worked perfectly on Chromebooks and restricted school networks.
+            CloudPlayHub was born out of a simple vision: gaming should be accessible, instantaneous, and free from bulky downloads. We are a dedicated collective of gaming enthusiasts and developers who recognized the need for a seamless browser-based gaming experience.
           </p>
 
-          <h2 className="text-2xl font-bold text-foreground">Why We Built This?</h2>
+          <h2 className="text-2xl font-bold text-foreground">The Cloud Gaming Revolution</h2>
           <p>
-            Standard gaming platforms are often slow, resource-heavy, and frequently blocked by school filters. We wanted a lightweight, fast, and secure destination where you can jump straight into top HTML5 games without downloading anything.
+            We firmly believe that the future of casual gaming lies in the cloud. By leveraging modern HTML5 and WebGL technologies, we provide a robust platform where users can enjoy high-fidelity graphics and smooth gameplay on practically any device, from high-end PCs to standard school Chromebooks.
           </p>
 
-          <h2 className="text-2xl font-bold text-foreground">Our Mission</h2>
+          <h2 className="text-2xl font-bold text-foreground">Quality Over Quantity</h2>
           <p>
-            Our goal is simple: to be the #1 place where students can decompress, have fun, and play their favorite titles for free. We are committed to maintaining a safe environment and regularly auditing our library to ensure it remains kid-friendly and compliant with modern safety standards.
+            Instead of flooding our site with thousands of broken or low-quality titles, we meticulously curate our collection. Every game is play-tested for performance, safety, and fun. If a game doesn't meet our strict quality assurance guidelines, it doesn't make it to CloudPlayHub.
           </p>
 
-          <h2 className="text-2xl font-bold text-foreground">A Note on Performance</h2>
-          <p>
-            Every game on UnblockedGamesZone is tested on low-end hardware to ensure it runs smoothly even on older devices and slow WiFi. We use advanced caching techniques to make sure the site loads in under 2 seconds.
-          </p>
-
-          <p className="pt-8">
-            Thanks for playing with us. Game on!
+          <p className="pt-8 font-semibold">
+            Join the revolution. Play instantly.
           </p>
         </div>
       </div>

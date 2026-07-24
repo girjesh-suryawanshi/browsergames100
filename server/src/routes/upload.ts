@@ -1,10 +1,10 @@
-import { Router } from 'express';
+﻿import { Router } from 'express';
 import multer from 'multer';
 import path from 'path';
 import fs from 'fs';
 import { requireAdmin } from '../middleware/auth';
 
-const SITE_URL = process.env.SITE_URL || 'https://unblockedgameszone.com';
+const SITE_URL = process.env.SITE_URL || 'https://CloudPlayHub.com';
 
 const router = Router();
 
@@ -46,3 +46,4 @@ router.post('/image', requireAdmin, upload.single('image'), (req, res) => {
 });
 
 export default router;
+

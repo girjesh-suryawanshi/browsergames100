@@ -1,4 +1,4 @@
-import { Router, Request, Response } from 'express';
+﻿import { Router, Request, Response } from 'express';
 import fs from 'fs';
 import path from 'path';
 import https from 'https';
@@ -6,7 +6,7 @@ import http from 'http';
 
 const router = Router();
 
-const SITE_URL = process.env.SITE_URL || 'https://unblockedgameszone.com';
+const SITE_URL = process.env.SITE_URL || 'https://CloudPlayHub.com';
 
 // ─── Bot detection ─────────────────────────────────────────
 function isSocialBot(userAgent: string): boolean {
@@ -78,7 +78,7 @@ router.get('/img', async (req: Request, res: Response) => {
   try {
     const response = await fetch(targetUrl.href, {
       headers: {
-        'User-Agent': 'Mozilla/5.0 (compatible; UnblockedGamesZone/1.0)',
+        'User-Agent': 'Mozilla/5.0 (compatible; CloudPlayHub/1.0)',
         'Referer': 'https://html5.gamemonetize.co/',
         'Accept': 'image/*,*/*;q=0.8'
       }
@@ -121,7 +121,7 @@ router.get('/img', async (req: Request, res: Response) => {
 function buildOGHtml(slug: string, gameData: { title: string; description: string; image: string } | null): string {
   const title = gameData
     ? `Play ${gameData.title} Unblocked — Free Online Game`
-    : 'UnblockedGamesZone — Play Free Unblocked Games';
+    : 'CloudPlayHub — Play Free Unblocked Games';
 
   const description = gameData
     ? `${gameData.description.slice(0, 160)}...`
@@ -147,7 +147,7 @@ function buildOGHtml(slug: string, gameData: { title: string; description: strin
   <!-- Open Graph (WhatsApp, Facebook, Telegram, Discord) -->
   <meta property="og:type"              content="website" />
   <meta property="fb:app_id"            content="850381667086827" />
-  <meta property="og:site_name"         content="UnblockedGamesZone" />
+  <meta property="og:site_name"         content="CloudPlayHub" />
   <meta property="og:url"               content="${pageUrl}" />
   <meta property="og:title"             content="${title}" />
   <meta property="og:description"       content="${description}" />
@@ -199,3 +199,4 @@ router.get('/game/:slug', (req: Request, res: Response) => {
 });
 
 export default router;
+

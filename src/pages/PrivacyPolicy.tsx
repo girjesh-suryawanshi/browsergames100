@@ -4,53 +4,42 @@ export default function PrivacyPolicy() {
   return (
     <div className="min-h-screen py-12">
       <SEO 
-        title="Privacy Policy - UnblockedGamesZone" 
-        description="Read our privacy policy to understand how we handle your data and ensure a safe gaming environment."
+        title="Privacy Policy | CloudPlayHub"
+        description="Our comprehensive privacy policy detailing data collection, cookie usage, and advertising networks on CloudPlayHub."
       />
       <div className="container max-w-4xl">
-        <h1 className="text-4xl font-black mb-8">Privacy Policy</h1>
+        <h1 className="text-4xl font-black mb-8">Privacy & Data Policy</h1>
         <div className="prose prose-invert max-w-none space-y-6 text-muted-foreground">
           <p>
-            Welcome to UnblockedGamesZone. Your privacy is genuinely important to us. We’ve written this policy in plain English to help you understand what information we collect, how we use it, and how we keep you safe while you’re enjoying our games.
+            At CloudPlayHub, safeguarding your personal data is a primary directive. We are committed to transparency regarding the information we collect while you utilize our free cloud gaming services.
           </p>
 
-          <h2 className="text-2xl font-bold text-foreground">1. Information We Collect</h2>
+          <h2 className="text-2xl font-bold text-foreground">Data Collection Practices</h2>
           <p>
-            We don’t ask for your name, email, or phone number to play games here. We believe in "instant play," which means you can jump right into the action without creating an account.
-          </p>
-          <p>
-            However, like almost every website, we do collect some basic technical data automatically:
-          </p>
-          <ul className="list-disc pl-6 space-y-2">
-            <li><strong>Log Files:</strong> This includes your IP address, browser type, and the pages you visit. This helps us see which games are popular and fix any technical bugs.</li>
-            <li><strong>Cookies:</strong> We use small text files called cookies to remember your "Favorite" games and your high scores locally on your device.</li>
-          </ul>
-
-          <h2 className="text-2xl font-bold text-foreground">2. Google AdSense & Third-Party Advertising</h2>
-          <p>
-            To keep our games free for everyone, we show advertisements. We work with Google AdSense, which uses cookies to serve ads based on your previous visits to our site or other sites on the internet.
-          </p>
-          <p>
-            Google’s use of advertising cookies enables it and its partners to serve ads to you based on your visit to our sites and/or other sites on the Internet. You may opt-out of personalized advertising by visiting <a href="https://www.google.com/settings/ads" className="text-primary hover:underline">Ads Settings</a>.
+            Our platform operates on a "no registration required" model. We do not mandate the submission of Personally Identifiable Information (PII) such as names, physical addresses, or emails for general gameplay.
+            We automatically gather anonymous telemetry data—including browser specifications, IP addresses, and session duration—solely for the purpose of optimizing server performance and identifying technical anomalies.
           </p>
 
-          <h2 className="text-2xl font-bold text-foreground">3. Safety for Students & Schools</h2>
+          <h2 className="text-2xl font-bold text-foreground">Cookie Policy</h2>
           <p>
-            We know many of our users are students playing on school Chromebooks. We strive to maintain a clean environment. We do not host "adult" content, and we regularly audit our game library to ensure it's appropriate for all ages.
+            CloudPlayHub deploys essential cookies to preserve user preferences, such as your "Favorite" games roster and local save states. By navigating our platform, you consent to the deployment of these functional cookies.
           </p>
 
-          <h2 className="text-2xl font-bold text-foreground">4. External Links</h2>
+          <h2 className="text-2xl font-bold text-foreground">Third-Party Advertising (Google AdSense)</h2>
           <p>
-            Our games often come from various developers and might contain links to their own websites. Once you leave UnblockedGamesZone, our privacy policy no longer applies, so please be mindful of where you click.
+            To subsidize our server costs and keep the platform free, we partner with advertising networks, prominently Google AdSense. These third-party vendors utilize DART cookies to serve contextual and personalized advertisements based on your browsing history across the web.
+          </p>
+          <p>
+            Users retain the right to opt out of personalized ad tracking by navigating to the <a href="https://myadcenter.google.com/" className="text-primary hover:underline">Google Ad Center</a>. Furthermore, we comply with regional directives such as GDPR and CCPA by providing appropriate consent management frameworks where applicable.
           </p>
 
-          <h2 className="text-2xl font-bold text-foreground">5. Changes to This Policy</h2>
+          <h2 className="text-2xl font-bold text-foreground">Policy Modifications</h2>
           <p>
-            We might update this page from time to time as we add new features. We’ll always keep the latest version right here for you to check.
+            We reserve the right to amend this Privacy Policy dynamically. Significant alterations will be reflected directly on this page with an updated timestamp.
           </p>
 
-          <p className="pt-8">
-            Last Updated: April 2026
+          <p className="pt-8 italic">
+            Effective Date: July 2026
           </p>
         </div>
       </div>

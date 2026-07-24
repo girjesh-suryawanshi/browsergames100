@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+﻿import { useState, useEffect } from "react";
 import { Download, X, Share, PlusSquare } from "lucide-react";
 import { usePWA } from "@/hooks/usePWA";
 
@@ -56,7 +56,7 @@ export default function InstallBanner() {
           </div>
           
           <div className="flex-1">
-            <h3 className="text-sm font-bold text-foreground">Install UnblockedGamesZone</h3>
+            <h3 className="text-sm font-bold text-foreground">Install CloudPlayHub</h3>
             <p className="text-xs text-muted-foreground leading-tight mt-0.5">
               {isiOS 
                 ? "Tap Share > Add to Home Screen" 
@@ -84,3 +84,4 @@ export default function InstallBanner() {
     </div>
   );
 }
+

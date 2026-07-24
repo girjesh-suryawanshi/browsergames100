@@ -20,10 +20,10 @@ export default function Footer() {
               <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center">
                 <Gamepad2 className="w-4 h-4 text-primary-foreground" />
               </div>
-              <span className="text-lg font-bold text-gradient-gaming">UnblockedGamesZone</span>
+              <span className="text-lg font-bold text-gradient-gaming">CloudPlayHub</span>
             </Link>
             <p className="text-sm text-muted-foreground mb-6">
-              UnblockedGamesZone is your ultimate destination for free unblocked games. Play thousands of action, puzzle, and racing games directly in your browser.
+              CloudPlayHub is your ultimate destination for free unblocked games. Play thousands of action, puzzle, and racing games directly in your browser.
             </p>
             <SuggestGame />
           </div>
@@ -46,17 +46,20 @@ export default function Footer() {
               <li><Link to="/about" className="text-sm text-muted-foreground hover:text-primary transition-colors">About Us</Link></li>
               <li><Link to="/contact" className="text-sm text-muted-foreground hover:text-primary transition-colors">Contact Us</Link></li>
               <li><Link to="/disclaimer" className="text-sm text-muted-foreground hover:text-primary transition-colors">Disclaimer</Link></li>
+              <li><Link to="/dmca" className="text-sm text-muted-foreground hover:text-primary transition-colors font-medium text-gaming-yellow/80">DMCA / Copyright</Link></li>
             </ul>
           </div>
         </div>
         <div className="border-t border-border mt-8 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-xs text-muted-foreground">© 2026 UnblockedGamesZone. All rights reserved.</p>
-          <div className="flex gap-4 text-xs text-muted-foreground">
+          <p className="text-xs text-muted-foreground">© 2026 CloudPlayHub. All rights reserved.</p>
+          <div className="flex flex-wrap gap-4 text-xs text-muted-foreground justify-center">
             <Link to="/privacy" className="hover:text-foreground transition-colors">Privacy Policy</Link>
             <Link to="/terms" className="hover:text-foreground transition-colors">Terms of Service</Link>
+            <Link to="/dmca" className="hover:text-foreground transition-colors">DMCA</Link>
           </div>
         </div>
       </div>
     </footer>
   );
 }
+

@@ -1,10 +1,10 @@
-import { Router, Request, Response } from 'express';
+﻿import { Router, Request, Response } from 'express';
 import { PrismaClient } from '@prisma/client';
 
 const router = Router();
 const prisma = new PrismaClient();
 
-const BASE_URL = process.env.SITE_URL || 'https://unblockedgameszone.com';
+const BASE_URL = process.env.SITE_URL || 'https://CloudPlayHub.com';
 
 // ─── Blog Sitemap XML ──────────────────────────────────────
 router.get('/sitemap-blog.xml', async (_req: Request, res: Response) => {
@@ -70,7 +70,7 @@ router.get('/rss.xml', async (_req: Request, res: Response) => {
       <link>${url}</link>
       <guid isPermaLink="true">${url}</guid>
       <description>${desc}</description>
-      <author>contact@unblockedgameszone.com (${post.authorName || 'UnblockedGamesZone'})</author>
+      <author>contact@CloudPlayHub.com (${post.authorName || 'CloudPlayHub'})</author>
       ${post.category ? `<category>${post.category.name}</category>` : ''}
       <pubDate>${pubDate}</pubDate>
       ${post.coverImage ? `<enclosure url="${post.coverImage}" type="image/jpeg" length="0" />` : ''}
@@ -83,7 +83,7 @@ router.get('/rss.xml', async (_req: Request, res: Response) => {
   xmlns:atom="http://www.w3.org/2005/Atom"
   xmlns:media="http://search.yahoo.com/mrss/">
   <channel>
-    <title>UnblockedGamesZone Blog — Gaming News &amp; Tips</title>
+    <title>CloudPlayHub Blog — Gaming News &amp; Tips</title>
     <link>${BASE_URL}/blog</link>
     <atom:link href="${BASE_URL}/rss.xml" rel="self" type="application/rss+xml" />
     <description>Latest gaming news, tips, and strategies for unblocked games. Updated regularly.</description>
@@ -92,7 +92,7 @@ router.get('/rss.xml', async (_req: Request, res: Response) => {
     <ttl>60</ttl>
     <image>
       <url>${BASE_URL}/og-image.png</url>
-      <title>UnblockedGamesZone</title>
+      <title>CloudPlayHub</title>
       <link>${BASE_URL}</link>
     </image>
 ${items}
@@ -109,3 +109,4 @@ ${items}
 });
 
 export default router;
+

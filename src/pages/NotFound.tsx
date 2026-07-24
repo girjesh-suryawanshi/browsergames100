@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+﻿import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { Home, Search, Gamepad2 } from "lucide-react";
 import SEO from "@/components/SEO";
@@ -8,7 +8,7 @@ const NotFound = () => {
     <>
       <Helmet>
         <meta name="robots" content="noindex, nofollow" />
-        <title>404 — Page Not Found | UnblockedGamesZone</title>
+        <title>404 — Page Not Found | CloudPlayHub</title>
       </Helmet>
 
       <div className="flex min-h-screen items-center justify-center bg-background px-4">
@@ -49,3 +49,4 @@ const NotFound = () => {
 };
 
 export default NotFound;
+

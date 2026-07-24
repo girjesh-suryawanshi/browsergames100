@@ -1,5 +1,5 @@
-/**
- * Image Utilities for UnblockedGamesZone
+﻿/**
+ * Image Utilities for CloudPlayHub
  * Handles on-the-fly WebP conversion and resizing via proxy.
  */
 
@@ -18,3 +18,4 @@ export const getOptimizedImage = (url: string, width: number = 400): string => {
   // n: -1 (disable default cache to ensure freshness if needed, or omit for best caching)
   return `https://images.weserv.nl/?url=${encodeURIComponent(cleanUrl)}&w=${width}&q=80&output=webp&il`;
 };
+
