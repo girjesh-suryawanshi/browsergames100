@@ -1,4 +1,4 @@
-﻿import { Helmet } from "react-helmet-async";
+import { Helmet } from "react-helmet-async";
 
 export interface BreadcrumbItem {
   name: string;
@@ -12,10 +12,13 @@ interface SEOProps {
   keywords?: string;
   ogType?: string;
   ogImage?: string;
+  ogImageAlt?: string;
   schema?: object | object[];
   breadcrumbs?: BreadcrumbItem[];
   robots?: string;
   noindex?: boolean;
+  publishedTime?: string;
+  modifiedTime?: string;
 }
 
 const BASE_URL = "https://CloudPlayHub.com";
@@ -67,10 +70,13 @@ export default function SEO({
   canonical,
   ogType = "website",
   ogImage = "/og-image.png",
+  ogImageAlt,
   schema,
   breadcrumbs,
   robots,
   noindex = false,
+  publishedTime,
+  modifiedTime,
 }: SEOProps) {
   const siteName = "CloudPlayHub";
   const fullTitle = title
@@ -85,6 +91,11 @@ export default function SEO({
   const robotsContent = noindex
     ? "noindex, nofollow"
     : robots || "index, follow";
+
+  // Resolve ogImage — if it's already an absolute URL don't prepend BASE_URL
+  const resolvedOgImage = ogImage.startsWith("http")
+    ? ogImage
+    : `${BASE_URL}${ogImage}`;
 
   const breadcrumbSchema =
     breadcrumbs && breadcrumbs.length > 0
@@ -114,16 +125,25 @@ export default function SEO({
       <meta property="og:description" content={fullDescription} />
       <meta property="og:type" content={ogType} />
       <meta property="og:url" content={url} />
-      <meta property="og:image" content={`${BASE_URL}${ogImage}`} />
+      <meta property="og:image" content={resolvedOgImage} />
       <meta property="og:image:width" content="1200" />
       <meta property="og:image:height" content="630" />
+      <meta property="og:image:alt" content={ogImageAlt || fullTitle} />
+      <meta property="og:locale" content="en_US" />
+      {publishedTime && <meta property="article:published_time" content={publishedTime} />}
+      {modifiedTime && <meta property="article:modified_time" content={modifiedTime} />}
 
       {/* Twitter Meta Tags */}
       <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:site" content="@UnblockedGamesZ" />
+      <meta name="twitter:site" content="@CloudPlayHub" />
       <meta name="twitter:title" content={fullTitle} />
       <meta name="twitter:description" content={fullDescription} />
-      <meta name="twitter:image" content={`${BASE_URL}${ogImage}`} />
+      <meta name="twitter:image" content={resolvedOgImage} />
+      <meta name="twitter:image:alt" content={ogImageAlt || fullTitle} />
+
+      {/* Hreflang — self-referencing for English */}
+      <link rel="alternate" hrefLang="en" href={url} />
+      <link rel="alternate" hrefLang="x-default" href={url} />
 
       {/* Schema.org JSON-LD — combined into one graph */}
       {schemas.length > 0 && (

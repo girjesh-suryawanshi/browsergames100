@@ -139,7 +139,6 @@ export default function GamePage() {
   const cleanDesc = game.d.replace(/<[^>]+>/g, "");
   const displayRating = currentRating || game.r || 4.8;
 
-  // Richer VideoGame schema
   const schema = {
     "@context": "https://schema.org",
     "@type": "VideoGame",
@@ -153,6 +152,7 @@ export default function GamePage() {
     "operatingSystem": "Browser, ChromeOS, Windows, macOS",
     "inLanguage": "en",
     "isAccessibleForFree": true,
+    "dateModified": new Date().toISOString().split("T")[0],
     "publisher": {
       "@type": "Organization",
       "name": "CloudPlayHub",
@@ -179,16 +179,52 @@ export default function GamePage() {
     { name: game.t, url: `/game/${slug}` },
   ];
 
+  // FAQ schema for AEO (Answer Engine Optimization)
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": `How do I play ${game.t}?`,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": (slug && gameDescriptions[slug]?.howToPlay) ||
+            game.ins?.replace(/<[^>]+>/g, "") ||
+            `Use your mouse or keyboard to play ${game.t}. Follow the on-screen instructions and controls to progress through the game.`
+        }
+      },
+      {
+        "@type": "Question",
+        "name": `Is ${game.t} free to play?`,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": `Yes, ${game.t} is completely free to play on CloudPlayHub. No download, no registration, and no payment required. Simply click the Play button and the game launches instantly in your browser.`
+        }
+      },
+      {
+        "@type": "Question",
+        "name": `Does ${game.t} work on Chromebooks?`,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": `Yes, ${game.t} is fully compatible with Chromebooks and works on all modern browsers including Chrome, Firefox, Edge, and Safari. No special software or extensions are needed.`
+        }
+      },
+    ]
+  };
+
   return (
     <div className="min-h-screen">
-      <SEO
-        title={`Play ${game.t} Unblocked - Free Online Game for School`}
-        description={`Play ${game.t} unblocked online for free! No download needed. Works on Chromebooks and all browsers. ${cleanDesc.slice(0, 100).trim()}...`}
+  <SEO
+        title={`Play ${game.t} Unblocked - Free Online Game`}
+        description={`Play ${game.t} free online — no download needed, works on Chromebooks. ${cleanDesc.slice(0, 120).trim()}...`}
         canonical={`/game/${slug}`}
         keywords={`${game.t}, ${game.t} unblocked, ${game.t} online, ${category?.name || "browser games"}, unblocked games, school games`}
-        schema={schema}
+        schema={[schema, faqSchema]}
         breadcrumbs={breadcrumbs}
         ogType="article"
+        ogImageAlt={`${game.t} — play free online`}
+        modifiedTime={new Date().toISOString()}
       />
 
       <ScraperShield />

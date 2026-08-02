@@ -14,7 +14,15 @@ declare global {
   }
 }
 
-const AD_CLIENT = "ca-pub-7506978867736173";
+// ─── AdSense Publisher ID ───────────────────────────────────────────────────
+// IMPORTANT: AdSense scripts have been removed from index.html pending approval.
+// After your AdSense account is approved:
+//   1. Uncomment the line below (replace AD_CLIENT)
+//   2. Re-enable the scripts in index.html (look for "ADD BACK after AdSense approval")
+//   3. Replace placeholder slot IDs in SLOT_MAP below with real slot IDs
+//
+// const AD_CLIENT = "ca-pub-7506978867736173"; // <-- uncomment after approval
+const AD_CLIENT = ""; // Disabled until AdSense approved
 
 // Map slot names → actual AdSense slot IDs.
 // IMPORTANT: Replace SLOT_ID_* values with real IDs from your AdSense dashboard.
@@ -60,6 +68,11 @@ export default function AdPlacement({
   slot = "default",
   sticky = false,
 }: AdPlacementProps) {
+  // ─── DISABLED: Return null until AdSense account is approved ───────────────
+  // Google requires your site to be reviewed BEFORE showing ads.
+  // Once approved, remove the line below and uncomment the ad code.
+  if (!AD_CLIENT) return null;
+  // ───────────────────────────────────────────────────────────────────────────
   const uid        = useId();           // stable, unique per component instance
   const pushed     = useRef(false);     // prevents double-push in StrictMode
   const location   = useLocation();
@@ -97,7 +110,7 @@ export default function AdPlacement({
     : `flex flex-col items-center justify-center gap-1.5 my-4 ${className}`;
 
   return (
-    <div className={wrapperClass}>
+    <div className={wrapperClass} aria-label="Advertisement" role="complementary">
       <span className="text-[10px] uppercase tracking-widest text-muted-foreground/40 font-medium select-none">
         Advertisement
       </span>
@@ -123,10 +136,11 @@ export default function AdPlacement({
           }}
           data-ad-client={AD_CLIENT}
           data-ad-slot={slotId}
-          data-ad-format={isLeaderboard ? "auto" : undefined}
+          data-ad-format="auto"
           data-full-width-responsive={isLeaderboard ? "true" : "false"}
         />
       </div>
     </div>
   );
 }
+

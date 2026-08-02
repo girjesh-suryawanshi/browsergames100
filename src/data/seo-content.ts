@@ -10,72 +10,118 @@ export interface SEOContent {
 export const landingPages: Record<string, SEOContent> = {
   'play-html5-games': {
     slug: 'play-html5-games',
-    title: 'Play HTML5 Games Unblocked',
-    description: 'Play the best high-quality HTML5 games unblocked directly in your browser. No download required. Experience fast, seamless cloud gaming today.',
-    keywords: 'play HTML5 games, HTML5 games unblocked, premium browser games, no download games',
+    title: 'Play HTML5 Games Free — No Download, No Install',
+    description: 'Play the best HTML5 games free in your browser. No download, no Flash plugin. Thousands of action, puzzle, and racing games ready to play instantly on any device.',
+    keywords: 'play HTML5 games, HTML5 games unblocked, free browser games, no download games, HTML5 game site',
     collectionTitle: 'Top Rated HTML5 Games',
     content: `
-      <h2>The Ultimate Destination for HTML5 Gaming</h2>
-      <p>Welcome to CloudPlayHub, the premier portal to <strong>play HTML5 games unblocked</strong>. We utilize cutting-edge web technology to bring you high-fidelity gaming experiences right in your browser. Whether you're on a high-end PC or a standard Chromebook, our platform ensures maximum performance and zero lag.</p>
-      
-      <h3>Why HTML5?</h3>
-      <p>HTML5 represents the pinnacle of modern web development, allowing us to bypass the need for third-party plugins or cumbersome app downloads. Every title in our library runs natively, meaning you get faster load times, better graphics, and enhanced security compared to older Flash-based sites.</p>
+      <h2>What Are HTML5 Games and Why Are They Better?</h2>
+      <p>HTML5 games run entirely in your web browser using modern web standards — no Flash, no Unity plugin, no app store. That means you can go from "I want to play a game" to actually playing one in under ten seconds, on any device you happen to be using.</p>
+
+      <p>CloudPlayHub hosts over 28,000 HTML5 games across every genre imaginable. Whether you're into fast-paced action, brain-teasing puzzles, high-speed racing, or relaxing idle games, you'll find something that clicks within minutes of visiting the site.</p>
+
+      <h3>Why HTML5 Games Work Where Others Don't</h3>
+      <p>The old days of browser gaming required Flash Player, which is now permanently discontinued. HTML5 games replaced Flash entirely and work better in every way: they load faster, work on mobile devices, don't crash browsers, and run on Chromebooks without any special setup. If your browser can load a website, it can play an HTML5 game.</p>
+
+      <p>CloudPlayHub is built specifically around HTML5 performance. Every game in our catalog is tested for load speed, visual quality, and control responsiveness. If a game doesn't meet our standards, it doesn't go in the catalog — simple as that.</p>
+
+      <h3>Common Questions About HTML5 Games</h3>
+      <p><strong>Do HTML5 games require internet?</strong> Yes, they load over the internet the first time. But many HTML5 games continue running even if your connection drops briefly, since the game logic runs in your browser.</p>
+
+      <p><strong>Are HTML5 games safe?</strong> HTML5 games on CloudPlayHub are embedded from trusted game networks and are reviewed for content. They cannot install software on your device or access your files.</p>
+
+      <p><strong>Do they work on phones?</strong> Yes. Most HTML5 games on CloudPlayHub are mobile-compatible and include touch controls.</p>
     `
   },
   'free-browser-games': {
     slug: 'free-browser-games',
-    title: 'Free Browser Games No Download',
-    description: 'Discover thousands of free browser games with no download. Enjoy premium cloud gaming experiences instantly on any device.',
-    keywords: 'free browser games, no download games, instant play games, cloud gaming free',
+    title: 'Free Browser Games — Play Instantly, No Download',
+    description: 'Discover thousands of free browser games you can play right now with no download, no login, and no cost. Works on any device with a web browser.',
+    keywords: 'free browser games, no download games, instant play games, free online games, games no install',
     collectionTitle: 'Instant Play Browser Games',
     content: `
-      <h2>Instant Gaming Without Limits</h2>
-      <p>In a digital landscape filled with massive install files and constant updates, CloudPlayHub champions the power of <strong>free browser games</strong>. Our mission is to provide you with instant access to thousands of premium titles with absolutely no downloads or installations required.</p>
-      
-      <h3>Cloud Gaming Redefined</h3>
-      <p>We leverage advanced cloud infrastructure to stream lightweight game assets directly to your device. From expansive multiplayer arenas to complex puzzle games, experience the thrill of next-generation cloud gaming directly through your favorite web browser.</p>
+      <h2>Free Browser Games: Play Right Now, No Strings Attached</h2>
+      <p>There was a time when playing a decent game meant a long download, a multi-GB installation, and a restart. Those days are gone. Modern browser games give you the same quality of entertainment without any of that friction — and on CloudPlayHub, they're completely free.</p>
+
+      <p>Every game on our platform loads directly in your browser tab. Click play, and you're in. No account creation, no credit card, no "free trial" with hidden costs. Just games, available to anyone with a browser.</p>
+
+      <h3>What Kinds of Free Browser Games Are Available?</h3>
+      <p>CloudPlayHub's catalog covers more than 20 genres:</p>
+      <p><strong>Action games</strong> like Slope, 1v1.LOL, and Shell Shockers for players who want fast-paced competition. <strong>Puzzle games</strong> like 2048 and physics puzzlers for players who prefer to think before they act. <strong>Racing games</strong> like Drift Hunters for speed enthusiasts who want realistic driving physics in a browser. <strong>Strategy games</strong> for players who enjoy building, planning, and commanding. <strong>Multiplayer .io games</strong> for real-time competition against players around the world.</p>
+
+      <p>All of these are free. All of them work in your browser right now.</p>
+
+      <h3>Why CloudPlayHub Is Different</h3>
+      <p>Most game sites list every HTML5 game they can find, regardless of quality. CloudPlayHub takes a different approach: we manually test every game before it goes into the catalog. If it's slow, broken, or just not fun, it doesn't make the cut. The result is a library of games that actually work and are worth your time.</p>
     `
   },
   'cloud-gaming-unblocked': {
     slug: 'cloud-gaming-unblocked',
-    title: 'Cloud Gaming Unblocked for PC & Chromebook',
-    description: 'Access the best cloud gaming unblocked library. Play top-tier games smoothly on restricted networks and school Chromebooks.',
-    keywords: 'cloud gaming unblocked, cloud games for school, chromebook cloud gaming, unblocked cloud platforms',
-    collectionTitle: 'Premium Cloud Gaming',
+    title: 'Unblocked Cloud Gaming — Play on School or Work Networks',
+    description: 'Play free unblocked games that work on school Chromebooks, restricted networks, and office Wi-Fi. No VPN needed. Fast loading on any connection.',
+    keywords: 'cloud gaming unblocked, unblocked games school, chromebook games, games for school, play games on school wifi',
+    collectionTitle: 'Unblocked Games for School',
     content: `
-      <h2>Seamless Cloud Gaming on Any Network</h2>
-      <p>Network restrictions shouldn't stop you from enjoying high-quality entertainment. CloudPlayHub is engineered to deliver <strong>cloud gaming unblocked</strong> experiences even on highly restricted networks, such as school or corporate WiFi setups. Our platform is fully optimized for ChromeOS and low-end hardware.</p>
-      
-      <h3>Safe, Secure, and Blazing Fast</h3>
-      <p>By shifting the heavy lifting from your device's processor to our optimized servers, we ensure that every game runs at maximum frame rates. Play intensive 3D games and massive multiplayer titles without ever seeing a "blocked" or "insufficient storage" warning again.</p>
+      <h2>Unblocked Games That Work on School and Work Networks</h2>
+      <p>If you've ever tried to play a game on a school Chromebook only to hit a firewall or a "site blocked" message, you know how frustrating it is. CloudPlayHub is built specifically to work on the kinds of restricted networks you find in schools, universities, and offices.</p>
+
+      <p>Our games are browser-based HTML5 titles that don't trigger content filters the way dedicated gaming sites or game launchers sometimes do. They load quickly over standard HTTPS connections and don't require any special ports or network permissions.</p>
+
+      <h3>Why Our Games Work on Chromebooks</h3>
+      <p>ChromeOS doesn't support Windows applications or Flash, which rules out most traditional games. But HTML5 games run natively in the Chrome browser — the same browser that comes with every Chromebook from day one. No extensions, no developer mode, no workarounds needed.</p>
+
+      <p>CloudPlayHub games are also optimized for lower-bandwidth connections. We use efficient image loading and lightweight game assets so that games perform well even on shared school Wi-Fi where 30 students might be connected at once.</p>
+
+      <h3>Is It Okay to Play Games at School?</h3>
+      <p>That depends on your school's policies and when you're playing. Many students use CloudPlayHub during lunch, free periods, or after school using school equipment. The platform has no chat features, no social elements that could distract others, and no content that violates typical school acceptable use policies. We host only general-audience games.</p>
+
+      <p>Always respect your school's rules. CloudPlayHub isn't responsible for how or when you choose to access the platform.</p>
     `
   },
   'poki-alternative': {
     slug: 'poki-alternative',
-    title: 'Best Poki Alternative for Free Games',
-    description: 'Looking for a Poki alternative? CloudPlayHub offers a curated selection of premium, ad-free-feeling browser games without annoying pop-ups.',
-    keywords: 'poki alternative, crazygames alternative, sites like poki, better than poki, free games like crazygames',
-    collectionTitle: 'Curated Premium Games',
+    title: 'Best Poki Alternative — Free Browser Games Without the Clutter',
+    description: 'Looking for a Poki alternative? CloudPlayHub offers thousands of free browser games with a cleaner interface, faster loading, and better curation. Try it free.',
+    keywords: 'poki alternative, games like poki, crazygames alternative, best free game sites, sites like poki',
+    collectionTitle: 'Top Free Browser Games',
     content: `
-      <h2>The Premium Alternative to Mainstream Portals</h2>
-      <p>If you're tired of intrusive ads, slow load times, and overwhelming layouts, you've found the perfect <strong>Poki alternative</strong>. CloudPlayHub prioritizes user experience above all else. We provide a clean, modern interface where the games take center stage.</p>
-      
-      <h3>A Hand-Picked Library</h3>
-      <p>We believe in quality over quantity. Instead of overwhelming you with thousands of broken links, we manually test and curate every single title. Discover why gamers globally are making the switch to our cleaner, faster gaming ecosystem.</p>
+      <h2>Looking for a Poki Alternative? Here's What CloudPlayHub Offers</h2>
+      <p>Poki and CrazyGames are well-known browser gaming platforms, and they have huge catalogs. But bigger doesn't always mean better. If you've found those sites overwhelming, slow to load, or frustrating to navigate, CloudPlayHub was built as a cleaner, faster alternative.</p>
+
+      <p>We focus on three things: game quality, page performance, and a straightforward browsing experience. You won't find endless category pages that lead to dead links, games that don't load, or confusing navigation that makes it hard to find what you actually want to play.</p>
+
+      <h3>What Makes CloudPlayHub Different From Poki?</h3>
+      <p><strong>Manual curation:</strong> Every game in our catalog is tested before it goes live. We remove games that don't work, load too slowly, or deliver a poor experience. Poki and similar sites often auto-import thousands of games without this level of review.</p>
+
+      <p><strong>Performance focus:</strong> CloudPlayHub is optimized for fast load times, especially on Chromebooks and school networks. We use CDN delivery, lazy loading, and compressed assets to get games in front of you as quickly as possible.</p>
+
+      <p><strong>Clean interface:</strong> Our site is designed to put games front and center. The layout is straightforward — browse by category, search by title, or check trending games. No confusing menus, no mandatory account creation pop-ups.</p>
+
+      <h3>Does CloudPlayHub Have the Same Games as Poki?</h3>
+      <p>Many popular HTML5 games appear on multiple platforms since developers license their games to various portals. You'll find many titles on CloudPlayHub that also appear on Poki, including popular action, puzzle, and racing games. You'll also find games exclusive to our platform and sourced from game networks that Poki doesn't work with.</p>
     `
   },
   'unblocked-racing-games': {
     slug: 'unblocked-racing-games',
-    title: 'Unblocked Racing Games - High Speed Fun',
-    description: 'Burn rubber with the best unblocked racing games. Play high-octane 3D car and bike games directly in your browser.',
-    keywords: 'unblocked racing games, racing games no download, 3d car games unblocked, drift games browser',
-    collectionTitle: 'High Speed Racing Collection',
+    title: 'Unblocked Racing Games — Free Browser Racing, No Download',
+    description: 'Play the best unblocked racing games free in your browser. Drift simulators, kart racers, and motorbike games that work on Chromebooks with no download.',
+    keywords: 'unblocked racing games, racing games no download, 3d car games browser, drift games unblocked, car games school',
+    collectionTitle: 'Free Racing Games',
     content: `
-      <h2>Experience Next-Gen Browser Racing</h2>
-      <p>Get behind the wheel with our elite collection of <strong>unblocked racing games</strong>. Utilizing modern WebGL technology, we bring console-quality physics, realistic drifting mechanics, and competitive multiplayer races straight to your browser. No steering wheel required!</p>
-      
-      <h3>Compete on the Global Leaderboards</h3>
-      <p>Challenge players from around the world in real-time multiplayer lobbies. Whether you prefer aggressive street racing or precision track drifting, our servers are optimized to ensure low-latency, lag-free competition.</p>
+      <h2>Unblocked Racing Games: Full-Speed Fun in Your Browser</h2>
+      <p>Racing games are one of the most popular categories on CloudPlayHub, and it's easy to understand why. There's something universally satisfying about pushing a car to its limits through a tight corner, executing a perfect drift, or edging out a competitor at the finish line.</p>
+
+      <p>Our collection of unblocked racing games covers every style of speed-based gameplay: realistic drift simulators, kart racers, motorbike stunt games, formula racing, demolition derbies, and more. All of them work in your browser without a download, and most of them run perfectly on Chromebooks.</p>
+
+      <h3>Types of Racing Games on CloudPlayHub</h3>
+      <p><strong>Drift simulators</strong> like Drift Hunters use physics engines that simulate real weight transfer, tire grip, and throttle control. They reward precise technique and are endlessly satisfying once you learn the mechanics.</p>
+
+      <p><strong>Kart racers</strong> are more accessible and fun for casual players. They feature power-ups, animated tracks, and the kind of chaotic multiplayer action that makes them great for short sessions.</p>
+
+      <p><strong>3D road racers</strong> put you in a cockpit or behind the wheel for high-speed highway or circuit races with traffic, upgrades, and leaderboard competition.</p>
+
+      <h3>Do Racing Games Work on Chromebooks?</h3>
+      <p>Yes. All racing games in our catalog are HTML5-based. Even our most graphically impressive titles like Drift Hunters (which uses WebGL for 3D rendering) run smoothly on mid-range Chromebooks. We test every racing game on Chromebook hardware before listing it, so you won't waste time clicking on a game that just shows a blank screen.</p>
     `
   }
 };

@@ -1,15 +1,15 @@
-﻿import { Link } from "react-router-dom";
-import { Helmet } from "react-helmet-async";
+import { Link } from "react-router-dom";
 import { Home, Search, Gamepad2 } from "lucide-react";
 import SEO from "@/components/SEO";
 
 const NotFound = () => {
   return (
     <>
-      <Helmet>
-        <meta name="robots" content="noindex, nofollow" />
-        <title>404 — Page Not Found | CloudPlayHub</title>
-      </Helmet>
+      <SEO
+        title="404 — Page Not Found"
+        description="The page you're looking for doesn't exist. Browse our game catalog or go back to the CloudPlayHub homepage."
+        noindex={true}
+      />
 
       <div className="flex min-h-screen items-center justify-center bg-background px-4">
         <div className="text-center max-w-md mx-auto">
@@ -49,4 +49,3 @@ const NotFound = () => {
 };
 
 export default NotFound;
-

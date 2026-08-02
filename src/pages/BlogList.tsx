@@ -28,15 +28,16 @@ export default function BlogList() {
 
   return (
     <main className="bg-background pt-24 pb-16 min-h-screen">
-      <SEO 
-        title="Gaming Blog & News | Unblocked Games Zone" 
-        description="Stay updated with the latest gaming news, tips, and unblocked games strategies." 
+      <SEO
+        title="Gaming Blog & Tips | CloudPlayHub"
+        description="Explore CloudPlayHub's gaming blog for tips, game guides, top picks, and the latest news on free browser games you can play anywhere."
+        canonical="/blog"
       />
       <div className="container mx-auto px-4 max-w-6xl">
         <div className="text-center mb-16">
-          <h1 className="text-4xl md:text-5xl font-extrabold mb-4">Gaming Blog & News</h1>
+          <h1 className="text-4xl md:text-5xl font-extrabold mb-4">Gaming Blog &amp; Tips</h1>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Discover the latest trends, strategies, and top picks for unblocked games you can play anywhere.
+            Game guides, top picks, and tips for the best free browser games on CloudPlayHub.
           </p>
         </div>
 
@@ -45,9 +46,33 @@ export default function BlogList() {
             <Loader2 className="h-10 w-10 animate-spin text-primary" />
           </div>
         ) : posts.length === 0 ? (
-          <div className="text-center py-20 bg-card rounded-2xl border border-border">
-            <h2 className="text-2xl font-bold mb-2">No Articles Yet</h2>
-            <p className="text-muted-foreground">Check back soon for awesome gaming content!</p>
+          <div className="space-y-8">
+            <div className="text-center py-12 bg-card rounded-2xl border border-border">
+              <h2 className="text-2xl font-bold mb-2 text-foreground">Articles Coming Soon</h2>
+              <p className="text-muted-foreground max-w-md mx-auto">
+                We're working on in-depth game guides and tips. Check back soon!
+              </p>
+            </div>
+            {/* Placeholder topic cards for SEO value */}
+            <div>
+              <h2 className="text-xl font-bold text-foreground mb-4">Topics We Cover</h2>
+              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                {[
+                  { emoji: "🎮", title: "Game Guides", desc: "Step-by-step walkthroughs and tips for the most popular unblocked games." },
+                  { emoji: "🏆", title: "Top Game Lists", desc: "Curated lists of the best action, puzzle, racing, and multiplayer browser games." },
+                  { emoji: "🔓", title: "Unblocked Picks", desc: "Our editors' picks for the best games that work on Chromebooks and school networks." },
+                  { emoji: "🧩", title: "Puzzle Strategies", desc: "How to solve the trickiest puzzles in popular browser puzzle games." },
+                  { emoji: "🏎️", title: "Racing Game Tips", desc: "Drift guides, car upgrade strategies, and track tips for racing game fans." },
+                  { emoji: "📱", title: "Mobile Gaming", desc: "The best HTML5 games that work just as well on your phone as on a PC." },
+                ].map(({ emoji, title, desc }) => (
+                  <div key={title} className="p-5 bg-card rounded-xl border border-border/50 hover:border-primary/30 transition-colors">
+                    <div className="text-3xl mb-3" aria-hidden>{emoji}</div>
+                    <h3 className="font-bold text-foreground mb-1">{title}</h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed">{desc}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">

@@ -1,5 +1,5 @@
-# UnblockedGamesZone — robots.txt
-# Last updated: 2026-06-25
+# CloudPlayHub — robots.txt
+# Last updated: 2026-07-24
 
 # ─── Google ─────────────────────────────────────────────────
 User-agent: Googlebot
@@ -39,7 +39,7 @@ User-agent: Discordbot
 Allow: /
 Disallow: /admin/
 
-# ─── AI Crawlers (allow for GEO/AEO) ────────────────────────
+# ─── AI Crawlers (allowed for GEO/AEO indexing) ─────────────
 User-agent: GPTBot
 Allow: /
 Disallow: /admin/
@@ -55,17 +55,30 @@ Allow: /
 Disallow: /admin/
 Disallow: /api/
 
-User-agent: PerplexityBot
-Allow: /
-Disallow: /admin/
-Disallow: /api/
-
 User-agent: ClaudeBot
 Allow: /
 Disallow: /admin/
 Disallow: /api/
 
-# ─── All other bots ─────────────────────────────────────────
+User-agent: PerplexityBot
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+
+User-agent: OAI-SearchBot
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+
+User-agent: cohere-ai
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+
+User-agent: Bytespider
+Disallow: /
+
+# ─── All other crawlers ─────────────────────────────────────
 User-agent: *
 Allow: /
 Disallow: /admin/
@@ -73,5 +86,5 @@ Disallow: /api/
 Crawl-delay: 5
 
 # ─── Sitemaps ───────────────────────────────────────────────
-Sitemap: https://unblockedgameszone.com/sitemap.xml
-Sitemap: https://unblockedgameszone.com/sitemap-blog.xml
+Sitemap: https://CloudPlayHub.com/sitemap.xml
+Sitemap: https://CloudPlayHub.com/sitemap-blog.xml

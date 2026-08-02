@@ -125,6 +125,19 @@ export default function Index() {
   }
 
   const webSiteSchema = buildWebSiteSchema();
+  const orgSchema = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "CloudPlayHub",
+    "url": `${BASE_URL}/`,
+    "logo": `${BASE_URL}/logo.png`,
+    "description": "CloudPlayHub is a free browser gaming platform offering 28,000+ HTML5 games playable instantly without downloads or registration.",
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "email": "support@cloudplayhub.com",
+      "contactType": "customer support"
+    }
+  };
   const gameSeriesSchema = {
     "@context": "https://schema.org",
     "@type": "VideoGameSeries",
@@ -151,10 +164,10 @@ export default function Index() {
   return (
     <div className="min-h-screen">
       <SEO
-        title="CloudPlayHub — Free HTML5 Games, Instant Browser Play"
-        description="Play 28,000+ premium HTML5 games free. No download, no install. Works on Chromebooks, Windows & Mac. Discover trending cloud games at CloudPlayHub."
-        schema={[webSiteSchema, gameSeriesSchema, itemListSchema]}
-        keywords="html5 games, cloud gaming browser, free browser games no download, chromebook games, play games online free, best browser games 2025"
+        title="CloudPlayHub — Free Browser Games, No Download Needed"
+        description="Play 28,000+ free HTML5 games instantly in your browser — no download, no account required. Action, puzzle, racing and more. Works on Chromebooks and school networks."
+        schema={[webSiteSchema, gameSeriesSchema, itemListSchema, orgSchema]}
+        keywords="html5 games, free browser games no download, unblocked games, chromebook games, play games online free, best browser games 2026"
         canonical="/"
       />
       <ScraperShield />
@@ -174,25 +187,26 @@ export default function Index() {
             {/* Badge */}
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-primary/30 bg-primary/10 text-primary text-xs font-bold uppercase tracking-widest mb-6 backdrop-blur-sm">
               <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-              Cloud Gaming Platform · 28,000+ HTML5 Games
+              Free Browser Games · 28,000+ Titles Ready to Play
             </div>
 
             {/* Headline */}
             <h1 className="text-5xl md:text-7xl font-black leading-[1.05] tracking-tight text-foreground mb-6">
-              Your{" "}
+              Play Free Games{" "}
               <span className="relative">
-                <span className="text-gradient-gaming">Cloud Gaming</span>
+                <span className="text-gradient-gaming">Instantly</span>
                 <span className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-primary to-accent opacity-50 rounded-full" />
               </span>
               <br />
-              HQ is Here
+              No Download Needed
             </h1>
 
             <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-xl leading-relaxed">
-              Premium HTML5 games that launch in seconds — no downloads, no installs. Works perfectly on{" "}
+              28,000+ free HTML5 games that launch in seconds, right in your browser.
+              Works perfectly on{" "}
               <strong className="text-foreground font-semibold">Chromebooks</strong>,{" "}
-              <strong className="text-foreground font-semibold">Windows</strong>, and{" "}
-              <strong className="text-foreground font-semibold">Mac</strong>.
+              <strong className="text-foreground font-semibold">Windows</strong>,{" "}
+              <strong className="text-foreground font-semibold">Mac</strong>, and any phone.
             </p>
 
             {/* CTAs */}
@@ -480,6 +494,49 @@ export default function Index() {
           >
             Explore All 28,000+ Games →
           </Link>
+        </div>
+      </section>
+      {/* ─── FAQ SECTION (AEO) ─── */}
+      <section className="container mb-14">
+        <div className="text-center mb-8">
+          <h2 className="text-2xl md:text-3xl font-black text-foreground mb-2">Frequently Asked Questions</h2>
+          <p className="text-muted-foreground">Everything you need to know about CloudPlayHub.</p>
+        </div>
+        <div className="max-w-3xl mx-auto space-y-4">
+          {[
+            {
+              q: "What is CloudPlayHub?",
+              a: "CloudPlayHub is a free browser gaming platform where you can play 28,000+ HTML5 games instantly without downloading anything. It works on any device with a modern browser, including Chromebooks, Windows PCs, Macs, and smartphones."
+            },
+            {
+              q: "Do I need to create an account to play games?",
+              a: "No. CloudPlayHub requires absolutely no account, registration, or email address. Simply visit the site, pick a game, and click play. Your favorite games and recently played history are saved locally on your device."
+            },
+            {
+              q: "Are the games on CloudPlayHub free?",
+              a: "Yes, all games on CloudPlayHub are 100% free to play. The platform is supported by advertising revenue through Google AdSense, which allows us to keep every game free for all users."
+            },
+            {
+              q: "Do these games work on school Chromebooks?",
+              a: "Yes. Every game in our catalog is built with HTML5 technology that works natively on Chromebooks without any extensions, plugins, or downloads. The games are also optimized for school Wi-Fi networks."
+            },
+            {
+              q: "How often are new games added?",
+              a: "New games are added to CloudPlayHub regularly. You can find the latest additions in the \u2728 New This Week section on the homepage, and trending titles in the 🔥 Trending Right Now section."
+            },
+            {
+              q: "Is CloudPlayHub safe for kids?",
+              a: "Yes. All games are reviewed for age-appropriate content before being listed. CloudPlayHub does not host games with graphic violence, adult themes, or inappropriate content. The platform is rated General Audience."
+            },
+          ].map(({ q, a }, i) => (
+            <details key={i} className="group p-5 rounded-xl bg-card border border-border/50 cursor-pointer hover:border-primary/30 transition-colors">
+              <summary className="font-semibold text-foreground list-none flex items-center justify-between gap-4">
+                {q}
+                <span className="text-primary text-lg group-open:rotate-45 transition-transform duration-200 shrink-0">+</span>
+              </summary>
+              <p className="mt-3 text-sm text-muted-foreground leading-relaxed">{a}</p>
+            </details>
+          ))}
         </div>
       </section>
     </div>
