@@ -58,7 +58,7 @@ export default function LandingPage({
         <div className="container relative z-10 max-w-4xl text-center">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-primary/30 bg-primary/10 text-primary text-xs font-bold uppercase tracking-widest mb-5">
             <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-            CloudPlayHub · Cloud Gaming Platform
+            BrowserGames100 · Cloud Gaming Platform
           </div>
           <h1 className="text-4xl md:text-6xl font-black tracking-tight text-foreground mb-5 leading-tight">
             {title}
@@ -170,7 +170,7 @@ export default function LandingPage({
         {/* ─── WHY CLOUDPLAYHUB TRUST BLOCK ─── */}
         <section className="mb-12 p-6 rounded-2xl bg-primary/5 border border-primary/15">
           <h2 className="text-xl font-black text-foreground mb-4">
-            ✅ Why Choose CloudPlayHub?
+            ✅ Why Choose BrowserGames100?
           </h2>
           <ul className="grid sm:grid-cols-2 gap-3">
             {[

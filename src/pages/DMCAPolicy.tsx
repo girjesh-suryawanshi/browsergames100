@@ -7,8 +7,8 @@ export default function DMCAPolicy() {
   return (
     <div className="min-h-screen py-12">
       <SEO
-        title="DMCA & Copyright Policy | CloudPlayHub"
-        description="CloudPlayHub's Digital Millennium Copyright Act (DMCA) policy. Submit takedown notices for copyright-infringing content hosted on our platform."
+        title="DMCA & Copyright Policy | BrowserGames100"
+        description="BrowserGames100's Digital Millennium Copyright Act (DMCA) policy. Submit takedown notices for copyright-infringing content hosted on our platform."
         canonical="/dmca"
       />
 
@@ -26,7 +26,7 @@ export default function DMCAPolicy() {
 
           {/* Intro */}
           <p>
-            CloudPlayHub operates as an aggregation and distribution portal for HTML5 browser games. We deeply respect the intellectual property rights of all creators, developers, and publishers. This page outlines our copyright compliance procedures in accordance with the{" "}
+            BrowserGames100 operates as an aggregation and distribution portal for HTML5 browser games. We deeply respect the intellectual property rights of all creators, developers, and publishers. This page outlines our copyright compliance procedures in accordance with the{" "}
             <strong className="text-foreground">Digital Millennium Copyright Act (DMCA), 17 U.S.C. § 512</strong>, the{" "}
             <strong className="text-foreground">EU Copyright Directive (2019/790)</strong>, and related international intellectual property frameworks.
           </p>
@@ -50,7 +50,7 @@ export default function DMCAPolicy() {
               <span className="text-primary">1.</span> How We Operate
             </h2>
             <p>
-              CloudPlayHub does not host game files on its own servers. The games displayed on this platform are loaded via <strong className="text-foreground">HTML5 iframes</strong> sourced from third-party game development networks and CDNs (e.g., GameMonetize, GD.games, etc.). In cases where the original host is the copyright infringer, we will promptly remove the embedding of that content from our platform and direct you to the appropriate upstream host for further action.
+              BrowserGames100 does not host game files on its own servers. The games displayed on this platform are loaded via <strong className="text-foreground">HTML5 iframes</strong> sourced from third-party game development networks and CDNs (e.g., GameMonetize, GD.games, etc.). In cases where the original host is the copyright infringer, we will promptly remove the embedding of that content from our platform and direct you to the appropriate upstream host for further action.
             </p>
           </div>
 
@@ -66,7 +66,7 @@ export default function DMCAPolicy() {
               {[
                 "A physical or electronic signature of the copyright owner or an authorised representative.",
                 "Identification of the copyrighted work claimed to have been infringed (e.g., title, registration number, or a URL to the original work).",
-                "The specific URL(s) on CloudPlayHub where the allegedly infringing material is located.",
+                "The specific URL(s) on BrowserGames100 where the allegedly infringing material is located.",
                 "Your name, mailing address, telephone number, and email address.",
                 "A statement that you have a good-faith belief that use of the material is not authorised by the copyright owner, its agent, or the law.",
                 "A statement, made under penalty of perjury, that the information in your notice is accurate and that you are the copyright owner or are authorised to act on behalf of the copyright owner.",
@@ -122,7 +122,7 @@ export default function DMCAPolicy() {
               <span className="text-primary">5.</span> Repeat Infringer Policy
             </h2>
             <p>
-              In accordance with the DMCA and our commitment to intellectual property protection, CloudPlayHub maintains a policy of removing or disabling access to the accounts of users who are determined to be repeat infringers. Game pages that receive multiple substantiated copyright complaints will be permanently removed from our platform without appeal.
+              In accordance with the DMCA and our commitment to intellectual property protection, BrowserGames100 maintains a policy of removing or disabling access to the accounts of users who are determined to be repeat infringers. Game pages that receive multiple substantiated copyright complaints will be permanently removed from our platform without appeal.
             </p>
           </div>
 

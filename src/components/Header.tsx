@@ -116,12 +116,12 @@ export default function Header() {
       <div className="container flex items-center justify-between h-16 gap-4">
         {/* LOGO */}
         <div className="flex items-center gap-2 group shrink-0">
-          <Link to="/" className="flex items-center gap-2" aria-label="CloudPlayHub Home">
+          <Link to="/" className="flex items-center gap-2" aria-label="BrowserGames100 Home">
             <div className="w-9 h-9 rounded-lg bg-primary flex items-center justify-center shadow-glow group-hover:scale-110 transition-transform">
               <Gamepad2 className="w-5 h-5 text-primary-foreground" />
             </div>
             <span className="text-xl font-black tracking-tighter text-gradient-gaming hidden lg:inline">
-              CloudPlayHub
+              BrowserGames100
             </span>
           </Link>
 
@@ -318,7 +318,7 @@ export default function Header() {
                 <Gamepad2 className="w-5 h-5 text-primary-foreground" />
               </div>
               <span className="text-xl font-black tracking-tighter text-gradient-gaming">
-                CloudPlayHub
+                BrowserGames100
               </span>
             </Link>
             <Button
@@ -407,7 +407,7 @@ export default function Header() {
           {/* Footer inside menu */}
           <div className="pt-4 border-t border-border/20 mt-auto shrink-0 flex justify-center">
             <p className="text-[10px] font-medium text-muted-foreground">
-              © 2026 CloudPlayHub · Cloud Gaming HQ
+              © 2026 BrowserGames100 · Cloud Gaming HQ
             </p>
           </div>
         </div>

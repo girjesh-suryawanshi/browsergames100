@@ -1,8 +1,8 @@
 const fs = require('fs');
 const path = require('path');
 
-// Ensure correct primary green color (#19E680)
-const BASE_URL = 'https://unblockedgameszone.com';
+// Ensure correct domain (https://browsergames100.com)
+const BASE_URL = 'https://browsergames100.com';
 // Use full ISO string for more precise lastmod, similar to reference sitemap
 const dateNow = new Date().toISOString();
 

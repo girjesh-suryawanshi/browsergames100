@@ -5,23 +5,23 @@ import { Shield, Star, Users, Gamepad2, Heart, Globe, Mail } from "lucide-react"
 const VALUES = [
   {
     icon: <Shield className="w-5 h-5 text-primary" />,
-    title: "Student-Safe First",
-    desc: "Every game in our catalog is manually reviewed for age-appropriate content before it ever goes live. We apply strict content filters and do not host games with graphic violence, adult themes, or predatory monetization aimed at minors.",
+    title: "Family & General Audience Safe",
+    desc: "Every game in our catalog is manually reviewed for age-appropriate content before it ever goes live. We apply strict content filters and do not host games with graphic violence, adult themes, or predatory monetization.",
   },
   {
     icon: <Star className="w-5 h-5 text-gaming-yellow" />,
     title: "Quality Over Quantity",
-    desc: "We test every game for performance, playability, and stability across Chromebooks, Windows PCs, and mobile browsers before adding it to the catalog. If a game lags, crashes, or disappoints — it doesn't make the cut.",
+    desc: "We test every game for performance, playability, and stability across Chromebooks, Windows PCs, Macs, and mobile browsers before adding it to the catalog. If a game lags, crashes, or disappoints — it doesn't make the cut.",
   },
   {
     icon: <Globe className="w-5 h-5 text-gaming-cyan" />,
-    title: "No-Barrier Access",
-    desc: "Gaming should never require a credit card, an account, or a 2GB download. Every title on CloudPlayHub launches instantly in your browser — no registration, no payment, no plugin required.",
+    title: "No-Barrier Instant Access",
+    desc: "Gaming should never require a credit card, an account, or a heavy download. Every title on BrowserGames100 launches instantly in your browser — no registration, no payment, no plugin required.",
   },
   {
     icon: <Heart className="w-5 h-5 text-gaming-pink" />,
-    title: "Community-Driven",
-    desc: "Our trending section is powered by real player activity, not sponsored rankings. If students are playing it, it rises to the top — that's it.",
+    title: "Community & Player Focused",
+    desc: "Our trending section is powered by real player activity, not sponsored rankings. If gamers are playing it, it rises to the top — that's it.",
   },
 ];
 
@@ -36,12 +36,12 @@ export default function AboutUs() {
   const orgSchema = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    "name": "CloudPlayHub",
-    "url": "https://CloudPlayHub.com",
-    "description": "CloudPlayHub is a free browser gaming platform offering 28,000+ HTML5 games playable instantly on any device without downloads or registration.",
+    "name": "BrowserGames100",
+    "url": "https://browsergames100.com",
+    "description": "BrowserGames100 is a free browser gaming platform offering 28,000+ HTML5 games playable instantly on any device without downloads or registration.",
     "contactPoint": {
       "@type": "ContactPoint",
-      "email": "support@cloudplayhub.com",
+      "email": "contact@browsergames100.com",
       "contactType": "customer support",
       "availableLanguage": "English"
     },
@@ -56,8 +56,8 @@ export default function AboutUs() {
   return (
     <div className="min-h-screen py-12">
       <SEO
-        title="About CloudPlayHub — Free Browser Gaming for Everyone"
-        description="Learn about CloudPlayHub's mission to make gaming instantly accessible to students and casual players worldwide. No downloads, no accounts — just great games, free."
+        title="About BrowserGames100 — Free Online Browser Gaming Platform"
+        description="Learn about BrowserGames100's mission to make instant gaming accessible to players worldwide. No downloads, no accounts — just great browser games."
         canonical="/about"
         schema={orgSchema}
         breadcrumbs={breadcrumbs}
@@ -70,16 +70,16 @@ export default function AboutUs() {
             <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
               <Gamepad2 className="w-5 h-5 text-primary" />
             </div>
-            <span className="text-sm font-semibold text-primary uppercase tracking-wider">Our Story</span>
+            <span className="text-sm font-semibold text-primary uppercase tracking-wider">Our Platform</span>
           </div>
           <h1 className="text-4xl md:text-5xl font-black text-foreground mb-6 leading-tight">
-            Gaming That Works<br />
-            <span className="text-gradient-gaming">For Everyone</span>
+            Browser Gaming That Works<br />
+            <span className="text-gradient-gaming">For Everyone, Everywhere</span>
           </h1>
           <p className="text-lg text-muted-foreground leading-relaxed max-w-2xl">
-            CloudPlayHub started with a simple observation: students in school libraries and computer labs
-            wanted to play games during free periods, but most gaming sites either required downloads they
-            couldn't install, loaded slowly on shared school networks, or were blocked by firewalls.
+            BrowserGames100 was built with a clear vision: to provide instant, high-quality browser gaming
+            for casual players, students, and gamers around the world with zero friction, zero forced installs,
+            and 100% free access.
           </p>
         </div>
 
@@ -88,42 +88,23 @@ export default function AboutUs() {
 
           <h2 className="text-2xl font-bold text-foreground">What We Built and Why</h2>
           <p>
-            CloudPlayHub was built from scratch to solve one very specific problem: getting high-quality browser
-            games in front of people who need them quickly, with zero friction. That means no mandatory
-            account creation, no payment walls, no app store redirects, and no download prompts. Every game
-            on our platform runs entirely within the browser using modern HTML5 and WebGL technology.
-          </p>
-          <p>
-            Our platform serves students on Chromebooks, casual players on shared office computers, and
-            anyone who just wants five minutes of fun without committing to a full software installation.
-            We believe that access to entertainment should not depend on the device you own or the network
-            you're using.
+            BrowserGames100 was engineered from the ground up to eliminate all the friction usually associated with digital gaming. No mandatory account sign-ups, no payment walls, no app store downloads, and no plugin installations. Every game on our platform runs natively inside the web browser using standard HTML5 and WebGL web technology.
           </p>
 
-          <h2 className="text-2xl font-bold text-foreground">How We Curate Our Game Library</h2>
+          <h2 className="text-2xl font-bold text-foreground">Our Editorial Policy &amp; Game Testing Methodology</h2>
           <p>
-            We do not simply scrape every available HTML5 game and dump them onto the platform.
-            Our editorial process involves manually testing every game for:
+            We take game curation very seriously. Rather than auto-scraping unverified web content, our team manually evaluates every prospective title against strict quality benchmarks:
           </p>
           <ul className="space-y-2">
-            <li className="flex gap-2"><span className="text-primary font-bold">Performance:</span> Games must load in under 5 seconds on a mid-range Chromebook connected to a shared school Wi-Fi network.</li>
-            <li className="flex gap-2"><span className="text-primary font-bold">Content Standards:</span> We reject games with graphic violence, adult content, or manipulative mechanics (such as pay-to-win loot boxes designed for children).</li>
-            <li className="flex gap-2"><span className="text-primary font-bold">Playability:</span> Controls must be responsive, the game must be completable, and core mechanics must work reliably across Chrome, Firefox, and Edge.</li>
-            <li className="flex gap-2"><span className="text-primary font-bold">Stability:</span> Games that crash frequently, display blank screens, or have broken audio are removed from the catalog.</li>
+            <li className="flex gap-2"><span className="text-primary font-bold">Performance &amp; Load Speed:</span> Games must initialize in under 5 seconds over standard internet connections and run at stable framerates on low-to-mid range PC, Mac, and Chromebook devices.</li>
+            <li className="flex gap-2"><span className="text-primary font-bold">Content &amp; Safety Standards:</span> We reject games containing graphic gore, mature themes, or predatory pay-to-win mechanics aimed at minors.</li>
+            <li className="flex gap-2"><span className="text-primary font-bold">Cross-Device Playability:</span> Controls must be intuitive, fully responsive, and function reliably across Chrome, Firefox, Edge, and Safari browsers.</li>
+            <li className="flex gap-2"><span className="text-primary font-bold">Stability Guarantee:</span> Games that exhibit frequent memory leaks, broken audio, or blank canvas renders are removed from our active catalog.</li>
           </ul>
-          <p>
-            This process means our catalog grows more slowly than competitors, but every game in it
-            actually works — and works well. We would rather have 28,000 great games than 100,000
-            broken ones.
-          </p>
 
-          <h2 className="text-2xl font-bold text-foreground">Our Commitment to Privacy and Safety</h2>
+          <h2 className="text-2xl font-bold text-foreground">Commitment to User Trust &amp; AdSense Policy Compliance</h2>
           <p>
-            CloudPlayHub does not require user registration, which means we collect far less personal
-            data than most websites. We do not sell user data to third parties. We use Google AdSense
-            to display advertisements that help keep the platform free, and we comply with GDPR, CCPA,
-            and COPPA requirements. Our cookie consent banner gives every visitor clear control over
-            their advertising preferences.
+            BrowserGames100 respects user privacy and complies with all global data protection standards, including GDPR, CCPA, and COPPA. We partner exclusively with Google AdSense and verified programmatic networks to deliver clean, non-intrusive advertising that funds free gaming without compromising user experience or data privacy.
           </p>
           <p>
             We operate a strict content moderation process. If a game in our catalog is reported
@@ -132,7 +113,7 @@ export default function AboutUs() {
             48–72 business hours. See our <Link to="/dmca" className="text-primary hover:underline">DMCA Policy</Link> for details.
           </p>
 
-          <h2 className="text-2xl font-bold text-foreground">The Technology Behind CloudPlayHub</h2>
+          <h2 className="text-2xl font-bold text-foreground">The Technology Behind BrowserGames100</h2>
           <p>
             The platform is built on modern web technologies designed for performance. We use
             progressive image loading, lazy-loaded game assets, and a Content Delivery Network (CDN)

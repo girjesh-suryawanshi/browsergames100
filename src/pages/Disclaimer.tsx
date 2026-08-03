@@ -13,8 +13,8 @@ export default function Disclaimer() {
   return (
     <div className="min-h-screen py-12">
       <SEO
-        title="Disclaimer — CloudPlayHub"
-        description="Read CloudPlayHub's full disclaimer. Covers third-party game content, affiliate advertising disclosures, accuracy limitations, and copyright compliance information."
+        title="Disclaimer — BrowserGames100"
+        description="Read BrowserGames100's full disclaimer. Covers third-party game content, affiliate advertising disclosures, accuracy limitations, and copyright compliance information."
         canonical="/disclaimer"
         breadcrumbs={breadcrumbs}
       />
@@ -27,8 +27,8 @@ export default function Disclaimer() {
         <div className="prose prose-invert max-w-none space-y-8 text-muted-foreground">
 
           <p>
-            The information, games, and interactive content provided on CloudPlayHub
-            (<strong className="text-foreground">CloudPlayHub.com</strong>) are offered for recreational
+            The information, games, and interactive content provided on BrowserGames100
+            (<strong className="text-foreground">BrowserGames100.com</strong>) are offered for recreational
             and entertainment purposes. Please read this Disclaimer carefully before using our platform.
           </p>
 
@@ -36,13 +36,13 @@ export default function Disclaimer() {
           <div>
             <h2 className="text-2xl font-bold text-foreground">1. Third-Party Game Content</h2>
             <p>
-              CloudPlayHub is a game aggregation and discovery platform. The games available on our platform
+              BrowserGames100 is a game aggregation and discovery platform. The games available on our platform
               are provided by third-party developers, publishers, and game distribution networks such as
               GameMonetize and GD.games. These games are embedded via HTML5 iframes and are hosted on
-              the third parties' own servers — not on CloudPlayHub's infrastructure.
+              the third parties' own servers — not on BrowserGames100's infrastructure.
             </p>
             <p className="mt-3">
-              CloudPlayHub does <strong className="text-foreground">not</strong> claim ownership, authorship,
+              BrowserGames100 does <strong className="text-foreground">not</strong> claim ownership, authorship,
               or creative control over any of the individual games in our catalog. All trademarks, character
               names, game titles, logos, and game mechanics remain the exclusive intellectual property of their
               respective creators and publishers.
@@ -58,7 +58,7 @@ export default function Disclaimer() {
           <div>
             <h2 className="text-2xl font-bold text-foreground">2. Accuracy and Completeness</h2>
             <p>
-              CloudPlayHub makes reasonable efforts to ensure that game descriptions, how-to-play
+              BrowserGames100 makes reasonable efforts to ensure that game descriptions, how-to-play
               instructions, ratings, and play counts are accurate and up to date. However, we make no
               warranty, express or implied, that any information on this website is complete, accurate,
               reliable, or current.
@@ -76,7 +76,7 @@ export default function Disclaimer() {
           <div>
             <h2 className="text-2xl font-bold text-foreground">3. Advertising Disclosure</h2>
             <p>
-              CloudPlayHub is a free-to-use platform supported by display advertising. We participate in
+              BrowserGames100 is a free-to-use platform supported by display advertising. We participate in
               the <strong className="text-foreground">Google AdSense</strong> program, which means
               Google automatically serves advertisements on our pages based on your browsing history and
               interests (with your consent) or based on page content (without personalization if consent
@@ -105,9 +105,9 @@ export default function Disclaimer() {
               informational purposes only.
             </p>
             <p className="mt-3">
-              CloudPlayHub has no control over the content, privacy policies, or availability of
+              BrowserGames100 has no control over the content, privacy policies, or availability of
               external websites. The inclusion of any link does not constitute an endorsement by
-              CloudPlayHub of that site's content or services. We encourage you to review the privacy
+              BrowserGames100 of that site's content or services. We encourage you to review the privacy
               policy and terms of service of any external website you visit.
             </p>
           </div>
@@ -116,7 +116,7 @@ export default function Disclaimer() {
           <div>
             <h2 className="text-2xl font-bold text-foreground">5. No Professional Advice</h2>
             <p>
-              Nothing on CloudPlayHub constitutes legal, financial, medical, or professional advice
+              Nothing on BrowserGames100 constitutes legal, financial, medical, or professional advice
               of any kind. Our content — including blog posts, game descriptions, and platform text —
               is intended for entertainment and informational purposes only. Always consult a qualified
               professional for advice specific to your situation.
@@ -127,7 +127,7 @@ export default function Disclaimer() {
           <div>
             <h2 className="text-2xl font-bold text-foreground">6. Copyright and DMCA</h2>
             <p>
-              CloudPlayHub respects intellectual property rights. If you are a copyright holder and
+              BrowserGames100 respects intellectual property rights. If you are a copyright holder and
               believe your work is being displayed on our platform without authorization, please submit
               a formal DMCA takedown notice following the process described in our{" "}
               <Link to="/dmca" className="text-primary hover:underline">DMCA Policy</Link>.
@@ -145,7 +145,7 @@ export default function Disclaimer() {
             <p>
               We may update this Disclaimer from time to time to reflect changes in our platform or
               the law. We will update the "Last Updated" date at the top when we do so. Continued use
-              of CloudPlayHub after an update constitutes acceptance of the revised Disclaimer.
+              of BrowserGames100 after an update constitutes acceptance of the revised Disclaimer.
             </p>
           </div>
 

@@ -20,7 +20,7 @@ import SEO, { buildWebSiteSchema } from "@/components/SEO";
 import ScraperShield from "@/components/ScraperShield";
 import InstallBanner from "@/components/InstallBanner";
 
-const BASE_URL = "https://CloudPlayHub.com";
+const BASE_URL = "https://BrowserGames100.com";
 
 const FEATURES = [
   {
@@ -128,10 +128,10 @@ export default function Index() {
   const orgSchema = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    "name": "CloudPlayHub",
+    "name": "BrowserGames100",
     "url": `${BASE_URL}/`,
     "logo": `${BASE_URL}/logo.png`,
-    "description": "CloudPlayHub is a free browser gaming platform offering 28,000+ HTML5 games playable instantly without downloads or registration.",
+    "description": "BrowserGames100 is a free browser gaming platform offering 28,000+ HTML5 games playable instantly without downloads or registration.",
     "contactPoint": {
       "@type": "ContactPoint",
       "email": "support@cloudplayhub.com",
@@ -141,17 +141,17 @@ export default function Index() {
   const gameSeriesSchema = {
     "@context": "https://schema.org",
     "@type": "VideoGameSeries",
-    "name": "CloudPlayHub - Free Cloud Gaming Platform",
+    "name": "BrowserGames100 - Free Cloud Gaming Platform",
     "url": `${BASE_URL}/`,
-    "description": "Play 28,000+ free HTML5 games instantly in your browser. No download required. CloudPlayHub is the premier cloud gaming destination for Chromebooks and all modern browsers.",
+    "description": "Play 28,000+ free HTML5 games instantly in your browser. No download required. BrowserGames100 is the premier cloud gaming destination for Chromebooks and all modern browsers.",
     "genre": ["Action", "Puzzle", "Racing", "Arcade", "Strategy", "Multiplayer"],
-    "publisher": { "@type": "Organization", "name": "CloudPlayHub", "url": `${BASE_URL}/` },
+    "publisher": { "@type": "Organization", "name": "BrowserGames100", "url": `${BASE_URL}/` },
   };
   const itemListSchema = {
     "@context": "https://schema.org",
     "@type": "ItemList",
     "name": "Top Trending HTML5 Games",
-    "description": "The most-played free browser games right now on CloudPlayHub.",
+    "description": "The most-played free browser games right now on BrowserGames100.",
     "numberOfItems": Math.min(trending.length, 10),
     "itemListElement": trending.slice(0, 10).map((g, i) => ({
       "@type": "ListItem",
@@ -164,7 +164,7 @@ export default function Index() {
   return (
     <div className="min-h-screen">
       <SEO
-        title="CloudPlayHub — Free Browser Games, No Download Needed"
+        title="BrowserGames100 — Free Browser Games, No Download Needed"
         description="Play 28,000+ free HTML5 games instantly in your browser — no download, no account required. Action, puzzle, racing and more. Works on Chromebooks and school networks."
         schema={[webSiteSchema, gameSeriesSchema, itemListSchema, orgSchema]}
         keywords="html5 games, free browser games no download, unblocked games, chromebook games, play games online free, best browser games 2026"
@@ -259,9 +259,9 @@ export default function Index() {
       <AdPlacement size="728x90" className="my-6" slot="leaderboard-homepage-top" />
 
       {/* ─── FEATURE STRIP ─── */}
-      <section className="container mb-14" aria-label="Why CloudPlayHub">
+      <section className="container mb-14" aria-label="Why BrowserGames100">
         <div className="text-center mb-8">
-          <h2 className="text-2xl md:text-3xl font-black text-foreground mb-2">Why CloudPlayHub?</h2>
+          <h2 className="text-2xl md:text-3xl font-black text-foreground mb-2">Why BrowserGames100?</h2>
           <p className="text-muted-foreground">Built different. No compromises.</p>
         </div>
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -428,7 +428,7 @@ export default function Index() {
       {/* ─── HOW IT WORKS ─── */}
       <section className="container mb-14">
         <div className="text-center mb-8">
-          <h2 className="text-2xl md:text-3xl font-black text-foreground mb-2">How CloudPlayHub Works</h2>
+          <h2 className="text-2xl md:text-3xl font-black text-foreground mb-2">How BrowserGames100 Works</h2>
           <p className="text-muted-foreground max-w-md mx-auto">From zero to playing in under 10 seconds. No account needed.</p>
         </div>
         <div className="grid md:grid-cols-3 gap-6">
@@ -500,21 +500,21 @@ export default function Index() {
       <section className="container mb-14">
         <div className="text-center mb-8">
           <h2 className="text-2xl md:text-3xl font-black text-foreground mb-2">Frequently Asked Questions</h2>
-          <p className="text-muted-foreground">Everything you need to know about CloudPlayHub.</p>
+          <p className="text-muted-foreground">Everything you need to know about BrowserGames100.</p>
         </div>
         <div className="max-w-3xl mx-auto space-y-4">
           {[
             {
-              q: "What is CloudPlayHub?",
-              a: "CloudPlayHub is a free browser gaming platform where you can play 28,000+ HTML5 games instantly without downloading anything. It works on any device with a modern browser, including Chromebooks, Windows PCs, Macs, and smartphones."
+              q: "What is BrowserGames100?",
+              a: "BrowserGames100 is a free browser gaming platform where you can play 28,000+ HTML5 games instantly without downloading anything. It works on any device with a modern browser, including Chromebooks, Windows PCs, Macs, and smartphones."
             },
             {
               q: "Do I need to create an account to play games?",
-              a: "No. CloudPlayHub requires absolutely no account, registration, or email address. Simply visit the site, pick a game, and click play. Your favorite games and recently played history are saved locally on your device."
+              a: "No. BrowserGames100 requires absolutely no account, registration, or email address. Simply visit the site, pick a game, and click play. Your favorite games and recently played history are saved locally on your device."
             },
             {
-              q: "Are the games on CloudPlayHub free?",
-              a: "Yes, all games on CloudPlayHub are 100% free to play. The platform is supported by advertising revenue through Google AdSense, which allows us to keep every game free for all users."
+              q: "Are the games on BrowserGames100 free?",
+              a: "Yes, all games on BrowserGames100 are 100% free to play. The platform is supported by advertising revenue through Google AdSense, which allows us to keep every game free for all users."
             },
             {
               q: "Do these games work on school Chromebooks?",
@@ -522,11 +522,11 @@ export default function Index() {
             },
             {
               q: "How often are new games added?",
-              a: "New games are added to CloudPlayHub regularly. You can find the latest additions in the \u2728 New This Week section on the homepage, and trending titles in the 🔥 Trending Right Now section."
+              a: "New games are added to BrowserGames100 regularly. You can find the latest additions in the \u2728 New This Week section on the homepage, and trending titles in the 🔥 Trending Right Now section."
             },
             {
-              q: "Is CloudPlayHub safe for kids?",
-              a: "Yes. All games are reviewed for age-appropriate content before being listed. CloudPlayHub does not host games with graphic violence, adult themes, or inappropriate content. The platform is rated General Audience."
+              q: "Is BrowserGames100 safe for kids?",
+              a: "Yes. All games are reviewed for age-appropriate content before being listed. BrowserGames100 does not host games with graphic violence, adult themes, or inappropriate content. The platform is rated General Audience."
             },
           ].map(({ q, a }, i) => (
             <details key={i} className="group p-5 rounded-xl bg-card border border-border/50 cursor-pointer hover:border-primary/30 transition-colors">

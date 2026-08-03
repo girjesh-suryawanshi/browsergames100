@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const EFFECTIVE_DATE = "July 24, 2026";
 const LAST_UPDATED = "July 24, 2026";
-const CONTACT_EMAIL = "support@cloudplayhub.com";
+const CONTACT_EMAIL = "privacy@browsergames100.com";
 
 export default function PrivacyPolicy() {
   const breadcrumbs = [
@@ -14,8 +14,8 @@ export default function PrivacyPolicy() {
   return (
     <div className="min-h-screen py-12">
       <SEO
-        title="Privacy Policy — CloudPlayHub"
-        description="Read CloudPlayHub's full privacy policy. Learn what data we collect, how we use it, your rights under GDPR and CCPA, and how we handle children's privacy under COPPA."
+        title="Privacy Policy — BrowserGames100"
+        description="Read BrowserGames100's full privacy policy. Learn what data we collect, how we use it, your rights under GDPR and CCPA, and how we handle children's privacy under COPPA."
         canonical="/privacy"
         breadcrumbs={breadcrumbs}
       />
@@ -29,13 +29,13 @@ export default function PrivacyPolicy() {
 
           {/* Intro */}
           <p>
-            Welcome to CloudPlayHub ("we," "us," or "our"). This Privacy Policy explains what information
-            we collect when you visit <strong className="text-foreground">CloudPlayHub.com</strong>, how we use it,
-            who we share it with, and what choices you have. By using CloudPlayHub, you agree to the practices
+            Welcome to BrowserGames100 ("we," "us," or "our"). This Privacy Policy explains what information
+            we collect when you visit <strong className="text-foreground">BrowserGames100.com</strong>, how we use it,
+            who we share it with, and what choices you have. By using BrowserGames100, you agree to the practices
             described in this policy. If you do not agree, please stop using our platform.
           </p>
           <p>
-            We are committed to protecting your privacy. CloudPlayHub is designed to be used without
+            We are committed to protecting your privacy. BrowserGames100 is designed to be used without
             creating an account, which means we collect far less personal information than most
             websites of our size.
           </p>
@@ -46,7 +46,7 @@ export default function PrivacyPolicy() {
 
             <h3 className="text-lg font-semibold text-foreground mt-4 mb-2">1a. Information You Provide Directly</h3>
             <p>
-              CloudPlayHub does not require you to create an account to play games. However, we may collect
+              BrowserGames100 does not require you to create an account to play games. However, we may collect
               information you voluntarily provide when you:
             </p>
             <ul className="space-y-1 ml-4 list-disc">
@@ -74,7 +74,7 @@ export default function PrivacyPolicy() {
 
             <h3 className="text-lg font-semibold text-foreground mt-4 mb-2">1c. Information Stored Locally on Your Device</h3>
             <p>
-              CloudPlayHub stores the following data in your browser's <strong className="text-foreground">localStorage</strong> (not on our servers):
+              BrowserGames100 stores the following data in your browser's <strong className="text-foreground">localStorage</strong> (not on our servers):
             </p>
             <ul className="space-y-1 ml-4 list-disc">
               <li>Your favorite games list (game IDs only, no personal data).</li>
@@ -92,7 +92,7 @@ export default function PrivacyPolicy() {
           <div>
             <h2 className="text-2xl font-bold text-foreground">2. Cookies and Tracking Technologies</h2>
             <p>
-              CloudPlayHub uses cookies and similar technologies for the following purposes:
+              BrowserGames100 uses cookies and similar technologies for the following purposes:
             </p>
 
             <div className="overflow-x-auto mt-4">
@@ -138,8 +138,8 @@ export default function PrivacyPolicy() {
             <h2 className="text-2xl font-bold text-foreground">3. How We Use Your Information</h2>
             <p>We use the information we collect for the following purposes:</p>
             <ul className="space-y-2 ml-4 list-disc">
-              <li>To operate and maintain the CloudPlayHub platform and ensure it functions correctly.</li>
-              <li>To display advertisements that help keep CloudPlayHub free to use.</li>
+              <li>To operate and maintain the BrowserGames100 platform and ensure it functions correctly.</li>
+              <li>To display advertisements that help keep BrowserGames100 free to use.</li>
               <li>To respond to contact form submissions and support requests.</li>
               <li>To analyze usage trends in aggregate and improve our game catalog.</li>
               <li>To detect and prevent abuse, fraud, or technical issues.</li>
@@ -159,7 +159,7 @@ export default function PrivacyPolicy() {
           <div>
             <h2 className="text-2xl font-bold text-foreground">4. Third-Party Services</h2>
             <p>
-              CloudPlayHub integrates the following third-party services. Each has their own privacy policy
+              BrowserGames100 integrates the following third-party services. Each has their own privacy policy
               that governs how they process your data:
             </p>
             <ul className="space-y-3 mt-3 ml-4 list-disc">
@@ -181,7 +181,7 @@ export default function PrivacyPolicy() {
           <div>
             <h2 className="text-2xl font-bold text-foreground">5. Children's Privacy (COPPA)</h2>
             <p>
-              CloudPlayHub is intended for a general audience. Our service is open to users of all ages,
+              BrowserGames100 is intended for a general audience. Our service is open to users of all ages,
               including students who may be under 13 years old. We take children's privacy very seriously
               and comply with the{" "}
               <strong className="text-foreground">Children's Online Privacy Protection Act (COPPA)</strong>.
@@ -237,7 +237,7 @@ export default function PrivacyPolicy() {
             <ul className="space-y-2 mt-3 ml-4 list-disc">
               <li>The right to know what personal information is collected, used, shared, or sold.</li>
               <li>The right to delete personal information we have collected from you.</li>
-              <li>The right to opt out of the sale of your personal information. CloudPlayHub does <strong className="text-foreground">not sell personal information</strong>.</li>
+              <li>The right to opt out of the sale of your personal information. BrowserGames100 does <strong className="text-foreground">not sell personal information</strong>.</li>
               <li>The right to non-discrimination for exercising your CCPA rights.</li>
             </ul>
             <p className="mt-3">
@@ -264,7 +264,7 @@ export default function PrivacyPolicy() {
           <div>
             <h2 className="text-2xl font-bold text-foreground">9. Security</h2>
             <p>
-              CloudPlayHub is served over HTTPS (TLS encryption) at all times. We do not store payment
+              BrowserGames100 is served over HTTPS (TLS encryption) at all times. We do not store payment
               information, passwords, or sensitive personal data on our servers. While no online service
               can guarantee 100% security, we implement industry-standard security practices to protect
               the limited data we do process.
@@ -278,7 +278,7 @@ export default function PrivacyPolicy() {
               We may update this Privacy Policy from time to time to reflect changes in our practices,
               technology, or legal requirements. When we make significant changes, we will update the
               "Last Updated" date at the top of this page. We encourage you to review this policy
-              periodically. Continued use of CloudPlayHub after an update constitutes acceptance of
+              periodically. Continued use of BrowserGames100 after an update constitutes acceptance of
               the revised policy.
             </p>
           </div>
@@ -290,7 +290,7 @@ export default function PrivacyPolicy() {
               If you have questions about this Privacy Policy or how we handle your data, please reach out:
             </p>
             <div className="mt-4 p-5 bg-card rounded-xl border border-border/50">
-              <p className="font-bold text-foreground mb-1">CloudPlayHub</p>
+              <p className="font-bold text-foreground mb-1">BrowserGames100</p>
               <p>Email: <a href={`mailto:${CONTACT_EMAIL}`} className="text-primary hover:underline">{CONTACT_EMAIL}</a></p>
               <p className="mt-2 text-sm">
                 We aim to respond to all privacy-related inquiries within 5 business days.

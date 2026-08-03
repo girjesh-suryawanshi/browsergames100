@@ -1,4 +1,4 @@
-﻿import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { 
   CheckCircle2, AlertCircle, Sparkles, Laptop, Smartphone, Share2
 } from "lucide-react";
@@ -228,7 +228,7 @@ export const SEOLiveAnalyzer = ({ data }: SEOAnalyzerProps) => {
 
             <TabsContent value="google" className="pt-3">
               <div className="p-4 bg-background border border-border rounded-lg text-left shadow-sm">
-                <span className="text-[12px] text-muted-foreground block mb-0.5">https://CloudPlayHub.com &rsaquo; blog &rsaquo; {data.slug || "url"}</span>
+                <span className="text-[12px] text-muted-foreground block mb-0.5">https://BrowserGames100.com &rsaquo; blog &rsaquo; {data.slug || "url"}</span>
                 <a href="#" className="text-[#8ab4f8] hover:underline text-[20px] leading-tight block mb-1 font-medium">
                   {data.seoTitle || data.title || "Enter post title..."}
                 </a>
@@ -250,7 +250,7 @@ export const SEOLiveAnalyzer = ({ data }: SEOAnalyzerProps) => {
                   )}
                 </div>
                 <div className="p-3 bg-secondary/50">
-                  <span className="text-[10px] uppercase text-muted-foreground block mb-0.5 font-semibold">CloudPlayHub.com</span>
+                  <span className="text-[10px] uppercase text-muted-foreground block mb-0.5 font-semibold">BrowserGames100.com</span>
                   <h5 className="text-[14px] font-bold leading-tight line-clamp-1 mb-1">{data.title || "Enter title..."}</h5>
                   <p className="text-[11px] text-muted-foreground line-clamp-2">{data.seoDescription || data.excerpt || "Enter description..."}</p>
                 </div>

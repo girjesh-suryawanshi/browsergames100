@@ -21,7 +21,7 @@ interface SEOProps {
   modifiedTime?: string;
 }
 
-const BASE_URL = "https://CloudPlayHub.com";
+const BASE_URL = "https://browsergames100.com";
 
 export function buildBreadcrumbSchema(items: BreadcrumbItem[]) {
   return {
@@ -40,9 +40,9 @@ export function buildWebSiteSchema() {
   return {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    "name": "CloudPlayHub",
+    "name": "BrowserGames100",
     "url": `${BASE_URL}/`,
-    "description": "Play thousands of free unblocked games for school. No download required. Works on Chromebooks.",
+    "description": "Play thousands of free online browser games no download required. Instant play HTML5 games on PC, mobile and Chromebook.",
     "potentialAction": {
       "@type": "SearchAction",
       "target": {
@@ -53,7 +53,7 @@ export function buildWebSiteSchema() {
     },
     "publisher": {
       "@type": "Organization",
-      "name": "CloudPlayHub",
+      "name": "BrowserGames100",
       "url": `${BASE_URL}/`,
       "logo": {
         "@type": "ImageObject",
@@ -78,13 +78,13 @@ export default function SEO({
   publishedTime,
   modifiedTime,
 }: SEOProps) {
-  const siteName = "CloudPlayHub";
+  const siteName = "BrowserGames100";
   const fullTitle = title
     ? `${title} | ${siteName}`
-    : `${siteName} - Play Free Online Games No Download`;
+    : `${siteName} - Play Free Online Browser Games No Download`;
   const fullDescription =
     description ||
-    "Play the best free unblocked games for school. No download required. Works on Chromebooks. CloudPlayHub features action, puzzle, and racing games.";
+    "Play the best free online browser games. No download required. Works on PC, Chromebooks and Mobile. BrowserGames100 features action, puzzle, racing, and arcade games.";
   const url = canonical
     ? `${BASE_URL}${canonical}`
     : `${BASE_URL}/`;
@@ -135,7 +135,7 @@ export default function SEO({
 
       {/* Twitter Meta Tags */}
       <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:site" content="@CloudPlayHub" />
+      <meta name="twitter:site" content="@BrowserGames100" />
       <meta name="twitter:title" content={fullTitle} />
       <meta name="twitter:description" content={fullDescription} />
       <meta name="twitter:image" content={resolvedOgImage} />

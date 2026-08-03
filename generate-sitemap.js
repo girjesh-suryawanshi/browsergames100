@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const BASE_URL = 'https://unblockedgameszone.com';
+const BASE_URL = 'https://browsergames100.com';
 const dateNow = new Date().toISOString().split('T')[0];
 
 const publicDir = path.join(__dirname, 'public');

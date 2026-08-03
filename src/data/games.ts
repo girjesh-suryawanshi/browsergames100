@@ -68,10 +68,13 @@ export async function getGamesPage(page: number): Promise<GameCompact[]> {
 
 export async function getCategoryGames(categoryId: number): Promise<GameCompact[]> {
   try {
-    return await fetchJson<GameCompact[]>(`/data/cat-${categoryId}.json`);
+    const games = await fetchJson<GameCompact[]>(`/data/cat-${categoryId}.json`);
+    if (games && games.length > 0) return games;
   } catch {
-    return [];
+    // Fallback to initial games catalog if category json doesn't exist
   }
+  const initial = await getInitialGames();
+  return initial.slice(0, 48);
 }
 
 export async function getGameDetail(slug: string): Promise<GameDetail | null> {
@@ -118,13 +121,15 @@ export async function getGamesByIds(ids: number[]): Promise<GameCompact[]> {
 
 export function getCategoryIcon(slug: string): string {
   const icons: Record<string, string> = {
-    'action-games': '⚔️', 'racing-games': '🏎️', 'shooting-games': '🎯',
-    'arcade-games': '🕹️', 'puzzle-games': '🧩', 'strategy-games': '♟️',
-    'multiplayer-games': '🌐', 'sports-games': '⚽', 'fighting-games': '🥊',
+    'browser-games': '🌐', 'action-games': '⚔️', 'puzzle-games': '🧩',
+    'adventure-games': '🗺️', 'arcade-games': '🕹️', 'sports-games': '⚽',
+    'racing-games': '🏎️', 'strategy-games': '♟️', 'simulation-games': '🏭',
+    'idle-games': '⏱️', 'shooting-games': '🎯', 'kids-games': '🎈',
+    '2-player-games': '👥', 'multiplayer-games': '🌐', 'html5-games': '⚡',
+    'no-download-games': '🚀', 'instant-games': '⚡', 'fighting-games': '🥊',
     'girls-games': '💅', 'hypercasual-games': '🎮', 'boys-games': '🎯',
-    'adventure-games': '🗺️', 'bejeweled-games': '💎', 'clicker-games': '👆',
-    'cooking-games': '🍳', 'soccer-games': '⚽', 'stickman-games': '🏃',
-    'io-games': '🌐', '3d-games': '🎲',
+    'bejeweled-games': '💎', 'clicker-games': '👆', 'cooking-games': '🍳',
+    'soccer-games': '⚽', 'stickman-games': '🏃', 'io-games': '🌐', '3d-games': '🎲',
   };
   return icons[slug] || '🎮';
 }

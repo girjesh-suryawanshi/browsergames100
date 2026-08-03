@@ -70,7 +70,7 @@ export default function ContactUs() {
     setStatus("sending");
 
     const subjectLabel = SUBJECTS.find((s) => s.value === formData.subject)?.label || formData.subject;
-    const mailtoSubject = encodeURIComponent(`[CloudPlayHub] ${subjectLabel} — from ${formData.name}`);
+    const mailtoSubject = encodeURIComponent(`[BrowserGames100] ${subjectLabel} — from ${formData.name}`);
     const mailtoBody = encodeURIComponent(
       `Name: ${formData.name}\nEmail: ${formData.email}\nSubject: ${subjectLabel}\n\n${formData.message}`
     );
@@ -85,8 +85,8 @@ export default function ContactUs() {
   return (
     <div className="min-h-screen py-12">
       <SEO
-        title="Contact Us — CloudPlayHub"
-        description="Get in touch with the CloudPlayHub team. Report bugs, suggest games, submit DMCA notices, or ask any question. We respond within 48–72 hours."
+        title="Contact Us — BrowserGames100"
+        description="Get in touch with the BrowserGames100 team. Report bugs, suggest games, submit DMCA notices, or ask any question. We respond within 48–72 hours."
         canonical="/contact"
         breadcrumbs={breadcrumbs}
       />

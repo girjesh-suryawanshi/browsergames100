@@ -29,15 +29,15 @@ export default function BlogList() {
   return (
     <main className="bg-background pt-24 pb-16 min-h-screen">
       <SEO
-        title="Gaming Blog & Tips | CloudPlayHub"
-        description="Explore CloudPlayHub's gaming blog for tips, game guides, top picks, and the latest news on free browser games you can play anywhere."
+        title="Gaming Blog & Tips | BrowserGames100"
+        description="Explore BrowserGames100's gaming blog for tips, game guides, top picks, and the latest news on free browser games you can play anywhere."
         canonical="/blog"
       />
       <div className="container mx-auto px-4 max-w-6xl">
         <div className="text-center mb-16">
           <h1 className="text-4xl md:text-5xl font-extrabold mb-4">Gaming Blog &amp; Tips</h1>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Game guides, top picks, and tips for the best free browser games on CloudPlayHub.
+            Game guides, top picks, and tips for the best free browser games on BrowserGames100.
           </p>
         </div>
 

@@ -1,5 +1,5 @@
-# CloudPlayHub — robots.txt
-# Last updated: 2026-07-24
+# BrowserGames100 — robots.txt
+# Last updated: 2026-08-03
 
 # ─── Google ─────────────────────────────────────────────────
 User-agent: Googlebot
@@ -86,5 +86,5 @@ Disallow: /api/
 Crawl-delay: 5
 
 # ─── Sitemaps ───────────────────────────────────────────────
-Sitemap: https://CloudPlayHub.com/sitemap.xml
-Sitemap: https://CloudPlayHub.com/sitemap-blog.xml
+Sitemap: https://browsergames100.com/sitemap.xml
+Sitemap: https://browsergames100.com/sitemap-blog.xml

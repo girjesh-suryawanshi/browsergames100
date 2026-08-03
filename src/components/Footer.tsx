@@ -20,17 +20,17 @@ export default function Footer() {
               <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center">
                 <Gamepad2 className="w-4 h-4 text-primary-foreground" />
               </div>
-              <span className="text-lg font-bold text-gradient-gaming">CloudPlayHub</span>
+              <span className="text-lg font-bold text-gradient-gaming">BrowserGames100</span>
             </Link>
             <p className="text-sm text-muted-foreground mb-6">
-              CloudPlayHub is your ultimate destination for free unblocked games. Play thousands of action, puzzle, and racing games directly in your browser.
+              BrowserGames100 is your ultimate destination for free online browser games. Play thousands of action, puzzle, racing, strategy, and arcade games directly in your browser.
             </p>
             <SuggestGame />
           </div>
           <div>
-            <h4 className="font-semibold text-foreground mb-3 text-sm">Categories</h4>
+            <h4 className="font-semibold text-foreground mb-3 text-sm">Top Game Silos</h4>
             <ul className="space-y-2">
-              {categories.slice(0, 6).map(cat => (
+              {categories.slice(0, 8).map(cat => (
                 <li key={cat.id}>
                   <Link to={`/category/${cat.slug}`} className="text-sm text-muted-foreground hover:text-primary transition-colors">
                     {cat.name}
@@ -40,25 +40,25 @@ export default function Footer() {
             </ul>
           </div>
           <div>
-            <h4 className="font-semibold text-foreground mb-3 text-sm">Site Info</h4>
+            <h4 className="font-semibold text-foreground mb-3 text-sm">Platform &amp; EEAT</h4>
             <ul className="space-y-2">
-              <li><Link to="/blog" className="text-sm text-muted-foreground hover:text-primary transition-colors">Blog</Link></li>
-              <li><Link to="/about" className="text-sm text-muted-foreground hover:text-primary transition-colors">About Us</Link></li>
-              <li><Link to="/contact" className="text-sm text-muted-foreground hover:text-primary transition-colors">Contact Us</Link></li>
+              <li><Link to="/about" className="text-sm text-muted-foreground hover:text-primary transition-colors">About Us &amp; Editorial Standards</Link></li>
+              <li><Link to="/contact" className="text-sm text-muted-foreground hover:text-primary transition-colors">Contact Support</Link></li>
               <li><Link to="/disclaimer" className="text-sm text-muted-foreground hover:text-primary transition-colors">Disclaimer</Link></li>
-              <li><Link to="/dmca" className="text-sm text-muted-foreground hover:text-primary transition-colors font-medium text-gaming-yellow/80">DMCA / Copyright</Link></li>
+              <li><Link to="/dmca" className="text-sm text-muted-foreground hover:text-primary transition-colors font-medium text-gaming-yellow/80">DMCA Copyright Policy</Link></li>
+              <li><Link to="/blog" className="text-sm text-muted-foreground hover:text-primary transition-colors">Gaming Blog</Link></li>
             </ul>
           </div>
           <div>
-            <h4 className="font-semibold text-foreground mb-3 text-sm">Legal</h4>
+            <h4 className="font-semibold text-foreground mb-3 text-sm">Legal &amp; Ad Policy</h4>
             <ul className="space-y-2">
-              <li><Link to="/privacy" className="text-sm text-muted-foreground hover:text-primary transition-colors">Privacy Policy</Link></li>
+              <li><Link to="/privacy" className="text-sm text-muted-foreground hover:text-primary transition-colors">Privacy Policy (GDPR / CCPA)</Link></li>
               <li><Link to="/terms" className="text-sm text-muted-foreground hover:text-primary transition-colors">Terms of Service</Link></li>
             </ul>
           </div>
         </div>
         <div className="border-t border-border mt-8 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-xs text-muted-foreground">© {new Date().getFullYear()} CloudPlayHub. All rights reserved.</p>
+          <p className="text-xs text-muted-foreground">© {new Date().getFullYear()} BrowserGames100. All rights reserved.</p>
           <div className="flex flex-wrap gap-4 text-xs text-muted-foreground justify-center">
             <Link to="/privacy" className="hover:text-foreground transition-colors">Privacy Policy</Link>
             <Link to="/terms" className="hover:text-foreground transition-colors">Terms of Service</Link>

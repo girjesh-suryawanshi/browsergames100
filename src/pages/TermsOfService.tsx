@@ -1,8 +1,8 @@
 import SEO from "@/components/SEO";
 import { Link } from "react-router-dom";
 
-const EFFECTIVE_DATE = "July 24, 2026";
-const CONTACT_EMAIL = "support@cloudplayhub.com";
+const EFFECTIVE_DATE = "August 3, 2026";
+const CONTACT_EMAIL = "contact@browsergames100.com";
 
 export default function TermsOfService() {
   const breadcrumbs = [
@@ -13,8 +13,8 @@ export default function TermsOfService() {
   return (
     <div className="min-h-screen py-12">
       <SEO
-        title="Terms of Service — CloudPlayHub"
-        description="Read CloudPlayHub's Terms of Service. Simple, plain-English rules for using our free browser gaming platform — what you can do, what we ask of you, and how disputes are handled."
+        title="Terms of Service — BrowserGames100"
+        description="Read BrowserGames100's Terms of Service. Simple, plain-English rules for using our free browser gaming platform — what you can do, what we ask of you, and how disputes are handled."
         canonical="/terms"
         breadcrumbs={breadcrumbs}
       />
@@ -27,9 +27,9 @@ export default function TermsOfService() {
         <div className="prose prose-invert max-w-none space-y-8 text-muted-foreground">
 
           <p>
-            Welcome to CloudPlayHub. These Terms of Service ("Terms") govern your use of the CloudPlayHub
-            website located at <strong className="text-foreground">CloudPlayHub.com</strong>. Please read
-            them carefully. By accessing or using CloudPlayHub, you agree to be bound by these Terms.
+            Welcome to BrowserGames100. These Terms of Service ("Terms") govern your use of the BrowserGames100
+            website located at <strong className="text-foreground">BrowserGames100.com</strong>. Please read
+            them carefully. By accessing or using BrowserGames100, you agree to be bound by these Terms.
             If you disagree with any part of them, please do not use our platform.
           </p>
           <p>
@@ -39,30 +39,30 @@ export default function TermsOfService() {
 
           {/* Section 1 */}
           <div>
-            <h2 className="text-2xl font-bold text-foreground">1. What CloudPlayHub Is</h2>
+            <h2 className="text-2xl font-bold text-foreground">1. What BrowserGames100 Is</h2>
             <p>
-              CloudPlayHub is a free, browser-based gaming platform. We aggregate and provide access to
+              BrowserGames100 is a free, browser-based gaming platform. We aggregate and provide access to
               HTML5 games from third-party developers and game networks. All games are playable directly
               in your web browser — no downloads, no installs, no account required.
             </p>
             <p className="mt-3">
               The individual games hosted on our platform are owned and operated by their respective
-              third-party developers. CloudPlayHub acts as a discovery and access portal, not as the
+              third-party developers. BrowserGames100 acts as a discovery and access portal, not as the
               developer or publisher of these games.
             </p>
           </div>
 
           {/* Section 2 */}
           <div>
-            <h2 className="text-2xl font-bold text-foreground">2. Who Can Use CloudPlayHub</h2>
+            <h2 className="text-2xl font-bold text-foreground">2. Who Can Use BrowserGames100</h2>
             <p>
-              CloudPlayHub is open to users of all ages. However, if you are under 13 years old,
+              BrowserGames100 is open to users of all ages. However, if you are under 13 years old,
               you should have a parent or guardian's permission to use the internet and review our{" "}
               <Link to="/privacy" className="text-primary hover:underline">Privacy Policy</Link> before using the platform.
             </p>
             <p className="mt-3">
               There is no account registration required. You do not need to provide your name, age,
-              or any personal information to access and play games on CloudPlayHub.
+              or any personal information to access and play games on BrowserGames100.
             </p>
           </div>
 
@@ -71,8 +71,8 @@ export default function TermsOfService() {
             <h2 className="text-2xl font-bold text-foreground">3. Acceptable Use — What You Can Do</h2>
             <p>You are welcome to:</p>
             <ul className="space-y-2 mt-3 ml-4 list-disc">
-              <li>Browse and play any game on CloudPlayHub for your personal, non-commercial entertainment.</li>
-              <li>Share links to CloudPlayHub games with friends, classmates, or on social media.</li>
+              <li>Browse and play any game on BrowserGames100 for your personal, non-commercial entertainment.</li>
+              <li>Share links to BrowserGames100 games with friends, classmates, or on social media.</li>
               <li>Use the platform on any device that supports a modern web browser.</li>
               <li>Save games to your favorites list using our local storage feature.</li>
             </ul>
@@ -90,7 +90,7 @@ export default function TermsOfService() {
                 <strong className="text-foreground">Attempting to access restricted areas</strong> — including admin panels, backend APIs, or any portion of our infrastructure that is not intended for public access.
               </li>
               <li>
-                <strong className="text-foreground">Misrepresenting our platform</strong> — claiming to be CloudPlayHub, impersonating our team, or using our branding without authorization.
+                <strong className="text-foreground">Misrepresenting our platform</strong> — claiming to be BrowserGames100, impersonating our team, or using our branding without authorization.
               </li>
               <li>
                 <strong className="text-foreground">Exploiting or disrupting the service</strong> — including DDoS attacks, SQL injection, or any other attempt to compromise the integrity or availability of the platform.
@@ -111,17 +111,17 @@ export default function TermsOfService() {
           <div>
             <h2 className="text-2xl font-bold text-foreground">5. Intellectual Property</h2>
             <p>
-              <strong className="text-foreground">CloudPlayHub's original content</strong> — including our website design, logo, written copy, and curation — is the property of CloudPlayHub and may not be copied, reproduced, or redistributed without written permission.
+              <strong className="text-foreground">BrowserGames100's original content</strong> — including our website design, logo, written copy, and curation — is the property of BrowserGames100 and may not be copied, reproduced, or redistributed without written permission.
             </p>
             <p className="mt-3">
-              <strong className="text-foreground">Third-party game content</strong> — the individual games, characters, music, graphics, and mechanics within each game are the intellectual property of their respective developers and publishers. CloudPlayHub claims no ownership over third-party game content.
+              <strong className="text-foreground">Third-party game content</strong> — the individual games, characters, music, graphics, and mechanics within each game are the intellectual property of their respective developers and publishers. BrowserGames100 claims no ownership over third-party game content.
             </p>
             <p className="mt-3">
-              If you believe any content on CloudPlayHub infringes your copyright, please review our{" "}
+              If you believe any content on BrowserGames100 infringes your copyright, please review our{" "}
               <Link to="/dmca" className="text-primary hover:underline">DMCA Policy</Link> and submit a
               formal takedown notice to{" "}
-              <a href="mailto:dmca@cloudplayhub.com" className="text-primary hover:underline">
-                dmca@cloudplayhub.com
+              <a href="mailto:dmca@browsergames100.com" className="text-primary hover:underline">
+                dmca@browsergames100.com
               </a>.
             </p>
           </div>
@@ -130,7 +130,7 @@ export default function TermsOfService() {
           <div>
             <h2 className="text-2xl font-bold text-foreground">6. Advertising</h2>
             <p>
-              CloudPlayHub is free to use and is supported by advertising revenue from Google AdSense.
+              BrowserGames100 is free to use and is supported by advertising revenue from Google AdSense.
               Advertisements are displayed on various pages of the platform. We do not control the
               specific ads shown (they are served by Google's automated systems), but we have configured
               our account to exclude certain ad categories inappropriate for a gaming audience.
@@ -146,7 +146,7 @@ export default function TermsOfService() {
           <div>
             <h2 className="text-2xl font-bold text-foreground">7. Disclaimer of Warranties</h2>
             <p>
-              CloudPlayHub is provided <strong className="text-foreground">"as is"</strong> and{" "}
+              BrowserGames100 is provided <strong className="text-foreground">"as is"</strong> and{" "}
               <strong className="text-foreground">"as available"</strong> without any warranties of any kind,
               either express or implied. We do not guarantee that:
             </p>
@@ -162,14 +162,14 @@ export default function TermsOfService() {
           <div>
             <h2 className="text-2xl font-bold text-foreground">8. Limitation of Liability</h2>
             <p>
-              To the fullest extent permitted by law, CloudPlayHub and its team shall not be liable for
+              To the fullest extent permitted by law, BrowserGames100 and its team shall not be liable for
               any indirect, incidental, special, or consequential damages arising from your use of the
               platform, including but not limited to: data loss, device issues, game progress loss,
               or time spent on the platform.
             </p>
             <p className="mt-3">
               Our total liability for any claim arising from these Terms shall not exceed the amount you
-              have paid us in the past 12 months — which, since CloudPlayHub is free, is zero.
+              have paid us in the past 12 months — which, since BrowserGames100 is free, is zero.
             </p>
           </div>
 
@@ -177,9 +177,9 @@ export default function TermsOfService() {
           <div>
             <h2 className="text-2xl font-bold text-foreground">9. Links to Third-Party Websites</h2>
             <p>
-              CloudPlayHub may contain links to external websites or resources. We are not responsible
+              BrowserGames100 may contain links to external websites or resources. We are not responsible
               for the content, privacy practices, or availability of these third-party sites. A link from
-              CloudPlayHub does not constitute an endorsement of the linked site.
+              BrowserGames100 does not constitute an endorsement of the linked site.
             </p>
           </div>
 
@@ -188,7 +188,7 @@ export default function TermsOfService() {
             <h2 className="text-2xl font-bold text-foreground">10. Changes to These Terms</h2>
             <p>
               We may update these Terms from time to time. When we do, we will update the effective date
-              at the top of this page. If you continue to use CloudPlayHub after changes are posted,
+              at the top of this page. If you continue to use BrowserGames100 after changes are posted,
               you accept the updated Terms. We encourage you to review these Terms periodically.
             </p>
           </div>
@@ -198,7 +198,7 @@ export default function TermsOfService() {
             <h2 className="text-2xl font-bold text-foreground">11. Governing Law</h2>
             <p>
               These Terms are governed by and construed in accordance with applicable laws. Any disputes
-              arising from these Terms or your use of CloudPlayHub shall first be attempted to be
+              arising from these Terms or your use of BrowserGames100 shall first be attempted to be
               resolved through direct communication with our team at{" "}
               <a href={`mailto:${CONTACT_EMAIL}`} className="text-primary hover:underline">{CONTACT_EMAIL}</a>.
             </p>
@@ -211,7 +211,7 @@ export default function TermsOfService() {
               If you have questions about these Terms, please contact us:
             </p>
             <div className="mt-4 p-5 bg-card rounded-xl border border-border/50">
-              <p className="font-bold text-foreground mb-1">CloudPlayHub</p>
+              <p className="font-bold text-foreground mb-1">BrowserGames100</p>
               <p>Email: <a href={`mailto:${CONTACT_EMAIL}`} className="text-primary hover:underline">{CONTACT_EMAIL}</a></p>
             </div>
           </div>

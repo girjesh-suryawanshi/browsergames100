@@ -15,7 +15,7 @@ import { getOptimizedImage } from "@/lib/image-utils";
 import { gameDescriptions } from "@/data/game-descriptions";
 import { useToast } from "@/hooks/use-toast";
 
-const BASE_URL = "https://CloudPlayHub.com";
+const BASE_URL = "https://browsergames100.com";
 
 export default function GamePage() {
   const { slug } = useParams<{ slug: string }>();
@@ -48,8 +48,8 @@ export default function GamePage() {
 
   const handleShare = async () => {
     const pageUrl = `${BASE_URL}/game/${slug}`;
-    const title = `🎮 Play ${game?.t} Unblocked - Free Online Game`;
-    const text = `Check out ${game?.t} — free unblocked game, no download needed! Play now on CloudPlayHub.`;
+    const title = `🎮 Play ${game?.t} Online - Free Browser Game`;
+    const text = `Check out ${game?.t} — free browser game, no download needed! Play now on BrowserGames100.`;
 
     // On mobile: use native Web Share API (no file, just URL + text)
     const isMobile = /android|iphone|ipad|ipod/i.test(navigator.userAgent);
@@ -65,7 +65,6 @@ export default function GamePage() {
     // On desktop (or mobile fallback): show our custom share modal
     setShareOpen(true);
   };
-
 
   const handleRate = (starValue: number) => {
     if (!game) return;
@@ -143,19 +142,19 @@ export default function GamePage() {
     "@context": "https://schema.org",
     "@type": "VideoGame",
     "name": game.t,
-    "description": cleanDesc || `Play ${game.t} unblocked for free online. No download required.`,
+    "description": cleanDesc || `Play ${game.t} for free online. No download required.`,
     "image": game.img,
     "url": `${BASE_URL}/game/${slug}`,
     "genre": category?.name || "Online Game",
     "playMode": "SinglePlayer",
     "applicationCategory": "Game",
-    "operatingSystem": "Browser, ChromeOS, Windows, macOS",
+    "operatingSystem": "Browser, ChromeOS, Windows, macOS, Android, iOS",
     "inLanguage": "en",
     "isAccessibleForFree": true,
     "dateModified": new Date().toISOString().split("T")[0],
     "publisher": {
       "@type": "Organization",
-      "name": "CloudPlayHub",
+      "name": "BrowserGames100",
       "url": BASE_URL,
     },
     "aggregateRating": {
@@ -191,7 +190,7 @@ export default function GamePage() {
           "@type": "Answer",
           "text": (slug && gameDescriptions[slug]?.howToPlay) ||
             game.ins?.replace(/<[^>]+>/g, "") ||
-            `Use your mouse or keyboard to play ${game.t}. Follow the on-screen instructions and controls to progress through the game.`
+            `Use your keyboard (WASD/Arrow Keys) or mouse/touchscreen to play ${game.t}. Follow the on-screen instructions to progress through levels.`
         }
       },
       {
@@ -199,15 +198,15 @@ export default function GamePage() {
         "name": `Is ${game.t} free to play?`,
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": `Yes, ${game.t} is completely free to play on CloudPlayHub. No download, no registration, and no payment required. Simply click the Play button and the game launches instantly in your browser.`
+          "text": `Yes, ${game.t} is completely free to play on BrowserGames100. No download, no registration, and no payment required. Simply click the Play button and the game launches instantly in your browser.`
         }
       },
       {
         "@type": "Question",
-        "name": `Does ${game.t} work on Chromebooks?`,
+        "name": `Does ${game.t} work on Chromebooks and Mobile?`,
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": `Yes, ${game.t} is fully compatible with Chromebooks and works on all modern browsers including Chrome, Firefox, Edge, and Safari. No special software or extensions are needed.`
+          "text": `Yes, ${game.t} is fully compatible with Chromebooks, PC, Mac, Android, and iOS devices. Works on all modern web browsers including Chrome, Firefox, Edge, and Safari.`
         }
       },
     ]
@@ -215,11 +214,11 @@ export default function GamePage() {
 
   return (
     <div className="min-h-screen">
-  <SEO
-        title={`Play ${game.t} Unblocked - Free Online Game`}
-        description={`Play ${game.t} free online — no download needed, works on Chromebooks. ${cleanDesc.slice(0, 120).trim()}...`}
+      <SEO
+        title={`Play ${game.t} Free Online — Instant Browser Play`}
+        description={`Play ${game.t} free online — no download needed, works on Chromebooks and Mobile. ${cleanDesc.slice(0, 120).trim()}...`}
         canonical={`/game/${slug}`}
-        keywords={`${game.t}, ${game.t} unblocked, ${game.t} online, ${category?.name || "browser games"}, unblocked games, school games`}
+        keywords={`${game.t}, ${game.t} free online, ${game.t} no download, ${category?.name || "browser games"}, html5 games, instant web games`}
         schema={[schema, faqSchema]}
         breadcrumbs={breadcrumbs}
         ogType="article"
@@ -287,18 +286,16 @@ export default function GamePage() {
                     className="absolute inset-0 w-full h-full"
                     allow="autoplay; fullscreen; gamepad *; accelerometer *; gyroscope *; magnetometer *; clipboard-write *; keyboard-map; focus-without-user-activation"
                     sandbox="allow-forms allow-modals allow-orientation-lock allow-pointer-lock allow-popups allow-popups-to-escape-sandbox allow-presentation allow-same-origin allow-scripts allow-storage-access-by-user-activation"
-                    title={`Play ${game.t} - Unblocked Free Online Game`}
+                    title={`Play ${game.t} - Free Online Game`}
                     loading="eager"
                     onLoad={(e) => {
                       (e.target as HTMLIFrameElement).focus();
                     }}
                   />
-                  {/* Invisible click-through focus layer */}
                   <div
                     className="absolute inset-0 z-10 pointer-events-none"
                     onClick={() => iframeRef.current?.focus()}
                   />
-                  {/* Fullscreen button */}
                   <button
                     onClick={handleFullscreen}
                     className="absolute bottom-4 right-4 z-20 p-2.5 bg-black/50 backdrop-blur-md rounded-lg text-white opacity-0 group-hover:opacity-100 transition-opacity hover:bg-black/70 border border-white/20"
@@ -307,7 +304,6 @@ export default function GamePage() {
                   >
                     <Maximize className="w-5 h-5" />
                   </button>
-                  {/* Next Game Overlay — appears after 3 min */}
                   <NextGameOverlay
                     games={related}
                     isPlaying={playing}
@@ -340,7 +336,7 @@ export default function GamePage() {
                       Play {game.t}
                     </p>
                     <p className="text-[10px] md:text-sm font-medium text-muted-foreground bg-black/40 px-3 py-1.5 rounded-full backdrop-blur-md border border-white/10 uppercase tracking-wider">
-                      No Download • Unblocked • Free
+                      No Download • Instant Play • Free
                     </p>
                   </div>
                 </div>
@@ -349,7 +345,6 @@ export default function GamePage() {
 
             {/* Stats & Rating bar */}
             <div className="flex flex-wrap items-center gap-4 mb-6 p-3 bg-card rounded-lg border border-border/50">
-              {/* Interactive star rating */}
               <div className="flex items-center gap-1.5">
                 <div
                   className="flex gap-0.5"
@@ -406,15 +401,15 @@ export default function GamePage() {
               )}
             </div>
 
-            <AdPlacement size="728x90" className="mt-[150px] mb-8" slot="leaderboard-below-game" />
+            <AdPlacement size="728x90" className="my-6" slot="leaderboard-below-game" />
 
-            {/* About & Instructions */}
+            {/* Structured Game Content Sections */}
             <div className="grid md:grid-cols-2 gap-8 mb-12">
               <div className="space-y-6">
                 <div className="p-6 bg-card rounded-xl border border-border/50">
                   <h2 className="text-xl font-bold text-foreground mb-3 flex items-center gap-2">
                     <span className="w-1.5 h-6 bg-primary rounded-full" />
-                    About {game.t}
+                    Game Overview
                   </h2>
                   <div
                     className="text-muted-foreground leading-relaxed prose prose-invert max-w-none text-sm"
@@ -422,7 +417,7 @@ export default function GamePage() {
                       __html:
                         (slug && gameDescriptions[slug]?.about) ||
                         cleanDesc ||
-                        `${game.t} is a popular unblocked game that you can play directly in your browser. Experience high-speed action and challenging levels designed specifically for student gamers.`,
+                        `${game.t} is a top-rated free browser game playable directly in your web browser. Experience smooth gameplay, engaging challenges, and instant action with zero downloads required.`,
                     }}
                   />
                 </div>
@@ -430,13 +425,32 @@ export default function GamePage() {
                 <div className="p-6 bg-card rounded-xl border border-border/50">
                   <h2 className="text-xl font-bold text-foreground mb-3 flex items-center gap-2">
                     <span className="w-1.5 h-6 bg-gaming-blue rounded-full" />
-                    How to Play {game.t}
+                    How to Play &amp; Controls
                   </h2>
-                  <p className="text-muted-foreground leading-relaxed text-sm">
+                  <p className="text-muted-foreground leading-relaxed text-sm mb-3">
                     {(slug && gameDescriptions[slug]?.howToPlay) ||
                       game.ins?.replace(/<[^>]+>/g, "") ||
-                      `To play ${game.t}, simply use your mouse or keyboard controls. Follow the on-screen instructions to navigate through levels and achieve the highest score possible!`}
+                      `Use your keyboard (WASD or Arrow Keys) to steer/move, Spacebar to jump/action, and Mouse to aim/click. On touch devices, use intuitive on-screen touch buttons.`}
                   </p>
+                  <div className="p-3 bg-secondary/50 rounded-lg text-xs space-y-1 text-muted-foreground">
+                    <p><strong>Movement:</strong> Arrow Keys / WASD</p>
+                    <p><strong>Action / Shoot:</strong> Spacebar / Left Click</p>
+                    <p><strong>Pause / Menu:</strong> Esc / P Key</p>
+                  </div>
+                </div>
+
+                {/* Compatibility Matrix */}
+                <div className="p-6 bg-card rounded-xl border border-border/50">
+                  <h2 className="text-xl font-bold text-foreground mb-3 flex items-center gap-2">
+                    <span className="w-1.5 h-6 bg-gaming-cyan rounded-full" />
+                    Device &amp; Browser Compatibility
+                  </h2>
+                  <div className="grid grid-cols-2 gap-2 text-xs">
+                    <div className="p-2.5 bg-secondary/40 rounded-lg">💻 <strong>PC / Mac:</strong> Full WASD &amp; Mouse</div>
+                    <div className="p-2.5 bg-secondary/40 rounded-lg">💻 <strong>Chromebook:</strong> 100% Native WebGL</div>
+                    <div className="p-2.5 bg-secondary/40 rounded-lg">📱 <strong>Mobile / Tablet:</strong> Touchscreen Ready</div>
+                    <div className="p-2.5 bg-secondary/40 rounded-lg">🌐 <strong>Browsers:</strong> Chrome, Safari, Edge, Firefox</div>
+                  </div>
                 </div>
               </div>
 
@@ -445,15 +459,15 @@ export default function GamePage() {
                   <h2 className="text-xl font-bold text-foreground mb-3 flex items-center gap-2">
                     <span className="w-1.5 h-6 bg-gaming-yellow rounded-full" />
                     <Trophy className="w-4 h-4 text-gaming-yellow" />
-                    Tips &amp; Tricks
+                    Tips &amp; Strategies
                   </h2>
                   <ul className="space-y-3">
                     {(
                       (slug && gameDescriptions[slug]?.tips) || [
-                        "Start with easier levels to master the controls before advancing to harder stages.",
-                        "Use your browser's full-screen mode (F11 on desktop) for the most immersive experience.",
-                        "Look for hidden power-ups and bonus collectibles in every level to boost your score.",
-                        "Practice the core mechanics in early levels and study how top players approach difficult sections.",
+                        "Master basic controls in early levels before attempting high-speed maneuvers.",
+                        "Use Fullscreen mode (F11 on PC) for maximum field of view and focus.",
+                        "Collect power-ups and bonus multipliers to top leaderboards.",
+                        "Practice regularly to sharpen reaction speed and muscle memory.",
                       ]
                     ).map((tip: string, i: number) => (
                       <li key={i} className="flex gap-3 text-sm text-muted-foreground">
@@ -466,15 +480,33 @@ export default function GamePage() {
                   </ul>
                 </div>
 
+                {/* FAQ Section (AEO) */}
+                <div className="p-6 bg-card rounded-xl border border-border/50">
+                  <h2 className="text-xl font-bold text-foreground mb-3 flex items-center gap-2">
+                    <span className="w-1.5 h-6 bg-primary rounded-full" />
+                    Frequently Asked Questions
+                  </h2>
+                  <div className="space-y-3 text-sm">
+                    <div>
+                      <p className="font-semibold text-foreground">Is {game.t} free to play?</p>
+                      <p className="text-muted-foreground text-xs mt-0.5">Yes, 100% free with no registration or download needed on BrowserGames100.</p>
+                    </div>
+                    <div>
+                      <p className="font-semibold text-foreground">Does {game.t} work on Chromebooks?</p>
+                      <p className="text-muted-foreground text-xs mt-0.5">Yes, HTML5 games run natively on all Chromebooks and web browsers.</p>
+                    </div>
+                  </div>
+                </div>
+
                 <div className="p-6 bg-primary/5 rounded-xl border border-primary/10">
                   <h2 className="text-lg font-bold text-foreground mb-2">
-                    ✅ Why Play on CloudPlayHub?
+                    ✅ Why Play on BrowserGames100?
                   </h2>
                   <ul className="space-y-1.5 text-sm text-muted-foreground">
-                    <li>⚡ Fast loading — optimized for school WiFi</li>
-                    <li>🔓 Truly unblocked — works on Chromebooks</li>
+                    <li>⚡ Fast loading — optimized under 3 seconds</li>
+                    <li>🔒 Safe &amp; curated — general audience friendly</li>
                     <li>📥 Zero downloads — instant browser play</li>
-                    <li>🆓 100% free — no account needed</li>
+                    <li>🆓 100% free — no account required</li>
                   </ul>
                 </div>
               </div>

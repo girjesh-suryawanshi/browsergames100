@@ -1,5 +1,5 @@
-﻿/**
- * Image Utilities for CloudPlayHub
+/**
+ * Image Utilities for BrowserGames100
  * Handles on-the-fly WebP conversion and resizing via proxy.
  */
 

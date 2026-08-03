@@ -105,7 +105,7 @@ export default function CookieConsent() {
                 <Cookie className="w-4 h-4 text-gaming-yellow mt-0.5 shrink-0" />
                 <div>
                   <p className="font-semibold text-foreground text-xs mb-0.5">Advertising Cookies (Google AdSense) — Optional</p>
-                  <p className="text-xs leading-relaxed">Google AdSense uses cookies to serve personalised ads based on your browsing history. Declining means you may still see ads, but they will not be personalised. Our ad revenue keeps CloudPlayHub 100% free. <a href="https://policies.google.com/technologies/ads" target="_blank" rel="noopener noreferrer" className="text-primary underline">Google's Ads Policy →</a></p>
+                  <p className="text-xs leading-relaxed">Google AdSense uses cookies to serve personalised ads based on your browsing history. Declining means you may still see ads, but they will not be personalised. Our ad revenue keeps BrowserGames100 100% free. <a href="https://policies.google.com/technologies/ads" target="_blank" rel="noopener noreferrer" className="text-primary underline">Google's Ads Policy →</a></p>
                 </div>
               </div>
             </div>
@@ -127,7 +127,7 @@ export default function CookieConsent() {
             <div className="flex items-start gap-3 flex-1 min-w-0">
               <Cookie className="w-5 h-5 text-gaming-yellow shrink-0 mt-0.5" />
               <div className="text-sm text-muted-foreground leading-relaxed">
-                <span className="font-semibold text-foreground">We use cookies</span> to keep CloudPlayHub free. We and our ad partner{" "}
+                <span className="font-semibold text-foreground">We use cookies</span> to keep BrowserGames100 free. We and our ad partner{" "}
                 <span className="font-medium text-foreground">Google AdSense</span> use cookies for personalised advertising, analytics, and to remember your preferences (GDPR Art. 6 · CCPA).{" "}
                 <Link to="/privacy" className="text-primary hover:underline font-medium">Privacy Policy</Link>
                 {" · "}

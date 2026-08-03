@@ -1,4 +1,4 @@
-﻿import { useState } from "react";
+import { useState } from "react";
 import { Send, Gamepad2, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
@@ -46,7 +46,7 @@ export default function SuggestGame() {
             </div>
             
             <p className="text-sm text-muted-foreground mb-6">
-              Can't find your favorite game? Let us know and we'll try our best to add it to CloudPlayHub!
+              Can't find your favorite game? Let us know and we'll try our best to add it to BrowserGames100!
             </p>
 
             <form onSubmit={handleSubmit} className="space-y-4">
