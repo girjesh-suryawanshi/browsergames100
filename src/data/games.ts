@@ -37,6 +37,13 @@ const cache: Record<string, any> = {};
 async function fetchJson<T>(path: string): Promise<T> {
   if (cache[path]) return cache[path];
   const res = await fetch(path);
+  if (!res.ok) {
+    throw new Error(`Failed to fetch ${path}: status ${res.status}`);
+  }
+  const contentType = res.headers.get("content-type");
+  if (contentType && contentType.includes("text/html")) {
+    throw new Error(`Expected JSON but received HTML for ${path}`);
+  }
   const data = await res.json();
   cache[path] = data;
   return data;

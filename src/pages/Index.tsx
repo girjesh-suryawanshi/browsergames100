@@ -81,16 +81,24 @@ export default function Index() {
   const todayPlayCount = recent.length;
 
   useEffect(() => {
-    Promise.all([getCategories(), getTrendingGames(), getInitialGames()]).then(
-      ([cats, trend, initial]) => {
+    Promise.all([
+      getCategories().catch(() => []),
+      getTrendingGames().catch(() => []),
+      getInitialGames().catch(() => [])
+    ])
+      .then(([cats, trend, initial]) => {
         setCategories(cats.filter((c) => c.total_games > 0));
         setTrending(trend);
         setAllGames(initial);
         const byId = [...initial].sort((a, b) => b.id - a.id);
         setNewGames(byId.slice(0, 12));
+      })
+      .catch((err) => {
+        console.error("Error loading games catalog:", err);
+      })
+      .finally(() => {
         setLoading(false);
-      }
-    );
+      });
   }, []);
 
   useEffect(() => {
