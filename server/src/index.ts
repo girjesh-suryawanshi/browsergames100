@@ -15,7 +15,6 @@ import submissionRoutes from './routes/submissions';
 dotenv.config();
 
 const app = express();
-const PORT = Number(process.env.PORT) || 3000;
 
 app.use(cors());
 app.use(express.json());
@@ -99,7 +98,16 @@ if (foundDistDir) {
   });
 }
 
-app.listen(PORT, '0.0.0.0', () => {
-  console.log(`Server is running on http://0.0.0.0:${PORT}`);
-});
+const PORT = process.env.PORT || 3000;
+
+if (typeof PORT === 'string' && (PORT.startsWith('/') || PORT.startsWith('\\\\'))) {
+  app.listen(PORT, () => {
+    console.log(`Server is running on socket ${PORT}`);
+  });
+} else {
+  const numericPort = Number(PORT) || 3000;
+  app.listen(numericPort, () => {
+    console.log(`Server is running on port ${numericPort}`);
+  });
+}
 
