@@ -44,13 +44,13 @@ PORT=3000
 FRONTEND_URL=https://browsergames100.com
 SITE_URL=https://browsergames100.com
 
-DB_HOST=localhost
+DB_HOST=127.0.0.1
 DB_PORT=3306
 DB_NAME=u235459051_browsergames
 DB_USER=u235459051_admin
 DB_PASSWORD=Crompton@1310
 
-DATABASE_URL="mysql://u235459051_admin:Crompton@1310@localhost:3306/u235459051_browsergames"
+DATABASE_URL="mysql://u235459051_admin:Crompton@1310@127.0.0.1:3306/u235459051_browsergames"
 
 JWT_SECRET=replace_with_a_long_random_secret_key_browsergames100
 INDEXNOW_KEY=
