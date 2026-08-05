@@ -32,19 +32,33 @@ process.on('unhandledRejection', (reason) => {
 // Serve uploaded images from the persistent volume
 app.use('/uploads', express.static(path.join(process.cwd(), 'uploads')));
 
-// Serve static game data catalog (/data) from root public/data directory
-const publicDataPath = path.join(__dirname, '../../public/data');
-if (fs.existsSync(publicDataPath)) {
-  app.use('/data', express.static(publicDataPath));
+// Serve static game data catalog (/data)
+const dataDirs = [
+  path.join(process.cwd(), 'public/data'),
+  path.join(process.cwd(), 'dist/data'),
+  path.join(__dirname, '../../public/data'),
+  path.join(__dirname, '../public/data')
+];
+
+for (const dir of dataDirs) {
+  if (fs.existsSync(dir)) {
+    app.use('/data', express.static(dir));
+    break;
+  }
 }
 
-// Serve static files from root public directory if present
-const rootPublicPath = path.join(__dirname, '../../public');
-if (fs.existsSync(rootPublicPath)) {
-  app.use(express.static(rootPublicPath));
-}
+// Serve root public folder if present
+const publicDirs = [
+  path.join(process.cwd(), 'public'),
+  path.join(__dirname, '../../public'),
+  path.join(__dirname, '../public')
+];
 
-app.use(express.static(path.join(__dirname, '../public')));
+for (const dir of publicDirs) {
+  if (fs.existsSync(dir)) {
+    app.use(express.static(dir));
+  }
+}
 
 // API Routes
 app.use('/api/auth', authRoutes);
@@ -61,14 +75,27 @@ app.use('/api/og', ogRoutes);
 app.use('/', seoRoutes);
 
 // Serve compiled React frontend (dist) if hosted together with Node.js
-const frontendDistPath = path.join(__dirname, '../../dist');
-if (fs.existsSync(frontendDistPath)) {
-  app.use(express.static(frontendDistPath));
+const distDirs = [
+  path.join(process.cwd(), 'dist'),
+  path.join(__dirname, '../../dist'),
+  path.join(__dirname, '../dist')
+];
+
+let foundDistDir: string | null = null;
+for (const dir of distDirs) {
+  if (fs.existsSync(dir) && fs.existsSync(path.join(dir, 'index.html'))) {
+    foundDistDir = dir;
+    break;
+  }
+}
+
+if (foundDistDir) {
+  app.use(express.static(foundDistDir));
   app.get('*', (req, res, next) => {
     if (req.path.startsWith('/api') || req.path.includes('.')) {
       return next();
     }
-    res.sendFile(path.join(frontendDistPath, 'index.html'));
+    res.sendFile(path.join(foundDistDir!, 'index.html'));
   });
 }
 
