@@ -34,7 +34,15 @@ export const getPostBySlug = async (req: Request, res: Response) => {
 
 export const createPost = async (req: Request, res: Response) => {
   try {
-    const data = req.body;
+    const data = { ...req.body };
+    if (!data.categoryId) delete data.categoryId;
+    if (!data.id) delete data.id;
+
+    if (data.content) {
+      const words = data.content.replace(/<[^>]*>/g, '').split(/\s+/).filter(Boolean).length;
+      data.readingTime = `${Math.ceil(words / 200)} min`;
+    }
+
     const post = await prisma.blogPost.create({ data });
     
     if (post.isPublished) {
@@ -43,14 +51,23 @@ export const createPost = async (req: Request, res: Response) => {
     
     res.status(201).json(post);
   } catch (error) {
-    res.status(500).json({ error: 'Failed to create post' });
+    console.error('Error creating blog post in MySQL:', error);
+    res.status(500).json({ error: 'Failed to create post in database' });
   }
 };
 
 export const updatePost = async (req: Request, res: Response) => {
   try {
     const id = req.params.id as string;
-    const data = req.body;
+    const data = { ...req.body };
+    delete data.id;
+    if (!data.categoryId) delete data.categoryId;
+
+    if (data.content) {
+      const words = data.content.replace(/<[^>]*>/g, '').split(/\s+/).filter(Boolean).length;
+      data.readingTime = `${Math.ceil(words / 200)} min`;
+    }
+
     const post = await prisma.blogPost.update({ where: { id }, data });
     
     if (post.isPublished) {
@@ -59,7 +76,8 @@ export const updatePost = async (req: Request, res: Response) => {
     
     res.json(post);
   } catch (error) {
-    res.status(500).json({ error: 'Failed to update post' });
+    console.error('Error updating blog post in MySQL:', error);
+    res.status(500).json({ error: 'Failed to update post in database' });
   }
 };
 
@@ -75,7 +93,8 @@ export const deletePost = async (req: Request, res: Response) => {
     
     res.json({ success: true });
   } catch (error) {
-    res.status(500).json({ error: 'Failed to delete post' });
+    console.error('Error deleting blog post in MySQL:', error);
+    res.status(500).json({ error: 'Failed to delete post from database' });
   }
 };
 

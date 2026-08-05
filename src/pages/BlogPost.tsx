@@ -13,22 +13,12 @@ export default function BlogPost() {
   useEffect(() => {
     const fetchPost = async () => {
       try {
-        const local = JSON.parse(localStorage.getItem("local_blog_posts") || "[]");
-        const match = local.find((p: any) => p.slug === slug || p.id === slug);
-        if (match) {
-          setPost(match);
-          setLoading(false);
-          return;
-        }
-      } catch {}
-
-      try {
         const response = await fetch(`${API_BASE}/api/blog/posts/${slug}`);
         if (!response.ok) throw new Error("Post not found");
         const data = await response.json();
         setPost(data);
       } catch (err) {
-        console.error(err);
+        console.error("Error fetching blog post from MySQL:", err);
       } finally {
         setLoading(false);
       }

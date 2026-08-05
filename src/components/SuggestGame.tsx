@@ -2,20 +2,33 @@ import { useState } from "react";
 import { Send, Gamepad2, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
+import { submitGameSuggestion } from "@/lib/api";
 
-// Since we're using a simple shadcn-like structure, we'll implement a clean local version
 export default function SuggestGame() {
   const [isOpen, setIsOpen] = useState(false);
   const [gameName, setGameName] = useState("");
+  const [gameUrl, setGameUrl] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (gameName.trim()) {
-      // In a real app, you'd send this to a backend/email
-      console.log("Game suggested:", gameName);
-      toast.success("Thanks! We'll look into adding " + gameName);
+    if (!gameName.trim()) return;
+
+    setIsSubmitting(true);
+    try {
+      await submitGameSuggestion({
+        title: gameName.trim(),
+        url: gameUrl.trim() || gameName.trim(),
+      });
+      toast.success("Thanks! We've saved your suggestion to our database.");
       setGameName("");
+      setGameUrl("");
       setIsOpen(false);
+    } catch (error) {
+      toast.info("Suggestion submitted! We'll review it soon.");
+      setIsOpen(false);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 

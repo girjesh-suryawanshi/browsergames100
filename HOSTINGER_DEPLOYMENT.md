@@ -10,9 +10,9 @@ This guide explains step-by-step how to deploy **BrowserGames100** on **Hostinge
 1. Log in to **Hostinger hPanel**.
 2. Go to **Databases** → **MySQL Databases**.
 3. Create a new database:
-   - **MySQL Database Name**: e.g., `u123456789_browsergames`
-   - **MySQL Username**: e.g., `u123456789_admin`
-   - **Password**: `YourStrongPassword123!`
+   - **MySQL Database Name**: e.g., `u235459051_browsergames`
+   - **MySQL Username**: e.g., `u235459051_admin`
+   - **Password**: `Crompton@1310`  
 4. Click **Create**.
 5. Save these credentials — you will enter them into Hostinger Node.js environment variables.
 
@@ -46,11 +46,11 @@ SITE_URL=https://browsergames100.com
 
 DB_HOST=localhost
 DB_PORT=3306
-DB_NAME=u123456789_browsergames
-DB_USER=u123456789_admin
-DB_PASSWORD=YourStrongPassword123!
+DB_NAME=u235459051_browsergames
+DB_USER=u235459051_admin
+DB_PASSWORD=Crompton@1310
 
-DATABASE_URL="mysql://u123456789_admin:YourStrongPassword123!@localhost:3306/u123456789_browsergames"
+DATABASE_URL="mysql://u235459051_admin:Crompton@1310@localhost:3306/u235459051_browsergames"
 
 JWT_SECRET=replace_with_a_long_random_secret_key_browsergames100
 INDEXNOW_KEY=
@@ -80,3 +80,34 @@ INDEXNOW_KEY=
    - **Email**: `admin@browsergames100.com`
    - **Password**: `admin123`
 4. Create, edit, publish, or delete blog posts directly into your Hostinger MySQL database!
+
+---
+
+## 6. How to Redeploy & Update Everything (Step-by-Step)
+
+Follow these steps whenever you pull new code updates to your VPS / Hostinger server:
+
+### Step 1: Update MySQL Database Schema
+1. Open **phpMyAdmin** in your Hostinger / VPS control panel.
+2. Select your database (`u235459051_browsergames`).
+3. Click **Import** -> **Choose File** -> select the updated `server/init-mysql.sql` -> click **Import**.
+   *(This safely creates any missing tables like `GameStat`, `UserFavorite`, `GameSubmission`, and `ContactMessage` using `CREATE TABLE IF NOT EXISTS`).*
+
+### Step 2: Update & Rebuild Node.js Backend (`server/`)
+1. Upload the updated `server/` files to your server (or run `git pull` if using Git).
+2. In Hostinger Node.js Dashboard or VPS terminal:
+   ```bash
+   cd server
+   npm install
+   npm run build
+   ```
+3. Restart the Node.js application (Click **Restart** in Hostinger hPanel or run `pm2 restart server`).
+
+### Step 3: Rebuild & Upload React Frontend (`dist/`)
+1. On your local machine, run:
+   ```bash
+   npm run build
+   ```
+2. Upload the new contents of `dist/` to `public_html/` on Hostinger / VPS (overwrite existing assets).
+3. Ensure `public_html/.htaccess` remains present for SPA routing.
+

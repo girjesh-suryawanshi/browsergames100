@@ -21,6 +21,63 @@ CREATE TABLE IF NOT EXISTS `User` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ------------------------------------------------------------------------------
+-- Table Structure: GameStat
+-- ------------------------------------------------------------------------------
+CREATE TABLE IF NOT EXISTS `GameStat` (
+  `id` VARCHAR(191) NOT NULL,
+  `gameId` INT NOT NULL,
+  `slug` VARCHAR(191) NOT NULL,
+  `playCount` INT NOT NULL DEFAULT 0,
+  `likeCount` INT NOT NULL DEFAULT 0,
+  `dislikeCount` INT NOT NULL DEFAULT 0,
+  `updatedAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3),
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `GameStat_gameId_key` (`gameId`),
+  UNIQUE KEY `GameStat_slug_key` (`slug`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- ------------------------------------------------------------------------------
+-- Table Structure: UserFavorite
+-- ------------------------------------------------------------------------------
+CREATE TABLE IF NOT EXISTS `UserFavorite` (
+  `id` VARCHAR(191) NOT NULL,
+  `userId` VARCHAR(191) NOT NULL DEFAULT 'anonymous',
+  `gameId` INT NOT NULL,
+  `gameSlug` VARCHAR(191) NOT NULL,
+  `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `UserFavorite_userId_gameId_key` (`userId`, `gameId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- ------------------------------------------------------------------------------
+-- Table Structure: GameSubmission
+-- ------------------------------------------------------------------------------
+CREATE TABLE IF NOT EXISTS `GameSubmission` (
+  `id` VARCHAR(191) NOT NULL,
+  `title` VARCHAR(191) NOT NULL,
+  `url` VARCHAR(191) NOT NULL,
+  `email` VARCHAR(191) NULL,
+  `notes` TEXT NULL,
+  `status` VARCHAR(191) NOT NULL DEFAULT 'PENDING',
+  `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- ------------------------------------------------------------------------------
+-- Table Structure: ContactMessage
+-- ------------------------------------------------------------------------------
+CREATE TABLE IF NOT EXISTS `ContactMessage` (
+  `id` VARCHAR(191) NOT NULL,
+  `name` VARCHAR(191) NOT NULL,
+  `email` VARCHAR(191) NOT NULL,
+  `subject` VARCHAR(191) NULL,
+  `message` TEXT NOT NULL,
+  `status` VARCHAR(191) NOT NULL DEFAULT 'UNREAD',
+  `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- ------------------------------------------------------------------------------
 -- Table Structure: Category
 -- ------------------------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `Category` (

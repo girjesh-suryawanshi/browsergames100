@@ -14,6 +14,7 @@ import { ShareModal } from "@/components/ShareModal";
 import { getOptimizedImage } from "@/lib/image-utils";
 import { gameDescriptions } from "@/data/game-descriptions";
 import { useToast } from "@/hooks/use-toast";
+import { recordGamePlay, rateGame } from "@/lib/api";
 
 const BASE_URL = "https://browsergames100.com";
 
@@ -69,6 +70,7 @@ export default function GamePage() {
   const handleRate = (starValue: number) => {
     if (!game) return;
     setRating(game.id, starValue);
+    rateGame(game.s, game.id, starValue >= 4 ? 'like' : 'dislike');
     setRatingSubmitted(true);
     toast({ title: `Rated ${starValue} ⭐`, description: "Thanks for your rating!" });
     setTimeout(() => setRatingSubmitted(false), 2000);
@@ -77,6 +79,9 @@ export default function GamePage() {
   const handlePlay = () => {
     setPlaying(true);
     setPlayStartTime(Date.now());
+    if (game) {
+      recordGamePlay(game.s, game.id);
+    }
   };
 
   useEffect(() => {

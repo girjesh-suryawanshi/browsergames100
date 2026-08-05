@@ -11,28 +11,18 @@ export default function BlogList() {
 
   useEffect(() => {
     const fetchPosts = async () => {
-      let localPublished: any[] = [];
-      try {
-        const local = JSON.parse(localStorage.getItem("local_blog_posts") || "[]");
-        localPublished = local.filter((p: any) => p.isPublished);
-      } catch {}
-
       try {
         const response = await fetch(`${API_BASE}/api/blog/posts`);
         if (response.ok) {
           const data = await response.json();
-          const apiPublished = data.filter((p: any) => p.isPublished);
-          const map = new Map();
-          [...localPublished, ...apiPublished].forEach(p => map.set(p.slug || p.id, p));
-          setPosts(Array.from(map.values()));
-          setLoading(false);
-          return;
+          const published = data.filter((p: any) => p.isPublished);
+          setPosts(published);
         }
       } catch (err) {
-        console.error(err);
+        console.error("Error fetching blog posts from MySQL:", err);
+      } finally {
+        setLoading(false);
       }
-      setPosts(localPublished);
-      setLoading(false);
     };
     fetchPosts();
   }, []);

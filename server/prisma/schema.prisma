@@ -66,3 +66,44 @@ model BlogPost {
   categoryId        String?
   category          Category? @relation(fields: [categoryId], references: [id])
 }
+
+model GameStat {
+  id           String   @id @default(uuid())
+  gameId       Int      @unique
+  slug         String   @unique
+  playCount    Int      @default(0)
+  likeCount    Int      @default(0)
+  dislikeCount Int      @default(0)
+  updatedAt    DateTime @updatedAt
+}
+
+model UserFavorite {
+  id        String   @id @default(uuid())
+  userId    String   @default("anonymous")
+  gameId    Int
+  gameSlug  String
+  createdAt DateTime @default(now())
+
+  @@unique([userId, gameId])
+}
+
+model GameSubmission {
+  id        String   @id @default(uuid())
+  title     String
+  url       String
+  email     String?
+  notes     String?  @db.Text
+  status    String   @default("PENDING")
+  createdAt DateTime @default(now())
+}
+
+model ContactMessage {
+  id        String   @id @default(uuid())
+  name      String
+  email     String
+  subject   String?
+  message   String   @db.Text
+  status    String   @default("UNREAD")
+  createdAt DateTime @default(now())
+}
+

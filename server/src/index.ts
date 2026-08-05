@@ -7,6 +7,9 @@ import authRoutes from './routes/auth';
 import uploadRoutes from './routes/upload';
 import ogRoutes from './routes/og';
 import seoRoutes from './routes/seo';
+import gameStatRoutes from './routes/gameStats';
+import favoriteRoutes from './routes/favorites';
+import submissionRoutes from './routes/submissions';
 
 dotenv.config();
 
@@ -25,6 +28,9 @@ app.use('/uploads', express.static(path.join(process.cwd(), 'uploads')));
 app.use('/api/auth', authRoutes);
 app.use('/api/blog', blogRoutes);
 app.use('/api/upload', uploadRoutes);
+app.use('/api/games', gameStatRoutes);
+app.use('/api/favorites', favoriteRoutes);
+app.use('/api/submissions', submissionRoutes);
 
 // OG tag proxy for social media bots (image proxy + bot-served HTML)
 app.use('/api/og', ogRoutes);

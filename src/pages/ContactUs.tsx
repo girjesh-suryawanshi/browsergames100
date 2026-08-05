@@ -1,6 +1,7 @@
 import SEO from "@/components/SEO";
 import { useState } from "react";
 import { Mail, MessageSquare, Gamepad2, Bug, Shield, CheckCircle2, Loader2 } from "lucide-react";
+import { submitContactForm } from "@/lib/api";
 
 const CONTACT_EMAIL = "support@cloudplayhub.com";
 
@@ -65,21 +66,29 @@ export default function ContactUs() {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setStatus("sending");
 
     const subjectLabel = SUBJECTS.find((s) => s.value === formData.subject)?.label || formData.subject;
-    const mailtoSubject = encodeURIComponent(`[BrowserGames100] ${subjectLabel} — from ${formData.name}`);
-    const mailtoBody = encodeURIComponent(
-      `Name: ${formData.name}\nEmail: ${formData.email}\nSubject: ${subjectLabel}\n\n${formData.message}`
-    );
 
-    // Open the user's email client with the form pre-filled
-    window.location.href = `mailto:${CONTACT_EMAIL}?subject=${mailtoSubject}&body=${mailtoBody}`;
-
-    // Show success state after a brief delay
-    setTimeout(() => setStatus("sent"), 800);
+    try {
+      await submitContactForm({
+        name: formData.name,
+        email: formData.email,
+        subject: subjectLabel,
+        message: formData.message,
+      });
+      setStatus("sent");
+    } catch {
+      // Fallback: open mailto link if offline
+      const mailtoSubject = encodeURIComponent(`[BrowserGames100] ${subjectLabel} — from ${formData.name}`);
+      const mailtoBody = encodeURIComponent(
+        `Name: ${formData.name}\nEmail: ${formData.email}\nSubject: ${subjectLabel}\n\n${formData.message}`
+      );
+      window.location.href = `mailto:${CONTACT_EMAIL}?subject=${mailtoSubject}&body=${mailtoBody}`;
+      setStatus("sent");
+    }
   };
 
   return (

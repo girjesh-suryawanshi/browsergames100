@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
+import { toggleFavoriteGame } from "@/lib/api";
 
 const KEY = "ugz_favorites";
 
@@ -10,16 +11,21 @@ export function useFavorites() {
     if (stored) setFavorites(JSON.parse(stored));
   }, []);
 
-  const toggleFavorite = useCallback((gameId: number) => {
+  const toggleFavorite = useCallback((gameId: number, gameSlug?: string) => {
     setFavorites(prev => {
       const isFav = prev.includes(gameId);
       const next = isFav ? prev.filter(id => id !== gameId) : [...prev, gameId];
       localStorage.setItem(KEY, JSON.stringify(next));
       return next;
     });
+
+    if (gameSlug) {
+      toggleFavoriteGame(gameId, gameSlug);
+    }
   }, []);
 
   const isFavorite = useCallback((gameId: number) => favorites.includes(gameId), [favorites]);
 
   return { favorites, toggleFavorite, isFavorite };
 }
+
