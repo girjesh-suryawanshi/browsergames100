@@ -1,8 +1,10 @@
-﻿import { Request, Response } from 'express';
+import { Request, Response } from 'express';
 import { PrismaClient } from '@prisma/client';
 import { submitToIndexNow } from '../lib/indexnow';
 
 const prisma = new PrismaClient();
+
+const SITE_URL = process.env.SITE_URL || 'https://browsergames100.com';
 
 export const getPosts = async (req: Request, res: Response) => {
   try {
@@ -36,7 +38,7 @@ export const createPost = async (req: Request, res: Response) => {
     const post = await prisma.blogPost.create({ data });
     
     if (post.isPublished) {
-      await submitToIndexNow(`https://www.CloudPlayHub.com/blog/${post.slug}`);
+      await submitToIndexNow(`${SITE_URL}/blog/${post.slug}`);
     }
     
     res.status(201).json(post);
@@ -52,7 +54,7 @@ export const updatePost = async (req: Request, res: Response) => {
     const post = await prisma.blogPost.update({ where: { id }, data });
     
     if (post.isPublished) {
-      await submitToIndexNow(`https://www.CloudPlayHub.com/blog/${post.slug}`);
+      await submitToIndexNow(`${SITE_URL}/blog/${post.slug}`);
     }
     
     res.json(post);
@@ -68,7 +70,7 @@ export const deletePost = async (req: Request, res: Response) => {
     await prisma.blogPost.delete({ where: { id } });
     
     if (post && post.isPublished) {
-      await submitToIndexNow(`https://www.CloudPlayHub.com/blog/${post.slug}`);
+      await submitToIndexNow(`${SITE_URL}/blog/${post.slug}`);
     }
     
     res.json({ success: true });

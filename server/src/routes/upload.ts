@@ -1,10 +1,10 @@
-﻿import { Router } from 'express';
+import { Router } from 'express';
 import multer from 'multer';
 import path from 'path';
 import fs from 'fs';
 import { requireAdmin } from '../middleware/auth';
 
-const SITE_URL = process.env.SITE_URL || 'https://CloudPlayHub.com';
+const SITE_URL = process.env.SITE_URL || 'https://browsergames100.com';
 
 const router = Router();
 

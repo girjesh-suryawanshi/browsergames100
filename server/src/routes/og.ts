@@ -1,4 +1,4 @@
-﻿import { Router, Request, Response } from 'express';
+import { Router, Request, Response } from 'express';
 import fs from 'fs';
 import path from 'path';
 import https from 'https';
@@ -6,7 +6,7 @@ import http from 'http';
 
 const router = Router();
 
-const SITE_URL = process.env.SITE_URL || 'https://CloudPlayHub.com';
+const SITE_URL = process.env.SITE_URL || 'https://browsergames100.com';
 
 // ─── Bot detection ─────────────────────────────────────────
 function isSocialBot(userAgent: string): boolean {
@@ -121,7 +121,7 @@ router.get('/img', async (req: Request, res: Response) => {
 function buildOGHtml(slug: string, gameData: { title: string; description: string; image: string } | null): string {
   const title = gameData
     ? `Play ${gameData.title} Unblocked — Free Online Game`
-    : 'CloudPlayHub — Play Free Unblocked Games';
+    : 'BrowserGames100 — Play Free Unblocked Games';
 
   const description = gameData
     ? `${gameData.description.slice(0, 160)}...`
@@ -147,7 +147,7 @@ function buildOGHtml(slug: string, gameData: { title: string; description: strin
   <!-- Open Graph (WhatsApp, Facebook, Telegram, Discord) -->
   <meta property="og:type"              content="website" />
   <meta property="fb:app_id"            content="850381667086827" />
-  <meta property="og:site_name"         content="CloudPlayHub" />
+  <meta property="og:site_name"         content="BrowserGames100" />
   <meta property="og:url"               content="${pageUrl}" />
   <meta property="og:title"             content="${title}" />
   <meta property="og:description"       content="${description}" />
@@ -160,7 +160,7 @@ function buildOGHtml(slug: string, gameData: { title: string; description: strin
 
   <!-- Twitter Card (large image format = image on top) -->
   <meta name="twitter:card"        content="summary_large_image" />
-  <meta name="twitter:site"        content="@UnblockedGamesZ" />
+  <meta name="twitter:site"        content="@BrowserGames100" />
   <meta name="twitter:title"       content="${title}" />
   <meta name="twitter:description" content="${description}" />
   <meta name="twitter:image"       content="${proxiedImage}" />
