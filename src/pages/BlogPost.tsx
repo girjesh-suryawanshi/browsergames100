@@ -13,6 +13,16 @@ export default function BlogPost() {
   useEffect(() => {
     const fetchPost = async () => {
       try {
+        const local = JSON.parse(localStorage.getItem("local_blog_posts") || "[]");
+        const match = local.find((p: any) => p.slug === slug || p.id === slug);
+        if (match) {
+          setPost(match);
+          setLoading(false);
+          return;
+        }
+      } catch {}
+
+      try {
         const response = await fetch(`${API_BASE}/api/blog/posts/${slug}`);
         if (!response.ok) throw new Error("Post not found");
         const data = await response.json();
@@ -73,7 +83,7 @@ export default function BlogPost() {
   return (
     <main className="bg-background pt-24 pb-16 min-h-screen">
       <SEO 
-        title={post.seoTitle || `${post.title} | Unblocked Games Zone`}
+        title={post.seoTitle || `${post.title} | BrowserGames100`}
         description={post.seoDescription || post.excerpt}
         keywords={post.seoKeywords}
         image={post.ogImage || post.coverImage}

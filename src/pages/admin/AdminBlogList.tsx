@@ -27,17 +27,31 @@ export default function AdminBlogList() {
     adminEmail = payload.email || "";
   } catch {}
 
+  const getLocalPosts = () => {
+    try {
+      return JSON.parse(localStorage.getItem("local_blog_posts") || "[]");
+    } catch {
+      return [];
+    }
+  };
+
   const fetchPosts = async () => {
+    const localPosts = getLocalPosts();
     try {
       const response = await fetch(`${API_BASE}/api/blog/posts`);
-      if (!response.ok) throw new Error("Failed to fetch posts");
-      const data = await response.json();
-      setPosts(data);
+      if (response.ok) {
+        const apiPosts = await response.json();
+        const map = new Map();
+        [...localPosts, ...apiPosts].forEach(p => map.set(p.id || p.slug, p));
+        setPosts(Array.from(map.values()));
+        setLoading(false);
+        return;
+      }
     } catch (err) {
       console.error(err);
-    } finally {
-      setLoading(false);
     }
+    setPosts(localPosts);
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -46,16 +60,20 @@ export default function AdminBlogList() {
 
   const handleDelete = async (id: string, title: string) => {
     if (!window.confirm(`Are you sure you want to delete "${title}"?`)) return;
+
+    // Delete from localStorage first
+    const localPosts = getLocalPosts().filter((p: any) => p.id !== id && p.slug !== id);
+    localStorage.setItem("local_blog_posts", JSON.stringify(localPosts));
+
     try {
-      const res = await fetch(`${API_BASE}/api/blog/posts/${id}`, {
+      await fetch(`${API_BASE}/api/blog/posts/${id}`, {
         method: "DELETE",
         headers: { "Authorization": `Bearer ${localStorage.getItem("admin_token")}` }
       });
-      if (!res.ok) throw new Error("Failed to delete");
-      fetchPosts();
     } catch {
-      alert("Failed to delete post.");
+      // Ignore API errors if running offline
     }
+    fetchPosts();
   };
 
   const handleLogout = () => {

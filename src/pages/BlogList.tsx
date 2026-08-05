@@ -11,17 +11,28 @@ export default function BlogList() {
 
   useEffect(() => {
     const fetchPosts = async () => {
+      let localPublished: any[] = [];
+      try {
+        const local = JSON.parse(localStorage.getItem("local_blog_posts") || "[]");
+        localPublished = local.filter((p: any) => p.isPublished);
+      } catch {}
+
       try {
         const response = await fetch(`${API_BASE}/api/blog/posts`);
-        if (!response.ok) throw new Error("Failed to fetch posts");
-        const data = await response.json();
-        // Only show published posts publicly
-        setPosts(data.filter((p: any) => p.isPublished));
+        if (response.ok) {
+          const data = await response.json();
+          const apiPublished = data.filter((p: any) => p.isPublished);
+          const map = new Map();
+          [...localPublished, ...apiPublished].forEach(p => map.set(p.slug || p.id, p));
+          setPosts(Array.from(map.values()));
+          setLoading(false);
+          return;
+        }
       } catch (err) {
         console.error(err);
-      } finally {
-        setLoading(false);
       }
+      setPosts(localPublished);
+      setLoading(false);
     };
     fetchPosts();
   }, []);

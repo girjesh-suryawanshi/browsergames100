@@ -47,6 +47,7 @@ export default function Footer() {
               <li><Link to="/disclaimer" className="text-sm text-muted-foreground hover:text-primary transition-colors">Disclaimer</Link></li>
               <li><Link to="/dmca" className="text-sm text-muted-foreground hover:text-primary transition-colors font-medium text-gaming-yellow/80">DMCA Copyright Policy</Link></li>
               <li><Link to="/blog" className="text-sm text-muted-foreground hover:text-primary transition-colors">Gaming Blog</Link></li>
+              <li><Link to="/admin/login" className="text-sm text-muted-foreground hover:text-primary transition-colors">Admin Portal</Link></li>
             </ul>
           </div>
           <div>
