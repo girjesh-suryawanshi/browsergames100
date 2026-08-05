@@ -1,2 +1,3 @@
-// Root Hostinger Entry Point
+import { createRequire } from 'module';
+const require = createRequire(import.meta.url);
 require('./server/dist/index.js');
