@@ -13,16 +13,15 @@ const getPosts = async (req, res) => {
         return res.json(posts);
     }
     catch (error) {
-        console.error('Error fetching blog posts with orderBy, attempting simple fetch:', error);
+        console.warn('Primary findMany with category relation failed, falling back to plain findMany:', error?.message);
         try {
-            const fallbackPosts = await prisma_1.prisma.blogPost.findMany({
-                include: { category: true }
+            const plainPosts = await prisma_1.prisma.blogPost.findMany({
+                orderBy: { publishedAt: 'desc' }
             });
-            fallbackPosts.sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime());
-            return res.json(fallbackPosts);
+            return res.json(plainPosts);
         }
         catch (fallbackError) {
-            console.error('Error fetching blog posts fallback:', fallbackError);
+            console.error('Error fetching blog posts simple fallback:', fallbackError);
             return res.status(500).json({ error: 'Failed to fetch posts', message: fallbackError?.message || String(fallbackError) });
         }
     }
