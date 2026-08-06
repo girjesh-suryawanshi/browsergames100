@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
-import { prisma } from '../lib/prisma';
+import { pool } from '../lib/db';
+import crypto from 'crypto';
 
 export const toggleFavorite = async (req: Request, res: Response) => {
   try {
@@ -10,28 +11,20 @@ export const toggleFavorite = async (req: Request, res: Response) => {
       return res.status(400).json({ error: 'Invalid gameId or gameSlug' });
     }
 
-    const existing = await prisma.userFavorite.findUnique({
-      where: {
-        userId_gameId: {
-          userId,
-          gameId: numericGameId
-        }
-      }
-    });
+    const [rows]: any = await pool.query(
+      'SELECT * FROM UserFavorite WHERE userId = ? AND gameId = ?',
+      [userId, numericGameId]
+    );
 
-    if (existing) {
-      await prisma.userFavorite.delete({
-        where: { id: existing.id }
-      });
+    if (rows.length > 0) {
+      await pool.query('DELETE FROM UserFavorite WHERE id = ?', [rows[0].id]);
       return res.json({ isFavorite: false });
     } else {
-      await prisma.userFavorite.create({
-        data: {
-          userId,
-          gameId: numericGameId,
-          gameSlug
-        }
-      });
+      const id = crypto.randomUUID();
+      await pool.query(
+        'INSERT INTO UserFavorite (id, userId, gameId, gameSlug) VALUES (?, ?, ?, ?)',
+        [id, userId, numericGameId, gameSlug]
+      );
       return res.json({ isFavorite: true });
     }
   } catch (error) {
@@ -43,10 +36,10 @@ export const toggleFavorite = async (req: Request, res: Response) => {
 export const getFavorites = async (req: Request, res: Response) => {
   try {
     const userId = (req.query.userId as string) || 'anonymous';
-    const favorites = await prisma.userFavorite.findMany({
-      where: { userId },
-      orderBy: { createdAt: 'desc' }
-    });
+    const [favorites]: any = await pool.query(
+      'SELECT * FROM UserFavorite WHERE userId = ? ORDER BY createdAt DESC',
+      [userId]
+    );
 
     return res.json(favorites);
   } catch (error) {

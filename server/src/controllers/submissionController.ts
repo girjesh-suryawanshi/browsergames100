@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
-import { prisma } from '../lib/prisma';
+import { pool } from '../lib/db';
+import crypto from 'crypto';
 
 export const submitGame = async (req: Request, res: Response) => {
   try {
@@ -9,11 +10,13 @@ export const submitGame = async (req: Request, res: Response) => {
       return res.status(400).json({ error: 'Title and URL are required' });
     }
 
-    const submission = await prisma.gameSubmission.create({
-      data: { title, url, email, notes }
-    });
+    const id = crypto.randomUUID();
+    await pool.query(
+      'INSERT INTO GameSubmission (id, title, url, email, notes) VALUES (?, ?, ?, ?, ?)',
+      [id, title, url, email || null, notes || null]
+    );
 
-    return res.status(201).json({ success: true, submission });
+    return res.status(201).json({ success: true, submission: { id, title, url, email, notes } });
   } catch (error) {
     console.error('Error submitting game:', error);
     return res.status(500).json({ error: 'Failed to save game submission' });
@@ -28,11 +31,13 @@ export const submitContact = async (req: Request, res: Response) => {
       return res.status(400).json({ error: 'Name, email, and message are required' });
     }
 
-    const contact = await prisma.contactMessage.create({
-      data: { name, email, subject, message }
-    });
+    const id = crypto.randomUUID();
+    await pool.query(
+      'INSERT INTO ContactMessage (id, name, email, subject, message) VALUES (?, ?, ?, ?, ?)',
+      [id, name, email, subject || null, message]
+    );
 
-    return res.status(201).json({ success: true, contact });
+    return res.status(201).json({ success: true, contact: { id, name, email, subject, message } });
   } catch (error) {
     console.error('Error submitting contact message:', error);
     return res.status(500).json({ error: 'Failed to save contact message' });
@@ -41,10 +46,8 @@ export const submitContact = async (req: Request, res: Response) => {
 
 export const getSubmissions = async (_req: Request, res: Response) => {
   try {
-    const submissions = await prisma.gameSubmission.findMany({
-      orderBy: { createdAt: 'desc' }
-    });
-    return res.json(submissions);
+    const [rows]: any = await pool.query('SELECT * FROM GameSubmission ORDER BY createdAt DESC');
+    return res.json(rows);
   } catch (error) {
     return res.status(500).json({ error: 'Failed to fetch game submissions' });
   }
@@ -52,10 +55,8 @@ export const getSubmissions = async (_req: Request, res: Response) => {
 
 export const getContactMessages = async (_req: Request, res: Response) => {
   try {
-    const messages = await prisma.contactMessage.findMany({
-      orderBy: { createdAt: 'desc' }
-    });
-    return res.json(messages);
+    const [rows]: any = await pool.query('SELECT * FROM ContactMessage ORDER BY createdAt DESC');
+    return res.json(rows);
   } catch (error) {
     return res.status(500).json({ error: 'Failed to fetch contact messages' });
   }

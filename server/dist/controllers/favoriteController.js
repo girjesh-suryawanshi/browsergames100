@@ -1,7 +1,11 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getFavorites = exports.toggleFavorite = void 0;
-const prisma_1 = require("../lib/prisma");
+const db_1 = require("../lib/db");
+const crypto_1 = __importDefault(require("crypto"));
 const toggleFavorite = async (req, res) => {
     try {
         const { userId = 'anonymous', gameId, gameSlug } = req.body;
@@ -9,28 +13,14 @@ const toggleFavorite = async (req, res) => {
         if (isNaN(numericGameId) || !gameSlug) {
             return res.status(400).json({ error: 'Invalid gameId or gameSlug' });
         }
-        const existing = await prisma_1.prisma.userFavorite.findUnique({
-            where: {
-                userId_gameId: {
-                    userId,
-                    gameId: numericGameId
-                }
-            }
-        });
-        if (existing) {
-            await prisma_1.prisma.userFavorite.delete({
-                where: { id: existing.id }
-            });
+        const [rows] = await db_1.pool.query('SELECT * FROM UserFavorite WHERE userId = ? AND gameId = ?', [userId, numericGameId]);
+        if (rows.length > 0) {
+            await db_1.pool.query('DELETE FROM UserFavorite WHERE id = ?', [rows[0].id]);
             return res.json({ isFavorite: false });
         }
         else {
-            await prisma_1.prisma.userFavorite.create({
-                data: {
-                    userId,
-                    gameId: numericGameId,
-                    gameSlug
-                }
-            });
+            const id = crypto_1.default.randomUUID();
+            await db_1.pool.query('INSERT INTO UserFavorite (id, userId, gameId, gameSlug) VALUES (?, ?, ?, ?)', [id, userId, numericGameId, gameSlug]);
             return res.json({ isFavorite: true });
         }
     }
@@ -43,10 +33,7 @@ exports.toggleFavorite = toggleFavorite;
 const getFavorites = async (req, res) => {
     try {
         const userId = req.query.userId || 'anonymous';
-        const favorites = await prisma_1.prisma.userFavorite.findMany({
-            where: { userId },
-            orderBy: { createdAt: 'desc' }
-        });
+        const [favorites] = await db_1.pool.query('SELECT * FROM UserFavorite WHERE userId = ? ORDER BY createdAt DESC', [userId]);
         return res.json(favorites);
     }
     catch (error) {

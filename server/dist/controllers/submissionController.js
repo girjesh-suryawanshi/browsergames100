@@ -1,17 +1,20 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getContactMessages = exports.getSubmissions = exports.submitContact = exports.submitGame = void 0;
-const prisma_1 = require("../lib/prisma");
+const db_1 = require("../lib/db");
+const crypto_1 = __importDefault(require("crypto"));
 const submitGame = async (req, res) => {
     try {
         const { title, url, email, notes } = req.body;
         if (!title || !url) {
             return res.status(400).json({ error: 'Title and URL are required' });
         }
-        const submission = await prisma_1.prisma.gameSubmission.create({
-            data: { title, url, email, notes }
-        });
-        return res.status(201).json({ success: true, submission });
+        const id = crypto_1.default.randomUUID();
+        await db_1.pool.query('INSERT INTO GameSubmission (id, title, url, email, notes) VALUES (?, ?, ?, ?, ?)', [id, title, url, email || null, notes || null]);
+        return res.status(201).json({ success: true, submission: { id, title, url, email, notes } });
     }
     catch (error) {
         console.error('Error submitting game:', error);
@@ -25,10 +28,9 @@ const submitContact = async (req, res) => {
         if (!name || !email || !message) {
             return res.status(400).json({ error: 'Name, email, and message are required' });
         }
-        const contact = await prisma_1.prisma.contactMessage.create({
-            data: { name, email, subject, message }
-        });
-        return res.status(201).json({ success: true, contact });
+        const id = crypto_1.default.randomUUID();
+        await db_1.pool.query('INSERT INTO ContactMessage (id, name, email, subject, message) VALUES (?, ?, ?, ?, ?)', [id, name, email, subject || null, message]);
+        return res.status(201).json({ success: true, contact: { id, name, email, subject, message } });
     }
     catch (error) {
         console.error('Error submitting contact message:', error);
@@ -38,10 +40,8 @@ const submitContact = async (req, res) => {
 exports.submitContact = submitContact;
 const getSubmissions = async (_req, res) => {
     try {
-        const submissions = await prisma_1.prisma.gameSubmission.findMany({
-            orderBy: { createdAt: 'desc' }
-        });
-        return res.json(submissions);
+        const [rows] = await db_1.pool.query('SELECT * FROM GameSubmission ORDER BY createdAt DESC');
+        return res.json(rows);
     }
     catch (error) {
         return res.status(500).json({ error: 'Failed to fetch game submissions' });
@@ -50,10 +50,8 @@ const getSubmissions = async (_req, res) => {
 exports.getSubmissions = getSubmissions;
 const getContactMessages = async (_req, res) => {
     try {
-        const messages = await prisma_1.prisma.contactMessage.findMany({
-            orderBy: { createdAt: 'desc' }
-        });
-        return res.json(messages);
+        const [rows] = await db_1.pool.query('SELECT * FROM ContactMessage ORDER BY createdAt DESC');
+        return res.json(rows);
     }
     catch (error) {
         return res.status(500).json({ error: 'Failed to fetch contact messages' });

@@ -88,6 +88,16 @@ async function initDb() {
         createdAt DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3)
       ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
     `);
+        await conn.query(`
+      CREATE TABLE IF NOT EXISTS UserFavorite (
+        id VARCHAR(191) PRIMARY KEY,
+        userId VARCHAR(191) NOT NULL,
+        gameId INT NOT NULL,
+        gameSlug VARCHAR(191) NOT NULL,
+        createdAt DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+        UNIQUE KEY uq_user_game (userId, gameId)
+      ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+    `);
         conn.release();
         console.log('✅ MySQL database tables initialized');
     }

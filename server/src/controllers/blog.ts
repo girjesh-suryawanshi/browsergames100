@@ -1,65 +1,70 @@
 import { Request, Response } from 'express';
-import { prisma } from '../lib/prisma';
+import { pool } from '../lib/db';
 import { submitToIndexNow } from '../lib/indexnow';
+import crypto from 'crypto';
 
 const SITE_URL = process.env.SITE_URL || 'https://browsergames100.com';
 
 export const getPosts = async (req: Request, res: Response) => {
   try {
-    const posts = await prisma.blogPost.findMany({
-      orderBy: { publishedAt: 'desc' },
-      include: { category: true }
-    });
-    return res.json(posts);
+    const [rows]: any = await pool.query('SELECT * FROM BlogPost ORDER BY publishedAt DESC');
+    return res.json(rows);
   } catch (error: any) {
-    console.warn('Primary findMany with category relation failed, falling back to plain findMany:', error?.message);
-    try {
-      const plainPosts = await prisma.blogPost.findMany({
-        orderBy: { publishedAt: 'desc' }
-      });
-      return res.json(plainPosts);
-    } catch (fallbackError: any) {
-      console.error('Error fetching blog posts simple fallback:', fallbackError);
-      return res.status(500).json({ error: 'Failed to fetch posts', message: fallbackError?.message || String(fallbackError) });
-    }
+    console.error('Error fetching blog posts:', error);
+    return res.status(500).json({ error: 'Failed to fetch posts', message: error?.message || String(error) });
   }
 };
 
 export const getPostBySlug = async (req: Request, res: Response) => {
   try {
     const slug = req.params.slug as string;
-    const post = await prisma.blogPost.findUnique({
-      where: { slug },
-      include: { category: true }
-    });
+    const [rows]: any = await pool.query('SELECT * FROM BlogPost WHERE slug = ?', [slug]);
+    const post = rows[0];
     if (!post) return res.status(404).json({ error: 'Post not found' });
-    res.json(post);
+    return res.json(post);
   } catch (error) {
-    res.status(500).json({ error: 'Failed to fetch post' });
+    return res.status(500).json({ error: 'Failed to fetch post' });
   }
 };
 
 export const createPost = async (req: Request, res: Response) => {
   try {
     const data = { ...req.body };
-    if (!data.categoryId) delete data.categoryId;
-    if (!data.id) delete data.id;
+    const id = data.id || crypto.randomUUID();
+    const title = data.title;
+    const slug = data.slug;
+    const content = data.content || '';
+    const excerpt = data.excerpt || null;
+    const authorName = data.authorName || 'Admin';
+    const isPublished = data.isPublished ? 1 : 0;
+    const isFeatured = data.isFeatured ? 1 : 0;
+    const coverImage = data.coverImage || null;
+    const seoTitle = data.seoTitle || null;
+    const seoDescription = data.seoDescription || null;
 
-    if (data.content) {
-      const words = data.content.replace(/<[^>]*>/g, '').split(/\s+/).filter(Boolean).length;
-      data.readingTime = `${Math.ceil(words / 200)} min`;
+    let readingTime = '3 min';
+    if (content) {
+      const words = content.replace(/<[^>]*>/g, '').split(/\s+/).filter(Boolean).length;
+      readingTime = `${Math.ceil(words / 200)} min`;
     }
 
-    const post = await prisma.blogPost.create({ data });
-    
-    if (post.isPublished) {
-      await submitToIndexNow(`${SITE_URL}/blog/${post.slug}`);
+    await pool.query(
+      `INSERT INTO BlogPost (id, title, slug, content, excerpt, authorName, readingTime, isPublished, isFeatured, coverImage, seoTitle, seoDescription)
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+      [id, title, slug, content, excerpt, authorName, readingTime, isPublished, isFeatured, coverImage, seoTitle, seoDescription]
+    );
+
+    const [rows]: any = await pool.query('SELECT * FROM BlogPost WHERE id = ?', [id]);
+    const createdPost = rows[0];
+
+    if (isPublished) {
+      await submitToIndexNow(`${SITE_URL}/blog/${slug}`);
     }
-    
-    res.status(201).json(post);
-  } catch (error) {
+
+    return res.status(201).json(createdPost);
+  } catch (error: any) {
     console.error('Error creating blog post in MySQL:', error);
-    res.status(500).json({ error: 'Failed to create post in database' });
+    return res.status(500).json({ error: 'Failed to create post in database', message: error?.message });
   }
 };
 
@@ -67,50 +72,67 @@ export const updatePost = async (req: Request, res: Response) => {
   try {
     const id = req.params.id as string;
     const data = { ...req.body };
-    delete data.id;
-    if (!data.categoryId) delete data.categoryId;
+    const title = data.title;
+    const slug = data.slug;
+    const content = data.content || '';
+    const excerpt = data.excerpt || null;
+    const isPublished = data.isPublished ? 1 : 0;
+    const isFeatured = data.isFeatured ? 1 : 0;
+    const coverImage = data.coverImage || null;
+    const seoTitle = data.seoTitle || null;
+    const seoDescription = data.seoDescription || null;
 
-    if (data.content) {
-      const words = data.content.replace(/<[^>]*>/g, '').split(/\s+/).filter(Boolean).length;
-      data.readingTime = `${Math.ceil(words / 200)} min`;
+    let readingTime = '3 min';
+    if (content) {
+      const words = content.replace(/<[^>]*>/g, '').split(/\s+/).filter(Boolean).length;
+      readingTime = `${Math.ceil(words / 200)} min`;
     }
 
-    const post = await prisma.blogPost.update({ where: { id }, data });
-    
-    if (post.isPublished) {
-      await submitToIndexNow(`${SITE_URL}/blog/${post.slug}`);
+    await pool.query(
+      `UPDATE BlogPost 
+       SET title = ?, slug = ?, content = ?, excerpt = ?, readingTime = ?, isPublished = ?, isFeatured = ?, coverImage = ?, seoTitle = ?, seoDescription = ?
+       WHERE id = ?`,
+      [title, slug, content, excerpt, readingTime, isPublished, isFeatured, coverImage, seoTitle, seoDescription, id]
+    );
+
+    const [rows]: any = await pool.query('SELECT * FROM BlogPost WHERE id = ?', [id]);
+    const updatedPost = rows[0];
+
+    if (isPublished) {
+      await submitToIndexNow(`${SITE_URL}/blog/${slug}`);
     }
-    
-    res.json(post);
-  } catch (error) {
+
+    return res.json(updatedPost);
+  } catch (error: any) {
     console.error('Error updating blog post in MySQL:', error);
-    res.status(500).json({ error: 'Failed to update post in database' });
+    return res.status(500).json({ error: 'Failed to update post in database', message: error?.message });
   }
 };
 
 export const deletePost = async (req: Request, res: Response) => {
   try {
     const id = req.params.id as string;
-    const post = await prisma.blogPost.findUnique({ where: { id } });
-    await prisma.blogPost.delete({ where: { id } });
-    
+    const [rows]: any = await pool.query('SELECT * FROM BlogPost WHERE id = ?', [id]);
+    const post = rows[0];
+
+    await pool.query('DELETE FROM BlogPost WHERE id = ?', [id]);
+
     if (post && post.isPublished) {
       await submitToIndexNow(`${SITE_URL}/blog/${post.slug}`);
     }
-    
-    res.json({ success: true });
+
+    return res.json({ success: true });
   } catch (error) {
     console.error('Error deleting blog post in MySQL:', error);
-    res.status(500).json({ error: 'Failed to delete post from database' });
+    return res.status(500).json({ error: 'Failed to delete post from database' });
   }
 };
 
 export const getCategories = async (req: Request, res: Response) => {
   try {
-    const categories = await prisma.category.findMany();
-    res.json(categories);
+    const [rows]: any = await pool.query('SELECT * FROM Category ORDER BY name ASC');
+    return res.json(rows);
   } catch (error) {
-    res.status(500).json({ error: 'Failed to fetch categories' });
+    return res.status(500).json({ error: 'Failed to fetch categories' });
   }
 };
-
