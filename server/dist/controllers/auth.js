@@ -4,15 +4,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.setupAdmin = exports.login = void 0;
-const client_1 = require("@prisma/client");
+const prisma_1 = require("../lib/prisma");
 const bcryptjs_1 = __importDefault(require("bcryptjs"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
-const prisma = new client_1.PrismaClient();
 const JWT_SECRET = process.env.JWT_SECRET || 'secret';
 const login = async (req, res) => {
     try {
         const { email, password } = req.body;
-        const user = await prisma.user.findUnique({ where: { email } });
+        const user = await prisma_1.prisma.user.findUnique({ where: { email } });
         if (!user) {
             return res.status(401).json({ error: 'Invalid credentials' });
         }
@@ -34,12 +33,12 @@ exports.login = login;
 const setupAdmin = async (req, res) => {
     try {
         const { email, password } = req.body;
-        const existing = await prisma.user.findUnique({ where: { email } });
+        const existing = await prisma_1.prisma.user.findUnique({ where: { email } });
         if (existing) {
             return res.status(400).json({ error: 'User already exists' });
         }
         const hashedPassword = await bcryptjs_1.default.hash(password, 10);
-        const admin = await prisma.user.create({
+        const admin = await prisma_1.prisma.user.create({
             data: {
                 email,
                 password: hashedPassword,

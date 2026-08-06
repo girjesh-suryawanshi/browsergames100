@@ -1,27 +1,27 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getCategories = exports.deletePost = exports.updatePost = exports.createPost = exports.getPostBySlug = exports.getPosts = void 0;
-const client_1 = require("@prisma/client");
+const prisma_1 = require("../lib/prisma");
 const indexnow_1 = require("../lib/indexnow");
-const prisma = new client_1.PrismaClient();
 const SITE_URL = process.env.SITE_URL || 'https://browsergames100.com';
 const getPosts = async (req, res) => {
     try {
-        const posts = await prisma.blogPost.findMany({
+        const posts = await prisma_1.prisma.blogPost.findMany({
             orderBy: { publishedAt: 'desc' },
             include: { category: true }
         });
         res.json(posts);
     }
     catch (error) {
-        res.status(500).json({ error: 'Failed to fetch posts' });
+        console.error('Error fetching blog posts:', error);
+        res.status(500).json({ error: 'Failed to fetch posts', message: error?.message || String(error) });
     }
 };
 exports.getPosts = getPosts;
 const getPostBySlug = async (req, res) => {
     try {
         const slug = req.params.slug;
-        const post = await prisma.blogPost.findUnique({
+        const post = await prisma_1.prisma.blogPost.findUnique({
             where: { slug },
             include: { category: true }
         });
@@ -45,7 +45,7 @@ const createPost = async (req, res) => {
             const words = data.content.replace(/<[^>]*>/g, '').split(/\s+/).filter(Boolean).length;
             data.readingTime = `${Math.ceil(words / 200)} min`;
         }
-        const post = await prisma.blogPost.create({ data });
+        const post = await prisma_1.prisma.blogPost.create({ data });
         if (post.isPublished) {
             await (0, indexnow_1.submitToIndexNow)(`${SITE_URL}/blog/${post.slug}`);
         }
@@ -68,7 +68,7 @@ const updatePost = async (req, res) => {
             const words = data.content.replace(/<[^>]*>/g, '').split(/\s+/).filter(Boolean).length;
             data.readingTime = `${Math.ceil(words / 200)} min`;
         }
-        const post = await prisma.blogPost.update({ where: { id }, data });
+        const post = await prisma_1.prisma.blogPost.update({ where: { id }, data });
         if (post.isPublished) {
             await (0, indexnow_1.submitToIndexNow)(`${SITE_URL}/blog/${post.slug}`);
         }
@@ -83,8 +83,8 @@ exports.updatePost = updatePost;
 const deletePost = async (req, res) => {
     try {
         const id = req.params.id;
-        const post = await prisma.blogPost.findUnique({ where: { id } });
-        await prisma.blogPost.delete({ where: { id } });
+        const post = await prisma_1.prisma.blogPost.findUnique({ where: { id } });
+        await prisma_1.prisma.blogPost.delete({ where: { id } });
         if (post && post.isPublished) {
             await (0, indexnow_1.submitToIndexNow)(`${SITE_URL}/blog/${post.slug}`);
         }
@@ -98,7 +98,7 @@ const deletePost = async (req, res) => {
 exports.deletePost = deletePost;
 const getCategories = async (req, res) => {
     try {
-        const categories = await prisma.category.findMany();
+        const categories = await prisma_1.prisma.category.findMany();
         res.json(categories);
     }
     catch (error) {

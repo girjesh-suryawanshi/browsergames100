@@ -1,8 +1,6 @@
 import { Request, Response } from 'express';
-import { PrismaClient } from '@prisma/client';
+import { prisma } from '../lib/prisma';
 import { submitToIndexNow } from '../lib/indexnow';
-
-const prisma = new PrismaClient();
 
 const SITE_URL = process.env.SITE_URL || 'https://browsergames100.com';
 
@@ -13,8 +11,9 @@ export const getPosts = async (req: Request, res: Response) => {
       include: { category: true }
     });
     res.json(posts);
-  } catch (error) {
-    res.status(500).json({ error: 'Failed to fetch posts' });
+  } catch (error: any) {
+    console.error('Error fetching blog posts:', error);
+    res.status(500).json({ error: 'Failed to fetch posts', message: error?.message || String(error) });
   }
 };
 
