@@ -42,9 +42,20 @@ const dataDirs = [
 for (const dir of dataDirs) {
   if (fs.existsSync(dir)) {
     app.use('/data', express.static(dir));
-    break;
   }
 }
+
+// Fallback explicit route for game data catalog files
+app.get('/data/:filename', (req, res, next) => {
+  const filename = req.params.filename;
+  for (const dir of dataDirs) {
+    const filePath = path.join(dir, filename);
+    if (fs.existsSync(filePath)) {
+      return res.sendFile(filePath);
+    }
+  }
+  next();
+});
 
 // Serve root public folder if present
 const publicDirs = [
