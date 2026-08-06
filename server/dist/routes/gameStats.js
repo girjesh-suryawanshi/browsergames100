@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const gameStatController_1 = require("../controllers/gameStatController");
 const router = (0, express_1.Router)();
+router.get('/analytics/summary', gameStatController_1.getTopAnalytics);
 router.get('/:slug/stats', gameStatController_1.getGameStats);
 router.post('/:slug/play', gameStatController_1.recordPlay);
 router.post('/:slug/rate', gameStatController_1.rateGame);

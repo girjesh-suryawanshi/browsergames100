@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getGameStats = exports.rateGame = exports.recordPlay = void 0;
+exports.getTopAnalytics = exports.getGameStats = exports.rateGame = exports.recordPlay = void 0;
 const prisma_1 = require("../lib/prisma");
 const recordPlay = async (req, res) => {
     try {
@@ -78,3 +78,25 @@ const getGameStats = async (req, res) => {
     }
 };
 exports.getGameStats = getGameStats;
+const getTopAnalytics = async (_req, res) => {
+    try {
+        const topPlayed = await prisma_1.prisma.gameStat.findMany({
+            orderBy: { playCount: 'desc' },
+            take: 20
+        });
+        const totals = await prisma_1.prisma.gameStat.aggregate({
+            _sum: { playCount: true, likeCount: true, dislikeCount: true }
+        });
+        return res.json({
+            topPlayed,
+            totalPlays: totals._sum.playCount || 0,
+            totalLikes: totals._sum.likeCount || 0,
+            totalDislikes: totals._sum.dislikeCount || 0
+        });
+    }
+    catch (error) {
+        console.error('Error fetching analytics summary:', error);
+        return res.status(500).json({ error: 'Failed to fetch analytics summary' });
+    }
+};
+exports.getTopAnalytics = getTopAnalytics;

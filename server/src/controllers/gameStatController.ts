@@ -81,3 +81,24 @@ export const getGameStats = async (req: Request, res: Response) => {
     return res.status(500).json({ error: 'Failed to fetch game stats' });
   }
 };
+
+export const getTopAnalytics = async (_req: Request, res: Response) => {
+  try {
+    const topPlayed = await prisma.gameStat.findMany({
+      orderBy: { playCount: 'desc' },
+      take: 20
+    });
+    const totals = await prisma.gameStat.aggregate({
+      _sum: { playCount: true, likeCount: true, dislikeCount: true }
+    });
+    return res.json({
+      topPlayed,
+      totalPlays: totals._sum.playCount || 0,
+      totalLikes: totals._sum.likeCount || 0,
+      totalDislikes: totals._sum.dislikeCount || 0
+    });
+  } catch (error) {
+    console.error('Error fetching analytics summary:', error);
+    return res.status(500).json({ error: 'Failed to fetch analytics summary' });
+  }
+};
