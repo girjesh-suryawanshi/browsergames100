@@ -100,7 +100,6 @@ async function autoSeed() {
         console.warn('Auto-seed skipped (database tables will be initialized on first write):', err);
     }
 }
-autoSeed();
 // Health & Database Connection Check Route
 app.get('/api/health', async (req, res) => {
     try {
@@ -156,4 +155,5 @@ if (foundDistDir) {
 const port = process.env.PORT || 3000;
 app.listen(port, "0.0.0.0", () => {
     console.log(`Server running on ${port}`);
+    autoSeed().catch((err) => console.warn('Background autoSeed warning:', err));
 });

@@ -111,8 +111,6 @@ async function autoSeed() {
   }
 }
 
-autoSeed();
-
 // Health & Database Connection Check Route
 app.get('/api/health', async (req, res) => {
   try {
@@ -175,5 +173,6 @@ const port = process.env.PORT || 3000;
 
 app.listen(port as any, "0.0.0.0", () => {
   console.log(`Server running on ${port}`);
+  autoSeed().catch((err) => console.warn('Background autoSeed warning:', err));
 });
 
