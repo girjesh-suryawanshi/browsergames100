@@ -10,10 +10,19 @@ export const getPosts = async (req: Request, res: Response) => {
       orderBy: { publishedAt: 'desc' },
       include: { category: true }
     });
-    res.json(posts);
+    return res.json(posts);
   } catch (error: any) {
-    console.error('Error fetching blog posts:', error);
-    res.status(500).json({ error: 'Failed to fetch posts', message: error?.message || String(error) });
+    console.error('Error fetching blog posts with orderBy, attempting simple fetch:', error);
+    try {
+      const fallbackPosts = await prisma.blogPost.findMany({
+        include: { category: true }
+      });
+      fallbackPosts.sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime());
+      return res.json(fallbackPosts);
+    } catch (fallbackError: any) {
+      console.error('Error fetching blog posts fallback:', fallbackError);
+      return res.status(500).json({ error: 'Failed to fetch posts', message: fallbackError?.message || String(fallbackError) });
+    }
   }
 };
 
