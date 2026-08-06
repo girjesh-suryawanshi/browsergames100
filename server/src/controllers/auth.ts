@@ -1,9 +1,7 @@
 import { Request, Response } from 'express';
-import { prisma } from '../lib/prisma';
+import { pool, syncAdminUser } from '../lib/db';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-
-const JWT_SECRET = process.env.JWT_SECRET || 'secret';
 
 export const login = async (req: Request, res: Response) => {
   try {
@@ -14,28 +12,17 @@ export const login = async (req: Request, res: Response) => {
 
     const cleanEmail = String(email).trim().toLowerCase();
     const cleanPassword = String(password).trim();
-    let user = await prisma.user.findUnique({ where: { email: cleanEmail } });
 
-    // Auto-sync default admin user if logging in with default admin credentials
     const defaultAdminEmail = (process.env.ADMIN_EMAIL || 'admin@browsergames100.com').trim().toLowerCase();
     const defaultAdminPass = (process.env.ADMIN_PASSWORD || 'admin123').trim();
 
+    // Auto-sync default admin if logging in with default credentials
     if (cleanEmail === defaultAdminEmail && cleanPassword === defaultAdminPass) {
-      const hashedPassword = await bcrypt.hash(defaultAdminPass, 10);
-      user = await prisma.user.upsert({
-        where: { email: defaultAdminEmail },
-        update: {
-          password: hashedPassword,
-          role: 'ADMIN'
-        },
-        create: {
-          email: defaultAdminEmail,
-          password: hashedPassword,
-          fullName: 'BrowserGames100 Admin',
-          role: 'ADMIN'
-        }
-      });
+      await syncAdminUser(defaultAdminEmail, defaultAdminPass);
     }
+
+    const [rows]: any = await pool.query('SELECT * FROM User WHERE email = ?', [cleanEmail]);
+    const user = rows[0];
 
     if (!user) {
       return res.status(401).json({ error: 'Invalid email or password' });
@@ -63,24 +50,9 @@ export const login = async (req: Request, res: Response) => {
 export const setupAdmin = async (req: Request, res: Response) => {
   try {
     const { email, password } = req.body;
-    
-    const existing = await prisma.user.findUnique({ where: { email } });
-    if (existing) {
-      return res.status(400).json({ error: 'User already exists' });
-    }
-    
-    const hashedPassword = await bcrypt.hash(password, 10);
-    const admin = await prisma.user.create({
-      data: {
-        email,
-        password: hashedPassword,
-        fullName: 'Administrator',
-        role: 'ADMIN'
-      }
-    });
-    
-    res.status(201).json({ success: true, message: 'Admin created successfully' });
+    await syncAdminUser(email || 'admin@browsergames100.com', password || 'admin123');
+    return res.json({ success: true, message: 'Admin synchronized' });
   } catch (error) {
-    res.status(500).json({ error: 'Failed to create admin' });
+    return res.status(500).json({ error: 'Failed to setup admin' });
   }
 };

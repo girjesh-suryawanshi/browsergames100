@@ -64,42 +64,14 @@ for (const dir of publicDirs) {
         app.use(express_1.default.static(dir));
     }
 }
-const bcryptjs_1 = __importDefault(require("bcryptjs"));
+const db_1 = require("./lib/db");
 async function autoSeed() {
     try {
-        const adminEmail = process.env.ADMIN_EMAIL || 'admin@browsergames100.com';
-        const adminPassword = process.env.ADMIN_PASSWORD || 'admin123';
-        const hashedPassword = await bcryptjs_1.default.hash(adminPassword, 10);
-        await prisma_1.prisma.user.upsert({
-            where: { email: adminEmail },
-            update: {
-                password: hashedPassword,
-                role: 'ADMIN'
-            },
-            create: {
-                email: adminEmail,
-                password: hashedPassword,
-                fullName: 'BrowserGames100 Admin',
-                role: 'ADMIN',
-            },
-        });
-        console.log(`✅ Admin user synchronized: ${adminEmail}`);
-        const defaultCategories = [
-            { name: 'Game Guides', description: 'In-depth strategy guides and walkthroughs for popular unblocked games.' },
-            { name: 'Top Picks', description: 'Curated roundups and top 10 lists of the best browser games.' },
-            { name: 'Unblocked Picks', description: 'Games tested and verified to run on school Chromebooks and restricted networks.' },
-            { name: 'Game Updates', description: 'Latest news, balance updates, and patch notes for browser games.' },
-        ];
-        for (const cat of defaultCategories) {
-            await prisma_1.prisma.category.upsert({
-                where: { name: cat.name },
-                update: {},
-                create: cat,
-            });
-        }
+        await (0, db_1.initDb)();
+        await (0, db_1.syncAdminUser)();
     }
     catch (err) {
-        console.warn('Auto-seed skipped (database tables will be initialized on first write):', err);
+        console.warn('Auto-seed warning:', err);
     }
 }
 // Health & Database Connection Check Route
