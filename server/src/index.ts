@@ -70,6 +70,27 @@ for (const dir of publicDirs) {
   }
 }
 
+import { prisma } from './lib/prisma';
+
+// Health & Database Connection Check Route
+app.get('/api/health', async (req, res) => {
+  try {
+    await prisma.$queryRaw`SELECT 1`;
+    res.json({
+      status: 'ok',
+      database: 'connected',
+      timestamp: new Date().toISOString()
+    });
+  } catch (error: any) {
+    res.status(500).json({
+      status: 'error',
+      database: 'disconnected',
+      error: error?.message || String(error),
+      timestamp: new Date().toISOString()
+    });
+  }
+});
+
 // API Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/blog', blogRoutes);

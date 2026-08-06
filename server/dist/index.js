@@ -63,6 +63,26 @@ for (const dir of publicDirs) {
         app.use(express_1.default.static(dir));
     }
 }
+const prisma_1 = require("./lib/prisma");
+// Health & Database Connection Check Route
+app.get('/api/health', async (req, res) => {
+    try {
+        await prisma_1.prisma.$queryRaw `SELECT 1`;
+        res.json({
+            status: 'ok',
+            database: 'connected',
+            timestamp: new Date().toISOString()
+        });
+    }
+    catch (error) {
+        res.status(500).json({
+            status: 'error',
+            database: 'disconnected',
+            error: error?.message || String(error),
+            timestamp: new Date().toISOString()
+        });
+    }
+});
 // API Routes
 app.use('/api/auth', auth_1.default);
 app.use('/api/blog', blog_1.default);
