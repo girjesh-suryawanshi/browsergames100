@@ -30,22 +30,16 @@ export default function AdminLogin() {
         localStorage.setItem("admin_token", data.token);
         navigate("/admin/blog");
         return;
+      } else {
+        const errData = await res.json().catch(() => ({}));
+        setError(errData.error || "Invalid email or password");
       }
-    } catch {
-      // Backend server unavailable — fallback to local admin mode
+    } catch (err) {
+      console.error("Login error:", err);
+      setError("Unable to connect to authentication server. Please try again.");
+    } finally {
+      setLoading(false);
     }
-
-    if (email && password) {
-      // Create a valid JWT structure so frontend decoders parse the email payload
-      const header = btoa(JSON.stringify({ alg: "HS256", typ: "JWT" }));
-      const payload = btoa(JSON.stringify({ email, role: "admin", exp: Date.now() + 86400000 }));
-      const localToken = `${header}.${payload}.local_signature`;
-      localStorage.setItem("admin_token", localToken);
-      navigate("/admin/blog");
-    } else {
-      setError("Please enter a valid email and password.");
-    }
-    setLoading(false);
   };
 
   return (

@@ -69,19 +69,21 @@ async function autoSeed() {
     try {
         const adminEmail = process.env.ADMIN_EMAIL || 'admin@browsergames100.com';
         const adminPassword = process.env.ADMIN_PASSWORD || 'admin123';
-        const existingAdmin = await prisma_1.prisma.user.findUnique({ where: { email: adminEmail } });
-        if (!existingAdmin) {
-            const hashedPassword = await bcryptjs_1.default.hash(adminPassword, 10);
-            await prisma_1.prisma.user.create({
-                data: {
-                    email: adminEmail,
-                    password: hashedPassword,
-                    fullName: 'BrowserGames100 Admin',
-                    role: 'ADMIN',
-                },
-            });
-            console.log(`✅ Auto-seeded admin user: ${adminEmail}`);
-        }
+        const hashedPassword = await bcryptjs_1.default.hash(adminPassword, 10);
+        await prisma_1.prisma.user.upsert({
+            where: { email: adminEmail },
+            update: {
+                password: hashedPassword,
+                role: 'ADMIN'
+            },
+            create: {
+                email: adminEmail,
+                password: hashedPassword,
+                fullName: 'BrowserGames100 Admin',
+                role: 'ADMIN',
+            },
+        });
+        console.log(`✅ Admin user synchronized: ${adminEmail}`);
         const defaultCategories = [
             { name: 'Game Guides', description: 'In-depth strategy guides and walkthroughs for popular unblocked games.' },
             { name: 'Top Picks', description: 'Curated roundups and top 10 lists of the best browser games.' },
