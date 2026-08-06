@@ -85,10 +85,6 @@ export default function AdminLogin() {
           <Button type="submit" className="w-full font-bold" disabled={loading}>
             {loading ? "Signing in..." : "Sign In"}
           </Button>
-
-          <p className="text-xs text-center text-muted-foreground pt-2">
-            Default credentials: <code className="bg-secondary px-1 py-0.5 rounded text-foreground">admin@browsergames100.com</code> / <code className="bg-secondary px-1 py-0.5 rounded text-foreground">admin123</code>
-          </p>
         </form>
       </div>
     </div>
