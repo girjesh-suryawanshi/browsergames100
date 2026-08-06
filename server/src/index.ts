@@ -1,6 +1,8 @@
+import dotenv from 'dotenv';
+dotenv.config();
+
 import express from 'express';
 import cors from 'cors';
-import dotenv from 'dotenv';
 import path from 'path';
 import fs from 'fs';
 import blogRoutes from './routes/blog';
@@ -12,8 +14,6 @@ import gameStatRoutes from './routes/gameStats';
 import favoriteRoutes from './routes/favorites';
 import submissionRoutes from './routes/submissions';
 import { prisma } from './lib/prisma';
-
-dotenv.config();
 
 const app = express();
 

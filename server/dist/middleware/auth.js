@@ -5,7 +5,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.requireAdmin = void 0;
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
-const JWT_SECRET = process.env.JWT_SECRET || 'secret';
 const requireAdmin = (req, res, next) => {
     const authHeader = req.headers.authorization;
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
@@ -13,10 +12,12 @@ const requireAdmin = (req, res, next) => {
         return;
     }
     const token = authHeader.split(' ')[1];
+    const secret = process.env.JWT_SECRET || 'deergh121454sdsdsd45dd4d545adad';
     try {
-        const decoded = jsonwebtoken_1.default.verify(token, JWT_SECRET);
-        if (decoded.role !== 'ADMIN') {
-            res.status(403).json({ error: 'Forbidden: Admin access required' });
+        const decoded = jsonwebtoken_1.default.verify(token, secret);
+        const userRole = (decoded.role || '').toUpperCase();
+        if (userRole !== 'ADMIN') {
+            res.status(403).json({ error: `Forbidden: Admin access required (got role ${decoded.role})` });
             return;
         }
         // @ts-ignore
@@ -24,7 +25,8 @@ const requireAdmin = (req, res, next) => {
         next();
     }
     catch (error) {
-        res.status(401).json({ error: 'Unauthorized: Invalid token' });
+        console.error('JWT verification error:', error?.message || error);
+        res.status(401).json({ error: 'Unauthorized: Invalid token', details: error?.message });
         return;
     }
 };
