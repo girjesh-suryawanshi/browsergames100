@@ -86,15 +86,7 @@ if (foundDistDir) {
         res.sendFile(path_1.default.join(foundDistDir, 'index.html'));
     });
 }
-const PORT = process.env.PORT || 3000;
-if (typeof PORT === 'string' && (PORT.startsWith('/') || PORT.startsWith('\\\\'))) {
-    app.listen(PORT, () => {
-        console.log(`Server is running on socket ${PORT}`);
-    });
-}
-else {
-    const numericPort = Number(PORT) || 3000;
-    app.listen(numericPort, () => {
-        console.log(`Server is running on port ${numericPort}`);
-    });
-}
+const port = process.env.PORT || 3000;
+app.listen(port, "0.0.0.0", () => {
+    console.log(`Server running on ${port}`);
+});

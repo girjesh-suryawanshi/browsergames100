@@ -98,16 +98,9 @@ if (foundDistDir) {
   });
 }
 
-const PORT = process.env.PORT || 3000;
+const port = process.env.PORT || 3000;
 
-if (typeof PORT === 'string' && (PORT.startsWith('/') || PORT.startsWith('\\\\'))) {
-  app.listen(PORT, () => {
-    console.log(`Server is running on socket ${PORT}`);
-  });
-} else {
-  const numericPort = Number(PORT) || 3000;
-  app.listen(numericPort, () => {
-    console.log(`Server is running on port ${numericPort}`);
-  });
-}
+app.listen(port as any, "0.0.0.0", () => {
+  console.log(`Server running on ${port}`);
+});
 
