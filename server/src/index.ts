@@ -11,6 +11,7 @@ import seoRoutes from './routes/seo';
 import gameStatRoutes from './routes/gameStats';
 import favoriteRoutes from './routes/favorites';
 import submissionRoutes from './routes/submissions';
+import { prisma } from './lib/prisma';
 
 dotenv.config();
 
@@ -70,7 +71,47 @@ for (const dir of publicDirs) {
   }
 }
 
-import { prisma } from './lib/prisma';
+import bcrypt from 'bcryptjs';
+
+async function autoSeed() {
+  try {
+    const adminEmail = process.env.ADMIN_EMAIL || 'admin@browsergames100.com';
+    const adminPassword = process.env.ADMIN_PASSWORD || 'admin123';
+
+    const existingAdmin = await prisma.user.findUnique({ where: { email: adminEmail } });
+    if (!existingAdmin) {
+      const hashedPassword = await bcrypt.hash(adminPassword, 10);
+      await prisma.user.create({
+        data: {
+          email: adminEmail,
+          password: hashedPassword,
+          fullName: 'BrowserGames100 Admin',
+          role: 'ADMIN',
+        },
+      });
+      console.log(`✅ Auto-seeded admin user: ${adminEmail}`);
+    }
+
+    const defaultCategories = [
+      { name: 'Game Guides', description: 'In-depth strategy guides and walkthroughs for popular unblocked games.' },
+      { name: 'Top Picks', description: 'Curated roundups and top 10 lists of the best browser games.' },
+      { name: 'Unblocked Picks', description: 'Games tested and verified to run on school Chromebooks and restricted networks.' },
+      { name: 'Game Updates', description: 'Latest news, balance updates, and patch notes for browser games.' },
+    ];
+
+    for (const cat of defaultCategories) {
+      await prisma.category.upsert({
+        where: { name: cat.name },
+        update: {},
+        create: cat,
+      });
+    }
+  } catch (err) {
+    console.warn('Auto-seed skipped (database tables will be initialized on first write):', err);
+  }
+}
+
+autoSeed();
 
 // Health & Database Connection Check Route
 app.get('/api/health', async (req, res) => {
