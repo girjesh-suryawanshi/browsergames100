@@ -2,8 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Loader2, BookOpen, Calendar, User } from "lucide-react";
 import SEO from "@/components/SEO";
-
-const API_BASE = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000";
+import { API_BASE } from "@/lib/api";
 
 export default function BlogList() {
   const [posts, setPosts] = useState<any[]>([]);
