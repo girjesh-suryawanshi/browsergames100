@@ -1,18 +1,28 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
-import { componentTagger } from "lovable-tagger";
 
 // https://vitejs.dev/config/
-export default defineConfig(({ mode }) => ({
-  server: {
-    host: "::",
-    port: 8080,
-    hmr: {
-      overlay: false,
+export default defineConfig(({ mode }) => {
+  let componentTagger = null;
+  if (mode === "development") {
+    try {
+      // Dynamic import for development tool
+      componentTagger = require("lovable-tagger")?.componentTagger;
+    } catch {
+      // Ignore if componentTagger is not installed in production
+    }
+  }
+
+  return {
+    server: {
+      host: "::",
+      port: 8080,
+      hmr: {
+        overlay: false,
+      },
     },
-  },
-  plugins: [react(), mode === "development" && componentTagger()].filter(Boolean),
+    plugins: [react(), componentTagger && componentTagger()].filter(Boolean),
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
@@ -65,4 +75,5 @@ export default defineConfig(({ mode }) => ({
   esbuild: {
     drop: ["console", "debugger"],
   },
-}));
+};
+});
