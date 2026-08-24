@@ -57,6 +57,10 @@ export default defineConfig(({ mode }) => {
           if (id.includes('node_modules/recharts') || id.includes('node_modules/react-day-picker')) {
             return 'charts';
           }
+          // Quill rich text editor — only loaded for admin blog editing
+          if (id.includes('node_modules/quill') || id.includes('node_modules/react-quill-new')) {
+            return 'editor';
+          }
           // Next-themes, sonner, vaul, embla, etc. — small UI utilities
           if (id.includes('node_modules/next-themes') ||
               id.includes('node_modules/sonner') ||

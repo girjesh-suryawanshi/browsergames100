@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Mail, MessageSquare, Gamepad2, Bug, Shield, CheckCircle2, Loader2 } from "lucide-react";
 import { submitContactForm } from "@/lib/api";
 
-const CONTACT_EMAIL = "support@cloudplayhub.com";
+const CONTACT_EMAIL = "support@browsergames100.com";
 
 const SUBJECTS = [
   { value: "general", label: "General Question" },
@@ -35,7 +35,7 @@ const CONTACT_CARDS = [
     bg: "bg-gaming-yellow/10 border-gaming-yellow/20",
     color: "text-gaming-yellow",
     title: "DMCA & Copyright",
-    desc: "For copyright notices, email dmca@cloudplayhub.com directly for fastest processing.",
+    desc: "For copyright notices, email dmca@browsergames100.com directly for fastest processing.",
   },
   {
     icon: <Mail className="w-5 h-5 text-gaming-pink" />,
@@ -245,8 +245,8 @@ export default function ContactUs() {
               <p className="text-xs text-muted-foreground/70 border-t border-border/40 pt-4">
                 We typically respond within <strong className="text-foreground">48–72 business hours</strong>.
                 For copyright/DMCA matters, please email{" "}
-                <a href="mailto:dmca@cloudplayhub.com" className="text-primary hover:underline">
-                  dmca@cloudplayhub.com
+                <a href="mailto:dmca@browsergames100.com" className="text-primary hover:underline">
+                  dmca@browsergames100.com
                 </a>{" "}
                 for the fastest response.
               </p>

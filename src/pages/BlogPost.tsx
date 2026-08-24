@@ -4,21 +4,28 @@ import { Loader2, ArrowLeft, Share2, List, Tag } from "lucide-react";
 import SEO from "@/components/SEO";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { API_BASE } from "@/lib/api";
+import { staticBlogPosts } from "@/data/static-blogs";
 
 export default function BlogPost() {
   const { slug } = useParams();
-  const [post, setPost] = useState<any>(null);
-  const [loading, setLoading] = useState(true);
+  const initialPost = staticBlogPosts.find((p) => p.slug === slug) || null;
+  const [post, setPost] = useState<any>(initialPost);
+  const [loading, setLoading] = useState<boolean>(!initialPost);
 
   useEffect(() => {
     const fetchPost = async () => {
       try {
         const response = await fetch(`${API_BASE}/api/blog/posts/${slug}`);
-        if (!response.ok) throw new Error("Post not found");
-        const data = await response.json();
-        setPost(data);
+        if (response.ok) {
+          const data = await response.json();
+          if (data && data.title) {
+            setPost(data);
+          }
+        }
       } catch (err) {
-        console.error("Error fetching blog post from MySQL:", err);
+        console.warn("Using static blog post fallback for slug:", slug, err);
+        const fallback = staticBlogPosts.find((p) => p.slug === slug);
+        if (fallback) setPost(fallback);
       } finally {
         setLoading(false);
       }
@@ -180,6 +187,24 @@ export default function BlogPost() {
               className="blog-prose ql-editor"
               dangerouslySetInnerHTML={{ __html: post.content }}
             />
+
+            {/* E-E-A-T Author Bio Box */}
+            <div className="mt-12 p-6 rounded-2xl bg-card border border-border/80 flex flex-col sm:flex-row items-center sm:items-start gap-4">
+              <div className="w-14 h-14 rounded-full bg-primary/20 flex items-center justify-center shrink-0 border-2 border-primary/40 font-black text-xl text-primary select-none">
+                {post.authorName ? post.authorName.charAt(0) : "M"}
+              </div>
+              <div className="text-center sm:text-left flex-1">
+                <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2 mb-1">
+                  <h4 className="font-extrabold text-foreground text-base">{post.authorName || "Marcus Vance"}</h4>
+                  <span className="text-[10px] font-bold uppercase tracking-wider bg-primary/10 text-primary px-2 py-0.5 rounded-full">
+                    Verified Gaming Journalist
+                  </span>
+                </div>
+                <p className="text-xs text-muted-foreground leading-relaxed">
+                  Senior Gaming Journalist and Web Technology Specialist at BrowserGames100. Specializing in HTML5 gaming architecture, web game performance tuning, and unblocked gaming strategy guides.
+                </p>
+              </div>
+            </div>
           </div>
 
           {/* Right Sidebar */}

@@ -4,8 +4,8 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build && cd server && npm install --include=dev && npm run build",
+    "dev": "node dev-frontend.js",
+    "build": "node build-frontend.js && cd server && npm install --include=dev && npm run build",
     "build:dev": "vite build --mode development",
     "lint": "eslint .",
     "preview": "vite preview",

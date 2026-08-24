@@ -69,6 +69,7 @@ async function autoSeed() {
     try {
         await (0, db_1.initDb)();
         await (0, db_1.syncAdminUser)();
+        await (0, db_1.syncInitialBlogPosts)();
     }
     catch (err) {
         console.warn('Auto-seed warning:', err);

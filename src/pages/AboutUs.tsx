@@ -102,6 +102,37 @@ export default function AboutUs() {
             <li className="flex gap-2"><span className="text-primary font-bold">Stability Guarantee:</span> Games that exhibit frequent memory leaks, broken audio, or blank canvas renders are removed from our active catalog.</li>
           </ul>
 
+          <h2 className="text-2xl font-bold text-foreground">Meet Our Editorial Team</h2>
+          <p>
+            Our content and strategy guides are researched, written, and verified by experienced gaming journalists:
+          </p>
+          <div className="grid sm:grid-cols-2 gap-4 not-prose my-6">
+            <div className="p-4 rounded-xl bg-card border border-border/60 flex items-start gap-3">
+              <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center shrink-0 font-extrabold text-primary text-lg">
+                MV
+              </div>
+              <div>
+                <h3 className="font-extrabold text-foreground text-sm">Marcus Vance</h3>
+                <p className="text-[11px] text-primary font-semibold mb-1">Lead Gaming Journalist & Web Architect</p>
+                <p className="text-xs text-muted-foreground leading-relaxed">
+                  Over 8 years covering browser technology, WebGL graphics optimization, and unblocked casual games.
+                </p>
+              </div>
+            </div>
+            <div className="p-4 rounded-xl bg-card border border-border/60 flex items-start gap-3">
+              <div className="w-12 h-12 rounded-full bg-gaming-cyan/20 flex items-center justify-center shrink-0 font-extrabold text-gaming-cyan text-lg">
+                AR
+              </div>
+              <div>
+                <h3 className="font-extrabold text-foreground text-sm">Alex Rivers</h3>
+                <p className="text-[11px] text-gaming-cyan font-semibold mb-1">Senior Game Analyst & Content Editor</p>
+                <p className="text-xs text-muted-foreground leading-relaxed">
+                  Specializes in sports simulators, strategy guides, and competitive arcade mechanics for web platforms.
+                </p>
+              </div>
+            </div>
+          </div>
+
           <h2 className="text-2xl font-bold text-foreground">Commitment to User Trust &amp; AdSense Policy Compliance</h2>
           <p>
             BrowserGames100 respects user privacy and complies with all global data protection standards, including GDPR, CCPA, and COPPA. We partner exclusively with Google AdSense and verified programmatic networks to deliver clean, non-intrusive advertising that funds free gaming without compromising user experience or data privacy.

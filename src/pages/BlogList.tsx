@@ -2,11 +2,11 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Loader2, BookOpen, Calendar, User } from "lucide-react";
 import SEO from "@/components/SEO";
-import { API_BASE } from "@/lib/api";
+import { staticBlogPosts } from "@/data/static-blogs";
 
 export default function BlogList() {
-  const [posts, setPosts] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [posts, setPosts] = useState<any[]>(staticBlogPosts);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -15,10 +15,12 @@ export default function BlogList() {
         if (response.ok) {
           const data = await response.json();
           const published = data.filter((p: any) => p.isPublished);
-          setPosts(published);
+          if (published.length > 0) {
+            setPosts(published);
+          }
         }
       } catch (err) {
-        console.error("Error fetching blog posts from MySQL:", err);
+        console.warn("Using static blog posts fallback:", err);
       } finally {
         setLoading(false);
       }

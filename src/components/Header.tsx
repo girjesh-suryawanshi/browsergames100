@@ -2,7 +2,8 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import {
   Gamepad2, Search, Flame, LayoutGrid, Menu, X,
-  Sun, Moon, Download, Heart, Command,
+  Sun, Moon, Download, Heart, Command, BookOpen, Info, Mail,
+  Shield, FileText, Scale, Lock, ChevronDown,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useTheme } from "next-themes";
@@ -272,6 +273,63 @@ export default function Header() {
             </DropdownMenuContent>
           </DropdownMenu>
 
+          <Link
+            to="/blog"
+            className="hidden sm:flex items-center gap-1.5 px-3 py-2 text-sm font-medium hover:text-primary transition-colors text-foreground/80 rounded-lg hover:bg-secondary/50"
+          >
+            <BookOpen className="w-4 h-4 text-cyan-400" />
+            <span>Blog</span>
+          </Link>
+
+          {/* AdSense Mandatory Pages Dropdown */}
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="ghost" size="sm" className="hidden md:flex items-center gap-1.5 font-medium">
+                <Shield className="w-4 h-4 text-primary" />
+                <span>Pages &amp; Policies</span>
+                <ChevronDown className="w-3.5 h-3.5 opacity-60" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className="w-56 p-1.5 space-y-0.5">
+              <DropdownMenuItem asChild>
+                <Link to="/about" className="flex items-center gap-2 text-sm py-2">
+                  <Info className="w-4 h-4 text-primary" />
+                  <span>About Us</span>
+                </Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem asChild>
+                <Link to="/contact" className="flex items-center gap-2 text-sm py-2">
+                  <Mail className="w-4 h-4 text-gaming-pink" />
+                  <span>Contact &amp; Support</span>
+                </Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem asChild>
+                <Link to="/privacy" className="flex items-center gap-2 text-sm py-2">
+                  <Lock className="w-4 h-4 text-gaming-cyan" />
+                  <span>Privacy Policy</span>
+                </Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem asChild>
+                <Link to="/terms" className="flex items-center gap-2 text-sm py-2">
+                  <FileText className="w-4 h-4 text-gaming-yellow" />
+                  <span>Terms of Service</span>
+                </Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem asChild>
+                <Link to="/disclaimer" className="flex items-center gap-2 text-sm py-2">
+                  <Shield className="w-4 h-4 text-orange-400" />
+                  <span>Disclaimer</span>
+                </Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem asChild>
+                <Link to="/dmca" className="flex items-center gap-2 text-sm py-2">
+                  <Scale className="w-4 h-4 text-red-400" />
+                  <span>DMCA Copyright</span>
+                </Link>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+
           {/* Theme Toggle */}
           <Button
             variant="ghost"
@@ -368,6 +426,13 @@ export default function Header() {
                     { to: "/trending", icon: <Flame className="w-5 h-5 text-orange-500" />, bg: "bg-orange-500/10", label: "Trending Games" },
                     { to: "/favorites", icon: <Heart className="w-5 h-5 text-red-400 fill-red-400" />, bg: "bg-red-500/10", label: "My Favorites" },
                     { to: "/categories", icon: <LayoutGrid className="w-5 h-5 text-primary" />, bg: "bg-primary/10", label: "All Categories" },
+                    { to: "/blog", icon: <BookOpen className="w-5 h-5 text-cyan-400" />, bg: "bg-cyan-500/10", label: "Gaming Blog & Guides" },
+                    { to: "/about", icon: <Info className="w-5 h-5 text-primary" />, bg: "bg-primary/10", label: "About Us" },
+                    { to: "/contact", icon: <Mail className="w-5 h-5 text-gaming-pink" />, bg: "bg-pink-500/10", label: "Contact & Support" },
+                    { to: "/privacy", icon: <Lock className="w-5 h-5 text-gaming-cyan" />, bg: "bg-cyan-500/10", label: "Privacy Policy" },
+                    { to: "/terms", icon: <FileText className="w-5 h-5 text-gaming-yellow" />, bg: "bg-yellow-500/10", label: "Terms of Service" },
+                    { to: "/disclaimer", icon: <Shield className="w-5 h-5 text-orange-400" />, bg: "bg-orange-500/10", label: "Disclaimer" },
+                    { to: "/dmca", icon: <Scale className="w-5 h-5 text-red-400" />, bg: "bg-red-500/10", label: "DMCA Copyright" },
                   ].map((item) => (
                     <Link
                       key={item.to}

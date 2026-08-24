@@ -73,12 +73,13 @@ for (const dir of publicDirs) {
 
 import bcrypt from 'bcryptjs';
 
-import { initDb, syncAdminUser } from './lib/db';
+import { initDb, syncAdminUser, syncInitialBlogPosts } from './lib/db';
 
 async function autoSeed() {
   try {
     await initDb();
     await syncAdminUser();
+    await syncInitialBlogPosts();
   } catch (err) {
     console.warn('Auto-seed warning:', err);
   }
