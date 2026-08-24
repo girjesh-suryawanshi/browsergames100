@@ -1,0 +1,90 @@
+# BrowserGames100 — robots.txt
+# Last updated: 2026-08-03
+
+# ─── Google ─────────────────────────────────────────────────
+User-agent: Googlebot
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+
+# ─── Bing ───────────────────────────────────────────────────
+User-agent: Bingbot
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+Crawl-delay: 2
+
+# ─── Social Media Crawlers ──────────────────────────────────
+User-agent: Twitterbot
+Allow: /
+Disallow: /admin/
+
+User-agent: facebookexternalhit
+Allow: /
+Disallow: /admin/
+
+User-agent: WhatsApp
+Allow: /
+Disallow: /admin/
+
+User-agent: TelegramBot
+Allow: /
+Disallow: /admin/
+
+User-agent: LinkedInBot
+Allow: /
+Disallow: /admin/
+
+User-agent: Discordbot
+Allow: /
+Disallow: /admin/
+
+# ─── AI Crawlers (allowed for GEO/AEO indexing) ─────────────
+User-agent: GPTBot
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+
+User-agent: Google-Extended
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+
+User-agent: anthropic-ai
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+
+User-agent: ClaudeBot
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+
+User-agent: PerplexityBot
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+
+User-agent: OAI-SearchBot
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+
+User-agent: cohere-ai
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+
+User-agent: Bytespider
+Disallow: /
+
+# ─── All other crawlers ─────────────────────────────────────
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+Crawl-delay: 5
+
+# ─── Sitemaps ───────────────────────────────────────────────
+Sitemap: https://browsergames100.com/sitemap.xml
+Sitemap: https://browsergames100.com/sitemap-blog.xml

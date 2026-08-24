@@ -1,0 +1,56 @@
+{
+  "short_name": "CloudPlayHub",
+  "name": "CloudPlayHub — Free Unblocked Games",
+  "description": "Play 28,000+ free unblocked games for school. No downloads, no installs. Works on Chromebooks and any browser.",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "type": "image/svg+xml",
+      "sizes": "any",
+      "purpose": "any"
+    },
+    {
+      "src": "/favicon.svg",
+      "type": "image/svg+xml",
+      "sizes": "512x512",
+      "purpose": "maskable"
+    }
+  ],
+  "id": "/",
+  "start_url": "/?source=pwa",
+  "display": "standalone",
+  "display_override": ["window-controls-overlay", "standalone", "browser"],
+  "background_color": "#0B0E14",
+  "theme_color": "#19E680",
+  "scope": "/",
+  "orientation": "any",
+  "lang": "en-US",
+  "dir": "ltr",
+  "categories": ["games", "entertainment"],
+  "screenshots": [
+    {
+      "src": "/og-image.png",
+      "sizes": "1200x630",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "CloudPlayHub Homepage"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Trending Games",
+      "short_name": "Trending",
+      "description": "Browse the most played unblocked games",
+      "url": "/trending",
+      "icons": [{ "src": "/favicon.svg", "sizes": "96x96" }]
+    },
+    {
+      "name": "Categories",
+      "short_name": "Categories",
+      "description": "Browse all game categories",
+      "url": "/categories",
+      "icons": [{ "src": "/favicon.svg", "sizes": "96x96" }]
+    }
+  ]
+}
+
