@@ -157,8 +157,8 @@ export default function CookieConsent() {
                 Accept All
               </button>
               <button
-                onClick={() => setVisible(false)}
-                aria-label="Dismiss banner"
+                onClick={handleReject}
+                aria-label="Reject optional cookies and dismiss banner"
                 className="p-2 rounded-lg hover:bg-secondary transition-colors"
               >
                 <X className="w-4 h-4 text-muted-foreground" />

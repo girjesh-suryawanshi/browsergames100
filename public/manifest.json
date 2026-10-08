@@ -1,7 +1,7 @@
 {
-  "short_name": "CloudPlayHub",
-  "name": "CloudPlayHub — Free Unblocked Games",
-  "description": "Play 28,000+ free unblocked games for school. No downloads, no installs. Works on Chromebooks and any browser.",
+  "short_name": "BrowserGames100",
+  "name": "BrowserGames100 — Play Free Online Games No Download",
+  "description": "Play 28,000+ free HTML5 browser games instantly. No download, no install. Works on Chromebooks, PC, Mobile and all modern browsers.",
   "icons": [
     {
       "src": "/favicon.svg",
@@ -33,7 +33,7 @@
       "sizes": "1200x630",
       "type": "image/png",
       "form_factor": "wide",
-      "label": "CloudPlayHub Homepage"
+      "label": "BrowserGames100 Homepage"
     }
   ],
   "shortcuts": [

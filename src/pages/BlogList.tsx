@@ -4,6 +4,9 @@ import { Loader2, BookOpen, Calendar, User } from "lucide-react";
 import SEO from "@/components/SEO";
 import { staticBlogPosts } from "@/data/static-blogs";
 
+const API_BASE = import.meta.env.VITE_API_BASE_URL || "";
+
+
 export default function BlogList() {
   const [posts, setPosts] = useState<any[]>(staticBlogPosts);
   const [loading, setLoading] = useState(false);
@@ -78,36 +81,35 @@ export default function BlogList() {
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {posts.map(post => (
-              <Link key={post.id} to={`/blog/${post.slug}`} className="group bg-card rounded-2xl border border-border overflow-hidden hover:border-primary transition-colors flex flex-col h-full">
-                <div className="aspect-[16/9] w-full bg-secondary overflow-hidden">
-                  {post.coverImage ? (
-                    <img src={post.coverImage} alt={post.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
-                  ) : (
-                    <div className="w-full h-full flex items-center justify-center bg-secondary/50">
-                      <span className="text-muted-foreground">No Image</span>
+            {[...posts]
+              .sort((a, b) => new Date(b.publishedAt || 0).getTime() - new Date(a.publishedAt || 0).getTime())
+              .map(post => {
+                const cover = post.coverImage || post.ogImage || "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=1200&q=80";
+                return (
+                  <Link key={post.id} to={`/blog/${post.slug}`} className="group bg-card rounded-2xl border border-border overflow-hidden hover:border-primary transition-colors flex flex-col h-full">
+                    <div className="aspect-[16/9] w-full bg-secondary overflow-hidden">
+                      <img src={cover} alt={post.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
                     </div>
-                  )}
-                </div>
-                <div className="p-6 flex flex-col flex-1">
-                  {post.category && (
-                    <span className="text-xs font-bold uppercase tracking-wider text-primary mb-2 block">
-                      {post.category.name}
-                    </span>
-                  )}
-                  <h3 className="text-xl font-bold mb-3 group-hover:text-primary transition-colors line-clamp-2">
-                    {post.title}
-                  </h3>
-                  <p className="text-sm text-muted-foreground line-clamp-3 mb-4 flex-1">
-                    {post.excerpt || post.seoDescription}
-                  </p>
-                  <div className="text-xs text-muted-foreground flex justify-between items-center pt-4 border-t border-border/50">
-                    <span>{post.authorName}</span>
-                    <span>{new Date(post.publishedAt).toLocaleDateString()}</span>
-                  </div>
-                </div>
-              </Link>
-            ))}
+                    <div className="p-6 flex flex-col flex-1">
+                      {post.category && (
+                        <span className="text-xs font-bold uppercase tracking-wider text-primary mb-2 block">
+                          {post.category.name}
+                        </span>
+                      )}
+                      <h3 className="text-xl font-bold mb-3 group-hover:text-primary transition-colors line-clamp-2">
+                        {post.title}
+                      </h3>
+                      <p className="text-sm text-muted-foreground line-clamp-3 mb-4 flex-1">
+                        {post.excerpt || post.seoDescription}
+                      </p>
+                      <div className="text-xs text-muted-foreground flex justify-between items-center pt-4 border-t border-border/50">
+                        <span>{post.authorName}</span>
+                        <span>{new Date(post.publishedAt).toLocaleDateString()}</span>
+                      </div>
+                    </div>
+                  </Link>
+                );
+              })}
           </div>
         )}
       </div>

@@ -15,7 +15,7 @@ router.get('/sitemap-blog.xml', async (_req: Request, res: Response) => {
       orderBy: { publishedAt: 'desc' }
     });
 
-    const urls = posts.map(post => {
+    const urls = posts.map((post: any) => {
       const lastmod = (post.updatedAt || post.publishedAt || new Date()).toISOString().split('T')[0];
       return `  <url>
     <loc>${BASE_URL}/blog/${post.slug}</loc>
@@ -59,7 +59,7 @@ router.get('/rss.xml', async (_req: Request, res: Response) => {
       take: 50
     });
 
-    const items = posts.map(post => {
+    const items = posts.map((post: any) => {
       const url = `${BASE_URL}/blog/${post.slug}`;
       const desc = (post.excerpt || post.seoDescription || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
       const title = post.title.replace(/&/g, '&amp;').replace(/</g, '&lt;');

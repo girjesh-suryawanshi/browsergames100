@@ -68,11 +68,6 @@ export default function AdPlacement({
   slot = "default",
   sticky = false,
 }: AdPlacementProps) {
-  // ─── DISABLED: Return null until AdSense account is approved ───────────────
-  // Google requires your site to be reviewed BEFORE showing ads.
-  // Once approved, remove the line below and uncomment the ad code.
-  if (!AD_CLIENT) return null;
-  // ───────────────────────────────────────────────────────────────────────────
   const uid        = useId();           // stable, unique per component instance
   const pushed     = useRef(false);     // prevents double-push in StrictMode
   const location   = useLocation();
@@ -87,7 +82,7 @@ export default function AdPlacement({
 
   // After every (remounted) render, fire the AdSense push once.
   useEffect(() => {
-    if (pushed.current) return;
+    if (!AD_CLIENT || pushed.current) return;
     pushed.current = true;
 
     // 100 ms delay: ensures the <ins> element is fully in the DOM
@@ -102,6 +97,12 @@ export default function AdPlacement({
 
     return () => clearTimeout(timer);
   }, [location.pathname, uid]);   // uid changes on remount → re-fires correctly
+
+  // ─── DISABLED: Return null until AdSense account is approved ───────────────
+  // Google requires your site to be reviewed BEFORE showing ads.
+  // Once approved, remove the line below and uncomment the ad code.
+  if (!AD_CLIENT) return null;
+  // ───────────────────────────────────────────────────────────────────────────
 
   const isLeaderboard  = w >= 728;
 

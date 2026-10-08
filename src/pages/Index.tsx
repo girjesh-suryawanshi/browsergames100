@@ -20,7 +20,7 @@ import SEO, { buildWebSiteSchema } from "@/components/SEO";
 import ScraperShield from "@/components/ScraperShield";
 import InstallBanner from "@/components/InstallBanner";
 
-const BASE_URL = "https://BrowserGames100.com";
+const BASE_URL = "https://browsergames100.com";
 
 const FEATURES = [
   {

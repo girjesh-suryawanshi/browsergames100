@@ -226,7 +226,7 @@ export default function GamePage() {
         keywords={`${game.t}, ${game.t} free online, ${game.t} no download, ${category?.name || "browser games"}, html5 games, instant web games`}
         schema={[schema, faqSchema]}
         breadcrumbs={breadcrumbs}
-        ogType="article"
+        ogType="website"
         ogImageAlt={`${game.t} — play free online`}
         modifiedTime={new Date().toISOString()}
       />

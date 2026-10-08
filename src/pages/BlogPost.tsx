@@ -83,8 +83,8 @@ export default function BlogPost() {
         title={post.seoTitle || `${post.title} | BrowserGames100`}
         description={post.seoDescription || post.excerpt}
         keywords={post.seoKeywords}
-        image={post.ogImage || post.coverImage}
-        type="article"
+        ogImage={post.ogImage || post.coverImage}
+        ogType="article"
       />
       {/* Inject JSON-LD Schema */}
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaJson) }} />
@@ -115,10 +115,10 @@ export default function BlogPost() {
             )}
           </div>
 
-          {post.coverImage && (
+          {(post.coverImage || post.ogImage || "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=1200&q=80") && (
             <div className="w-full aspect-[21/9] rounded-2xl overflow-hidden shadow-lg border border-border relative">
               <img 
-                src={post.coverImage} 
+                src={post.coverImage || post.ogImage || "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=1200&q=80"} 
                 alt={post.coverImageAlt || post.title} 
                 className="w-full h-full object-cover" 
                 loading="eager"
