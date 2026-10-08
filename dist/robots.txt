@@ -89,3 +89,4 @@ Sitemap: https://browsergames100.com/sitemap.xml
 Sitemap: https://browsergames100.com/sitemap-static.xml
 Sitemap: https://browsergames100.com/sitemap-categories.xml
 Sitemap: https://browsergames100.com/sitemap-games.xml
+Sitemap: https://browsergames100.com/sitemap-blog.xml
