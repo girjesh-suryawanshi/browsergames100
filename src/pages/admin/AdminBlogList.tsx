@@ -30,7 +30,7 @@ export default function AdminBlogList() {
       inGameBanner: localStorage.getItem("ad_ingame_banner") !== "false",
       sidebarBanner: localStorage.getItem("ad_sidebar_banner") !== "false",
       stickyFooter: localStorage.getItem("ad_sticky_footer") !== "false",
-      publisherId: localStorage.getItem("ad_publisher_id") || "ca-pub-7506978867736173"
+      publisherId: localStorage.getItem("ad_publisher_id") || "ca-pub-7316477328258550"
     };
   });
 

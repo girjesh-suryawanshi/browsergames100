@@ -21,7 +21,7 @@ declare global {
 //   2. Re-enable the scripts in index.html (look for "ADD BACK after AdSense approval")
 //   3. Replace placeholder slot IDs in SLOT_MAP below with real slot IDs
 //
-// const AD_CLIENT = "ca-pub-7506978867736173"; // <-- uncomment after approval
+// const AD_CLIENT = "ca-pub-7316477328258550"; // <-- uncomment after approval
 const AD_CLIENT = ""; // Disabled until AdSense approved
 
 // Map slot names → actual AdSense slot IDs.
