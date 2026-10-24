@@ -5,31 +5,31 @@ import { Shield, Star, Users, Gamepad2, Heart, Globe, Mail } from "lucide-react"
 const VALUES = [
   {
     icon: <Shield className="w-5 h-5 text-primary" />,
-    title: "Family & General Audience Safe",
-    desc: "Every game in our catalog is manually reviewed for age-appropriate content before it ever goes live. We apply strict content filters and do not host games with graphic violence, adult themes, or predatory monetization.",
+    title: "General Audience & Web-Safe Gaming",
+    desc: "We focus on casual, family-friendly titles across popular genres. We do not knowingly host games with graphic gore, adult themes, or deceptive software installers.",
   },
   {
     icon: <Star className="w-5 h-5 text-gaming-yellow" />,
-    title: "Quality Over Quantity",
-    desc: "We test every game for performance, playability, and stability across Chromebooks, Windows PCs, Macs, and mobile browsers before adding it to the catalog. If a game lags, crashes, or disappoints — it doesn't make the cut.",
+    title: "Playability & Web Standards",
+    desc: "We evaluate games to ensure they run inside modern web browsers using standard HTML5 and WebGL canvas technology without requiring executable downloads.",
   },
   {
     icon: <Globe className="w-5 h-5 text-gaming-cyan" />,
-    title: "No-Barrier Instant Access",
-    desc: "Gaming should never require a credit card, an account, or a heavy download. Every title on BrowserGames100 launches instantly in your browser — no registration, no payment, no plugin required.",
+    title: "Zero-Friction Web Access",
+    desc: "Gaming should be accessible to everyone. Titles on BrowserGames100 launch directly in your browser with no account registration, subscriptions, or payment walls.",
   },
   {
     icon: <Heart className="w-5 h-5 text-gaming-pink" />,
-    title: "Community & Player Focused",
-    desc: "Our trending section is powered by real player activity, not sponsored rankings. If gamers are playing it, it rises to the top — that's it.",
+    title: "Player Feedback Driven",
+    desc: "We listen to player feedback. If a game fails to load or exhibits technical issues, players can report it directly via our contact form for review.",
   },
 ];
 
 const STATS = [
-  { value: "28,000+", label: "Curated Games" },
-  { value: "2M+", label: "Monthly Players" },
-  { value: "20+", label: "Game Genres" },
-  { value: "100%", label: "Free, Always" },
+  { value: "28,000+", label: "HTML5 Games" },
+  { value: "14", label: "Game Genres" },
+  { value: "Zero", label: "Downloads Needed" },
+  { value: "100%", label: "Free Access" },
 ];
 
 export default function AboutUs() {
@@ -38,14 +38,23 @@ export default function AboutUs() {
     "@type": "Organization",
     "name": "BrowserGames100",
     "url": "https://browsergames100.com",
-    "description": "BrowserGames100 is a free browser gaming platform offering 28,000+ HTML5 games playable instantly on any device without downloads or registration.",
+    "description": "BrowserGames100 is an independent browser gaming platform offering HTML5 games playable instantly without downloads or registration.",
     "contactPoint": {
       "@type": "ContactPoint",
-      "email": "contact@browsergames100.com",
+      "email": "support@browsergames100.com",
       "contactType": "customer support",
       "availableLanguage": "English"
     },
     "sameAs": []
+  };
+
+  const aboutSchema = {
+    "@context": "https://schema.org",
+    "@type": "AboutPage",
+    "name": "About BrowserGames100",
+    "description": "Learn about BrowserGames100's mission to provide fast, web-standard browser gaming with zero downloads or subscriptions.",
+    "url": "https://browsergames100.com/about",
+    "mainEntity": orgSchema,
   };
 
   const breadcrumbs = [
@@ -59,7 +68,7 @@ export default function AboutUs() {
         title="About BrowserGames100 — Free Online Browser Gaming Platform"
         description="Learn about BrowserGames100's mission to make instant gaming accessible to players worldwide. No downloads, no accounts — just great browser games."
         canonical="/about"
-        schema={orgSchema}
+        schema={[aboutSchema, orgSchema]}
         breadcrumbs={breadcrumbs}
       />
       <div className="container max-w-4xl">
@@ -77,8 +86,8 @@ export default function AboutUs() {
             <span className="text-gradient-gaming">For Everyone, Everywhere</span>
           </h1>
           <p className="text-lg text-muted-foreground leading-relaxed max-w-2xl">
-            BrowserGames100 was built with a clear vision: to provide instant, high-quality browser gaming
-            for casual players, students, and gamers around the world with zero friction, zero forced installs,
+            BrowserGames100 was built with a clear vision: to provide instant, accessible browser gaming
+            for casual players and web gamers around the world with zero friction, zero forced installs,
             and 100% free access.
           </p>
         </div>
@@ -88,50 +97,24 @@ export default function AboutUs() {
 
           <h2 className="text-2xl font-bold text-foreground">What We Built and Why</h2>
           <p>
-            BrowserGames100 was engineered from the ground up to eliminate all the friction usually associated with digital gaming. No mandatory account sign-ups, no payment walls, no app store downloads, and no plugin installations. Every game on our platform runs natively inside the web browser using standard HTML5 and WebGL web technology.
+            BrowserGames100 was engineered from the ground up to eliminate the friction usually associated with digital gaming. No mandatory account sign-ups, no payment walls, no app store downloads, and no executable plugin installations. Every game on our platform runs natively inside the web browser using standard HTML5 and WebGL web technology.
           </p>
 
-          <h2 className="text-2xl font-bold text-foreground">Our Editorial Policy &amp; Game Testing Methodology</h2>
+          <h2 className="text-2xl font-bold text-foreground">Our Curation &amp; Quality Benchmarks</h2>
           <p>
-            We take game curation very seriously. Rather than auto-scraping unverified web content, our team manually evaluates every prospective title against strict quality benchmarks:
+            We curate our catalog to provide an enjoyable casual gaming experience. When selecting games from authorized distribution partners, we focus on key playability benchmarks:
           </p>
           <ul className="space-y-2">
-            <li className="flex gap-2"><span className="text-primary font-bold">Performance &amp; Load Speed:</span> Games must initialize in under 5 seconds over standard internet connections and run at stable framerates on low-to-mid range PC, Mac, and Chromebook devices.</li>
-            <li className="flex gap-2"><span className="text-primary font-bold">Content &amp; Safety Standards:</span> We reject games containing graphic gore, mature themes, or predatory pay-to-win mechanics aimed at minors.</li>
-            <li className="flex gap-2"><span className="text-primary font-bold">Cross-Device Playability:</span> Controls must be intuitive, fully responsive, and function reliably across Chrome, Firefox, Edge, and Safari browsers.</li>
-            <li className="flex gap-2"><span className="text-primary font-bold">Stability Guarantee:</span> Games that exhibit frequent memory leaks, broken audio, or blank canvas renders are removed from our active catalog.</li>
+            <li className="flex gap-2"><span className="text-primary font-bold">Browser Load Speed:</span> Games should initialize efficiently over standard internet connections and run smoothly on everyday desktop, laptop, and Chromebook devices.</li>
+            <li className="flex gap-2"><span className="text-primary font-bold">General Audience Content:</span> We prioritize family-friendly and casual entertainment, avoiding mature or graphic themes.</li>
+            <li className="flex gap-2"><span className="text-primary font-bold">Responsive Controls:</span> Games must have intuitive keyboard, mouse, or touchscreen inputs that respond cleanly.</li>
+            <li className="flex gap-2"><span className="text-primary font-bold">Technical Reliability:</span> Broken embeds or inactive feeds reported by users are reviewed and retired promptly.</li>
           </ul>
 
-          <h2 className="text-2xl font-bold text-foreground">Meet Our Editorial Team</h2>
+          <h2 className="text-2xl font-bold text-foreground">Editorial &amp; Publishing Principles</h2>
           <p>
-            Our content and strategy guides are researched, written, and verified by experienced gaming journalists:
+            BrowserGames100 is maintained by an independent editorial and development team. We research, write, and verify gameplay overviews, control instructions, and genre guides to help players discover engaging games. We clearly distinguish between games embedded from third-party distribution partners and our independent editorial content.
           </p>
-          <div className="grid sm:grid-cols-2 gap-4 not-prose my-6">
-            <div className="p-4 rounded-xl bg-card border border-border/60 flex items-start gap-3">
-              <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center shrink-0 font-extrabold text-primary text-lg">
-                MV
-              </div>
-              <div>
-                <h3 className="font-extrabold text-foreground text-sm">Marcus Vance</h3>
-                <p className="text-[11px] text-primary font-semibold mb-1">Lead Gaming Journalist & Web Architect</p>
-                <p className="text-xs text-muted-foreground leading-relaxed">
-                  Over 8 years covering browser technology, WebGL graphics optimization, and unblocked casual games.
-                </p>
-              </div>
-            </div>
-            <div className="p-4 rounded-xl bg-card border border-border/60 flex items-start gap-3">
-              <div className="w-12 h-12 rounded-full bg-gaming-cyan/20 flex items-center justify-center shrink-0 font-extrabold text-gaming-cyan text-lg">
-                AR
-              </div>
-              <div>
-                <h3 className="font-extrabold text-foreground text-sm">Alex Rivers</h3>
-                <p className="text-[11px] text-gaming-cyan font-semibold mb-1">Senior Game Analyst & Content Editor</p>
-                <p className="text-xs text-muted-foreground leading-relaxed">
-                  Specializes in sports simulators, strategy guides, and competitive arcade mechanics for web platforms.
-                </p>
-              </div>
-            </div>
-          </div>
 
           <h2 className="text-2xl font-bold text-foreground">Commitment to User Trust &amp; AdSense Policy Compliance</h2>
           <p>

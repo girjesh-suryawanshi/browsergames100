@@ -28,28 +28,28 @@ const FEATURES = [
     color: "text-gaming-cyan",
     bg: "bg-gaming-cyan/10 border-gaming-cyan/20",
     title: "Instant Play",
-    desc: "Zero downloads. Zero installs. Games launch in under 3 seconds directly from your browser.",
+    desc: "Zero downloads. Zero installs. Games launch directly in your modern web browser tab.",
   },
   {
     icon: <Monitor className="w-6 h-6" />,
     color: "text-gaming-pink",
     bg: "bg-gaming-pink/10 border-gaming-pink/20",
-    title: "Works Everywhere",
-    desc: "Chromebooks, Windows, Mac, Linux. If it has a browser, it runs our games perfectly.",
+    title: "Cross-Platform",
+    desc: "Play seamlessly on Chromebooks, Windows PCs, Macs, and mobile devices.",
   },
   {
     icon: <Shield className="w-6 h-6" />,
     color: "text-gaming-yellow",
     bg: "bg-gaming-yellow/10 border-gaming-yellow/20",
-    title: "Safe & Curated",
-    desc: "Every title is hand-tested for performance, safety, and age-appropriateness before going live.",
+    title: "General Audience",
+    desc: "A wide variety of casual arcade, puzzle, sports, and strategy games suited for everyday players.",
   },
   {
     icon: <Wifi className="w-6 h-6" />,
     color: "text-primary",
     bg: "bg-primary/10 border-primary/20",
-    title: "Network-Friendly",
-    desc: "Lightweight assets optimized for slow school WiFi. No buffering, no lag, just pure gaming.",
+    title: "Web Standards",
+    desc: "Powered by modern HTML5 and WebGL web standards without requiring any third-party plugins.",
   },
 ];
 
@@ -139,21 +139,12 @@ export default function Index() {
     "name": "BrowserGames100",
     "url": `${BASE_URL}/`,
     "logo": `${BASE_URL}/logo.png`,
-    "description": "BrowserGames100 is a free browser gaming platform offering 28,000+ HTML5 games playable instantly without downloads or registration.",
+    "description": "BrowserGames100 is a free browser gaming platform offering HTML5 games playable instantly without downloads or registration.",
     "contactPoint": {
       "@type": "ContactPoint",
-      "email": "support@cloudplayhub.com",
+      "email": "support@browsergames100.com",
       "contactType": "customer support"
     }
-  };
-  const gameSeriesSchema = {
-    "@context": "https://schema.org",
-    "@type": "VideoGameSeries",
-    "name": "BrowserGames100 - Free Cloud Gaming Platform",
-    "url": `${BASE_URL}/`,
-    "description": "Play 28,000+ free HTML5 games instantly in your browser. No download required. BrowserGames100 is the premier cloud gaming destination for Chromebooks and all modern browsers.",
-    "genre": ["Action", "Puzzle", "Racing", "Arcade", "Strategy", "Multiplayer"],
-    "publisher": { "@type": "Organization", "name": "BrowserGames100", "url": `${BASE_URL}/` },
   };
   const itemListSchema = {
     "@context": "https://schema.org",
@@ -173,8 +164,8 @@ export default function Index() {
     <div className="min-h-screen">
       <SEO
         title="BrowserGames100 — Free Browser Games, No Download Needed"
-        description="Play 28,000+ free HTML5 games instantly in your browser — no download, no account required. Action, puzzle, racing and more. Works on Chromebooks and school networks."
-        schema={[webSiteSchema, gameSeriesSchema, itemListSchema, orgSchema]}
+        description="Play free HTML5 browser games instantly in your web browser — no download, no account required. Action, puzzle, racing, and arcade games on PC, mobile and Chromebook."
+        schema={[webSiteSchema, itemListSchema, orgSchema]}
         keywords="html5 games, free browser games no download, unblocked games, chromebook games, play games online free, best browser games 2026"
         canonical="/"
       />
@@ -195,7 +186,7 @@ export default function Index() {
             {/* Badge */}
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-primary/30 bg-primary/10 text-primary text-xs font-bold uppercase tracking-widest mb-6 backdrop-blur-sm">
               <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-              Free Browser Games · 28,000+ Titles Ready to Play
+              Free Browser Games · Instant Web Play
             </div>
 
             {/* Headline */}
@@ -210,11 +201,11 @@ export default function Index() {
             </h1>
 
             <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-xl leading-relaxed">
-              28,000+ free HTML5 games that launch in seconds, right in your browser.
-              Works perfectly on{" "}
+              Explore thousands of free HTML5 browser games that launch directly in your browser.
+              Fully compatible with{" "}
               <strong className="text-foreground font-semibold">Chromebooks</strong>,{" "}
               <strong className="text-foreground font-semibold">Windows</strong>,{" "}
-              <strong className="text-foreground font-semibold">Mac</strong>, and any phone.
+              <strong className="text-foreground font-semibold">Mac</strong>, and mobile browsers.
             </p>
 
             {/* CTAs */}
@@ -232,21 +223,20 @@ export default function Index() {
                 id="hero-browse-btn"
                 className="inline-flex items-center gap-2.5 px-7 py-3.5 bg-secondary text-secondary-foreground font-semibold rounded-xl hover:bg-secondary/80 transition-all duration-200 text-base border border-border"
               >
-                Browse All Games
+                Browse All Genres
                 <ChevronRight className="w-4 h-4" />
               </Link>
             </div>
 
-            {/* Stats Row */}
+            {/* Value Proposition Row */}
             <div className="flex flex-wrap items-center gap-6 text-sm">
               {[
-                { val: "28K+", label: "Games" },
-                { val: "4.9", label: "Rating", icon: <Star className="w-3.5 h-3.5 text-gaming-yellow fill-gaming-yellow" /> },
-                { val: "2M+", label: "Players" },
+                { val: "28K+", label: "Browser Games" },
+                { val: "Instant", label: "Browser Play" },
+                { val: "Zero", label: "Downloads" },
                 { val: "100%", label: "Free" },
-              ].map(({ val, label, icon }) => (
+              ].map(({ val, label }) => (
                 <div key={label} className="flex items-center gap-1.5">
-                  {icon}
                   <span className="font-black text-foreground">{val}</span>
                   <span className="text-muted-foreground">{label}</span>
                 </div>
@@ -452,29 +442,23 @@ export default function Index() {
         </div>
       </section>
 
-      {/* ─── GLOBAL HUB ─── */}
-      <section className="container mb-14">
+      {/* ─── PLATFORM COMPATIBILITY ─── */}
+      <section className="container mb-14" aria-label="Device and Browser Compatibility">
         <div className="flex items-center gap-3 mb-6">
           <Globe className="w-5 h-5 text-primary" />
-          <h2 className="text-2xl font-black text-foreground">Played Globally</h2>
+          <h2 className="text-2xl font-black text-foreground">Play on Any Modern Device</h2>
         </div>
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {[
-            { flag: "🇺🇸", country: "United States", users: "840K+", desc: "America's top-rated free browser gaming platform, trusted by students and teachers alike." },
-            { flag: "🇬🇧", country: "United Kingdom", users: "210K+", desc: "No. 1 unblocked gaming destination for UK students. Instant play on any school network." },
-            { flag: "🇨🇦", country: "Canada", users: "190K+", desc: "Trending across Canadian schools and universities. Fully Chromebook-compatible." },
-            { flag: "🇦🇺", country: "Australia", users: "160K+", desc: "Fast-loading, ad-safe, and 100% free — the go-to portal for Australian gamers." },
+            { icon: "💻", title: "Chromebooks", desc: "Native HTML5 and WebGL support. Runs directly in ChromeOS with zero installation or developer mode required." },
+            { icon: "🖥️", title: "Windows PCs", desc: "Compatible with modern Windows browsers. Full support for keyboard navigation, mouse controls, and gamepads." },
+            { icon: "🍎", title: "Mac & macOS", desc: "Optimized for Safari, Chrome, and Firefox on macOS. Smooth framerates and retina canvas rendering." },
+            { icon: "📱", title: "Mobile & Tablets", desc: "Responsive touchscreen controls on Android and iOS devices. Play casual games on the go in full screen." },
           ].map((item) => (
-            <div key={item.country} className="p-5 rounded-2xl bg-card border border-border/50 hover:border-primary/20 transition-colors">
+            <div key={item.title} className="p-5 rounded-2xl bg-card border border-border/50 hover:border-primary/20 transition-colors">
               <div className="flex items-center gap-3 mb-3">
-                <span className="text-3xl" aria-hidden>{item.flag}</span>
-                <div>
-                  <h3 className="font-bold text-foreground text-sm">{item.country}</h3>
-                  <div className="flex items-center gap-1 text-xs text-primary font-bold">
-                    <Users className="w-3 h-3" />
-                    {item.users} players
-                  </div>
-                </div>
+                <span className="text-3xl" aria-hidden>{item.icon}</span>
+                <h3 className="font-bold text-foreground text-sm">{item.title}</h3>
               </div>
               <p className="text-xs text-muted-foreground leading-relaxed">{item.desc}</p>
             </div>
@@ -533,8 +517,8 @@ export default function Index() {
               a: "New games are added to BrowserGames100 regularly. You can find the latest additions in the \u2728 New This Week section on the homepage, and trending titles in the 🔥 Trending Right Now section."
             },
             {
-              q: "Is BrowserGames100 safe for kids?",
-              a: "Yes. All games are reviewed for age-appropriate content before being listed. BrowserGames100 does not host games with graphic violence, adult themes, or inappropriate content. The platform is rated General Audience."
+              q: "Is BrowserGames100 suitable for family and casual play?",
+              a: "Yes. Our catalogue features casual arcade, puzzle, sports, and strategy web games suitable for general audiences. Games run directly in standard browser tabs without software downloads or account registrations. If you ever encounter an issue with a game, you can contact us directly via our Contact page."
             },
           ].map(({ q, a }, i) => (
             <details key={i} className="group p-5 rounded-xl bg-card border border-border/50 cursor-pointer hover:border-primary/30 transition-colors">

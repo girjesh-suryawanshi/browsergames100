@@ -1,6 +1,6 @@
 import { useParams, Link } from "react-router-dom";
 import { useEffect, useState, useRef } from "react";
-import { Play, Heart, Star, Users, Share2, Loader2, Maximize, Check, Trophy } from "lucide-react";
+import { Play, Heart, Star, Users, Share2, Loader2, Maximize, Check, Trophy, Flag, ShieldCheck, Gamepad2, Info } from "lucide-react";
 import { getGameDetail, getCategoryGames, getCategories, getCategoryIcon, formatPlays, type GameDetail, type GameCompact, type Category } from "@/data/games";
 import { useFavorites } from "@/hooks/useFavorites";
 import { useRecentlyPlayed } from "@/hooks/useRecentlyPlayed";
@@ -11,8 +11,9 @@ import SEO from "@/components/SEO";
 import ScraperShield from "@/components/ScraperShield";
 import NextGameOverlay from "@/components/NextGameOverlay";
 import { ShareModal } from "@/components/ShareModal";
+import ReportGameModal from "@/components/ReportGameModal";
 import { getOptimizedImage } from "@/lib/image-utils";
-import { gameDescriptions } from "@/data/game-descriptions";
+import { getEnrichedGameContent } from "@/lib/game-content";
 import { useToast } from "@/hooks/use-toast";
 import { recordGamePlay, rateGame } from "@/lib/api";
 
@@ -34,6 +35,7 @@ export default function GamePage() {
   const [hoverRating, setHoverRating] = useState(0);
   const [ratingSubmitted, setRatingSubmitted] = useState(false);
   const [shareOpen, setShareOpen] = useState(false);
+  const [reportOpen, setReportOpen] = useState(false);
   const iframeRef = useRef<HTMLIFrameElement>(null);
 
   // useGameRating is called with undefined until game loads, then updates
@@ -140,14 +142,13 @@ export default function GamePage() {
     );
   }
 
-  const cleanDesc = game.d.replace(/<[^>]+>/g, "");
-  const displayRating = currentRating || game.r || 4.8;
+  const enriched = getEnrichedGameContent(slug || "", game, category);
 
   const schema = {
     "@context": "https://schema.org",
     "@type": "VideoGame",
     "name": game.t,
-    "description": cleanDesc || `Play ${game.t} for free online. No download required.`,
+    "description": enriched.cleanSummary,
     "image": game.img,
     "url": `${BASE_URL}/game/${slug}`,
     "genre": category?.name || "Online Game",
@@ -161,13 +162,6 @@ export default function GamePage() {
       "@type": "Organization",
       "name": "BrowserGames100",
       "url": BASE_URL,
-    },
-    "aggregateRating": {
-      "@type": "AggregateRating",
-      "ratingValue": displayRating,
-      "bestRating": "5",
-      "worstRating": "1",
-      "ratingCount": Math.max(game.p || 100, 100),
     },
     "offers": {
       "@type": "Offer",
@@ -183,48 +177,16 @@ export default function GamePage() {
     { name: game.t, url: `/game/${slug}` },
   ];
 
-  // FAQ schema for AEO (Answer Engine Optimization)
-  const faqSchema = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
-      {
-        "@type": "Question",
-        "name": `How do I play ${game.t}?`,
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": (slug && gameDescriptions[slug]?.howToPlay) ||
-            game.ins?.replace(/<[^>]+>/g, "") ||
-            `Use your keyboard (WASD/Arrow Keys) or mouse/touchscreen to play ${game.t}. Follow the on-screen instructions to progress through levels.`
-        }
-      },
-      {
-        "@type": "Question",
-        "name": `Is ${game.t} free to play?`,
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": `Yes, ${game.t} is completely free to play on BrowserGames100. No download, no registration, and no payment required. Simply click the Play button and the game launches instantly in your browser.`
-        }
-      },
-      {
-        "@type": "Question",
-        "name": `Does ${game.t} work on Chromebooks and Mobile?`,
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": `Yes, ${game.t} is fully compatible with Chromebooks, PC, Mac, Android, and iOS devices. Works on all modern web browsers including Chrome, Firefox, Edge, and Safari.`
-        }
-      },
-    ]
-  };
+  const displayRating = (game.r / 10).toFixed(1);
 
   return (
     <div className="min-h-screen">
       <SEO
         title={`Play ${game.t} Free Online — Instant Browser Play`}
-        description={`Play ${game.t} free online — no download needed, works on Chromebooks and Mobile. ${cleanDesc.slice(0, 120).trim()}...`}
+        description={`Play ${game.t} free online. ${enriched.cleanSummary.slice(0, 150).trim()}`}
         canonical={`/game/${slug}`}
         keywords={`${game.t}, ${game.t} free online, ${game.t} no download, ${category?.name || "browser games"}, html5 games, instant web games`}
-        schema={[schema, faqSchema]}
+        schema={schema}
         breadcrumbs={breadcrumbs}
         ogType="website"
         ogImageAlt={`${game.t} — play free online`}
@@ -255,8 +217,19 @@ export default function GamePage() {
           {/* Main column */}
           <div>
             {/* Title row */}
-            <div className="flex items-center justify-between mb-4 gap-4">
-              <h1 className="text-2xl md:text-3xl font-black text-foreground">{game.t}</h1>
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-4 gap-4">
+              <div>
+                <div className="flex items-center gap-2 mb-1.5 flex-wrap">
+                  <span className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-semibold border ${enriched.reviewBadgeColor}`}>
+                    <ShieldCheck className="w-3.5 h-3.5" />
+                    {enriched.reviewStatus}
+                  </span>
+                  <span className="text-xs text-muted-foreground">
+                    Verified: {enriched.lastReviewDate}
+                  </span>
+                </div>
+                <h1 className="text-2xl md:text-3xl font-black text-foreground">{game.t}</h1>
+              </div>
               <div className="flex items-center gap-2 shrink-0">
                 <button
                   onClick={() => toggleFavorite(game.id as any)}
@@ -277,6 +250,14 @@ export default function GamePage() {
                   aria-label="Share this game"
                 >
                   <Share2 className="w-5 h-5 text-muted-foreground" />
+                </button>
+                <button
+                  onClick={() => setReportOpen(true)}
+                  className="w-10 h-10 rounded-lg bg-secondary flex items-center justify-center hover:bg-red-500/10 hover:text-red-400 transition-colors"
+                  title="Report broken game or controls"
+                  aria-label="Report broken game or controls"
+                >
+                  <Flag className="w-5 h-5 text-muted-foreground" />
                 </button>
               </div>
             </div>
@@ -358,7 +339,7 @@ export default function GamePage() {
                   aria-label="Rate this game"
                 >
                   {[1, 2, 3, 4, 5].map((s) => {
-                    const isActive = s <= (hoverRating || currentRating || Math.round(displayRating));
+                    const isActive = s <= (hoverRating || currentRating || Math.round(Number(displayRating)));
                     return (
                       <button
                         key={s}
@@ -411,36 +392,64 @@ export default function GamePage() {
             {/* Structured Game Content Sections */}
             <div className="grid md:grid-cols-2 gap-8 mb-12">
               <div className="space-y-6">
+                {/* Game Overview */}
                 <div className="p-6 bg-card rounded-xl border border-border/50">
                   <h2 className="text-xl font-bold text-foreground mb-3 flex items-center gap-2">
                     <span className="w-1.5 h-6 bg-primary rounded-full" />
                     Game Overview
                   </h2>
                   <div
-                    className="text-muted-foreground leading-relaxed prose prose-invert max-w-none text-sm"
+                    className="text-muted-foreground leading-relaxed prose prose-invert max-w-none text-sm space-y-3"
                     dangerouslySetInnerHTML={{
-                      __html:
-                        (slug && gameDescriptions[slug]?.about) ||
-                        cleanDesc ||
-                        `${game.t} is a top-rated free browser game playable directly in your web browser. Experience smooth gameplay, engaging challenges, and instant action with zero downloads required.`,
+                      __html: enriched.aboutHtml,
                     }}
                   />
                 </div>
 
+                {/* Objective & Gameplay */}
                 <div className="p-6 bg-card rounded-xl border border-border/50">
                   <h2 className="text-xl font-bold text-foreground mb-3 flex items-center gap-2">
                     <span className="w-1.5 h-6 bg-gaming-blue rounded-full" />
-                    How to Play &amp; Controls
+                    Objective &amp; How to Win
                   </h2>
-                  <p className="text-muted-foreground leading-relaxed text-sm mb-3">
-                    {(slug && gameDescriptions[slug]?.howToPlay) ||
-                      game.ins?.replace(/<[^>]+>/g, "") ||
-                      `Use your keyboard (WASD or Arrow Keys) to steer/move, Spacebar to jump/action, and Mouse to aim/click. On touch devices, use intuitive on-screen touch buttons.`}
+                  <p className="text-muted-foreground leading-relaxed text-sm mb-4">
+                    {enriched.objective}
                   </p>
-                  <div className="p-3 bg-secondary/50 rounded-lg text-xs space-y-1 text-muted-foreground">
-                    <p><strong>Movement:</strong> Arrow Keys / WASD</p>
-                    <p><strong>Action / Shoot:</strong> Spacebar / Left Click</p>
-                    <p><strong>Pause / Menu:</strong> Esc / P Key</p>
+                  <h3 className="text-sm font-bold text-foreground mb-2">Instructions</h3>
+                  <p className="text-muted-foreground leading-relaxed text-sm">
+                    {enriched.howToPlay}
+                  </p>
+                </div>
+
+                {/* Controls Table */}
+                <div className="p-6 bg-card rounded-xl border border-border/50">
+                  <h2 className="text-xl font-bold text-foreground mb-3 flex items-center gap-2">
+                    <Gamepad2 className="w-5 h-5 text-primary" />
+                    Verified Controls
+                  </h2>
+                  <div className="overflow-x-auto">
+                    <table className="w-full text-left text-sm">
+                      <thead className="text-xs uppercase text-muted-foreground border-b border-border/60">
+                        <tr>
+                          <th className="pb-2 font-semibold">Action</th>
+                          <th className="pb-2 font-semibold">Input / Key</th>
+                          <th className="pb-2 font-semibold text-right">Device</th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-border/30 text-xs">
+                        {enriched.controls.map((ctrl, idx) => (
+                          <tr key={idx} className="hover:bg-secondary/30">
+                            <td className="py-2.5 font-medium text-foreground">{ctrl.action}</td>
+                            <td className="py-2.5 text-muted-foreground font-mono bg-secondary/20 px-2 rounded">
+                              {ctrl.keys}
+                            </td>
+                            <td className="py-2.5 text-right capitalize text-muted-foreground">
+                              {ctrl.device}
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
                   </div>
                 </div>
 
@@ -450,39 +459,65 @@ export default function GamePage() {
                     <span className="w-1.5 h-6 bg-gaming-cyan rounded-full" />
                     Device &amp; Browser Compatibility
                   </h2>
-                  <div className="grid grid-cols-2 gap-2 text-xs">
-                    <div className="p-2.5 bg-secondary/40 rounded-lg">💻 <strong>PC / Mac:</strong> Full WASD &amp; Mouse</div>
-                    <div className="p-2.5 bg-secondary/40 rounded-lg">💻 <strong>Chromebook:</strong> 100% Native WebGL</div>
-                    <div className="p-2.5 bg-secondary/40 rounded-lg">📱 <strong>Mobile / Tablet:</strong> Touchscreen Ready</div>
-                    <div className="p-2.5 bg-secondary/40 rounded-lg">🌐 <strong>Browsers:</strong> Chrome, Safari, Edge, Firefox</div>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs">
+                    <div className="p-3 bg-secondary/40 rounded-lg">
+                      <p className="font-semibold text-foreground mb-0.5">💻 PC &amp; Mac</p>
+                      <p className="text-muted-foreground">{enriched.supportedDevices.pcMac}</p>
+                    </div>
+                    <div className="p-3 bg-secondary/40 rounded-lg">
+                      <p className="font-semibold text-foreground mb-0.5">💻 Chromebook</p>
+                      <p className="text-muted-foreground">{enriched.supportedDevices.chromebook}</p>
+                    </div>
+                    <div className="p-3 bg-secondary/40 rounded-lg">
+                      <p className="font-semibold text-foreground mb-0.5">📱 Mobile &amp; Tablet</p>
+                      <p className="text-muted-foreground">{enriched.supportedDevices.mobileTablet}</p>
+                    </div>
+                    <div className="p-3 bg-secondary/40 rounded-lg">
+                      <p className="font-semibold text-foreground mb-0.5">🌐 Supported Browsers</p>
+                      <p className="text-muted-foreground">{enriched.supportedDevices.browsers}</p>
+                    </div>
                   </div>
                 </div>
               </div>
 
               <div className="space-y-6">
+                {/* Tips & Strategies */}
                 <div className="p-6 bg-card rounded-xl border border-border/50">
                   <h2 className="text-xl font-bold text-foreground mb-3 flex items-center gap-2">
-                    <span className="w-1.5 h-6 bg-gaming-yellow rounded-full" />
-                    <Trophy className="w-4 h-4 text-gaming-yellow" />
+                    <Trophy className="w-5 h-5 text-gaming-yellow" />
                     Tips &amp; Strategies
                   </h2>
                   <ul className="space-y-3">
-                    {(
-                      (slug && gameDescriptions[slug]?.tips) || [
-                        "Master basic controls in early levels before attempting high-speed maneuvers.",
-                        "Use Fullscreen mode (F11 on PC) for maximum field of view and focus.",
-                        "Collect power-ups and bonus multipliers to top leaderboards.",
-                        "Practice regularly to sharpen reaction speed and muscle memory.",
-                      ]
-                    ).map((tip: string, i: number) => (
+                    {enriched.tips.map((tip: string, i: number) => (
                       <li key={i} className="flex gap-3 text-sm text-muted-foreground">
                         <span className="flex-shrink-0 w-5 h-5 rounded-full bg-secondary flex items-center justify-center text-[10px] font-bold text-primary">
                           {i + 1}
                         </span>
-                        {tip}
+                        <span>{tip}</span>
                       </li>
                     ))}
                   </ul>
+                </div>
+
+                {/* Source & Distribution Attribution (Transparency) */}
+                <div className="p-6 bg-card rounded-xl border border-border/50">
+                  <h2 className="text-xl font-bold text-foreground mb-3 flex items-center gap-2">
+                    <Info className="w-5 h-5 text-muted-foreground" />
+                    Licensing &amp; Attribution
+                  </h2>
+                  <div className="space-y-2 text-xs text-muted-foreground">
+                    <p><strong className="text-foreground">Distributor:</strong> {enriched.attribution.distributor}</p>
+                    <p><strong className="text-foreground">Licensing:</strong> {enriched.attribution.licensing}</p>
+                    <p className="leading-relaxed">{enriched.attribution.developerAttribution}</p>
+                    <div className="pt-2 border-t border-border/40">
+                      <button
+                        onClick={() => setReportOpen(true)}
+                        className="text-primary hover:underline font-medium inline-flex items-center gap-1"
+                      >
+                        <Flag className="w-3.5 h-3.5" /> Report copyright or technical issue with this game
+                      </button>
+                    </div>
+                  </div>
                 </div>
 
                 {/* FAQ Section (AEO) */}
@@ -498,7 +533,11 @@ export default function GamePage() {
                     </div>
                     <div>
                       <p className="font-semibold text-foreground">Does {game.t} work on Chromebooks?</p>
-                      <p className="text-muted-foreground text-xs mt-0.5">Yes, HTML5 games run natively on all Chromebooks and web browsers.</p>
+                      <p className="text-muted-foreground text-xs mt-0.5">Yes, HTML5 games run natively on ChromeOS without plugins or special software.</p>
+                    </div>
+                    <div>
+                      <p className="font-semibold text-foreground">What should I do if {game.t} shows a black screen?</p>
+                      <p className="text-muted-foreground text-xs mt-0.5">Refresh your browser, disable ad-blockers that may block game assets, or click "Report Issue" above so our team can verify the embed.</p>
                     </div>
                   </div>
                 </div>
@@ -574,6 +613,14 @@ export default function GamePage() {
         gameTitle={game.t}
         gameUrl={`${BASE_URL}/game/${slug}`}
         gameThumbnail={game.img || imgSrc}
+      />
+
+      {/* Report Broken Game / Feedback Modal */}
+      <ReportGameModal
+        isOpen={reportOpen}
+        onClose={() => setReportOpen(false)}
+        gameTitle={game.t}
+        gameSlug={slug || ""}
       />
     </div>
   );

@@ -237,7 +237,9 @@ export default function CategoryPage() {
   if (!category) {
     return (
       <div className="container py-20 text-center">
+        <SEO title="Category Not Found" noindex={true} canonical="/categories" />
         <h1 className="text-3xl font-bold text-foreground mb-4">Category Not Found</h1>
+        <p className="text-muted-foreground mb-6">This category is not available or has been consolidated into our primary genre list.</p>
         <Link to="/categories" className="text-primary hover:underline">← Browse All Categories</Link>
       </div>
     );
@@ -262,8 +264,8 @@ export default function CategoryPage() {
   const collectionSchema = {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
-    "name": `${catName} - Unblocked Games`,
-    "description": `Play the best free ${catName.toLowerCase()} unblocked online. No download, no signup. ${category.total_games.toLocaleString()} games available on Chromebooks and school browsers.`,
+    "name": `${catName} - Free Online Browser Games`,
+    "description": `Play free ${catName.toLowerCase()} online with no download required. Over ${category.total_games.toLocaleString()} games playable instantly in your browser.`,
     "url": `${BASE_URL}/category/${slug}`,
     "isPartOf": { "@type": "WebSite", "url": `${BASE_URL}/` },
   };
@@ -271,7 +273,7 @@ export default function CategoryPage() {
   const itemListSchema = {
     "@context": "https://schema.org",
     "@type": "ItemList",
-    "name": `Best Unblocked ${catName}`,
+    "name": `Popular ${catName}`,
     "numberOfItems": Math.min(visibleGames.length, 10),
     "itemListElement": visibleGames.slice(0, 10).map((g, i) => ({
       "@type": "ListItem",
@@ -290,10 +292,10 @@ export default function CategoryPage() {
   return (
     <div className="min-h-screen">
       <SEO
-        title={`${catName} Unblocked - Free Online ${catName} for School`}
-        description={`Play the best free ${catName.toLowerCase()} unblocked online for school. ${category.total_games.toLocaleString()} games available. No download, works on Chromebooks instantly.`}
+        title={`Free ${catName} Online — Play in Browser`}
+        description={`Play ${category.total_games.toLocaleString()} free ${catName.toLowerCase()} online directly in your web browser. Instant play on PC, Mac, Chromebook, and mobile without downloads.`}
         canonical={`/category/${slug}`}
-        keywords={`${catName.toLowerCase()} unblocked, unblocked ${catName.toLowerCase()}, free ${catName.toLowerCase()} online, school ${catName.toLowerCase()}, ${catName.toLowerCase()} chromebook`}
+        keywords={`${catName.toLowerCase()}, free ${catName.toLowerCase()}, play ${catName.toLowerCase()} online, html5 ${catName.toLowerCase()}, browser games`}
         schema={[collectionSchema, itemListSchema, ...(faqSchema ? [faqSchema] : [])]}
         breadcrumbs={breadcrumbs}
       />
@@ -314,11 +316,11 @@ export default function CategoryPage() {
         <div className="p-6 rounded-xl bg-card border border-border/50 mb-6">
           <div className="text-4xl mb-3" aria-hidden>{catIcon}</div>
           <h1 className="text-3xl font-black text-foreground mb-2">
-            {catName} — Unblocked Games
+            Free {catName} Online
           </h1>
           <p className="text-muted-foreground max-w-2xl">
-            Play the best free {catName.toLowerCase()} online — no download, no signup, 100% unblocked for school!{" "}
-            <strong className="text-foreground">{category.total_games.toLocaleString()} games</strong> available. Works on Chromebooks and all browsers.
+            Play the best free {catName.toLowerCase()} directly in your browser — zero downloads, no installation required.{" "}
+            <strong className="text-foreground">{category.total_games.toLocaleString()} curated titles</strong> available on PC, Mac, Chromebook, and mobile devices.
           </p>
         </div>
 
@@ -379,7 +381,7 @@ export default function CategoryPage() {
           <div className="mt-12 space-y-4">
             <div className="p-6 bg-card rounded-xl border border-border/30">
               <h2 className="text-lg font-bold text-foreground mb-4">
-                About Unblocked {catName}
+                About {catName}
               </h2>
               {seoBg.body.split("\n\n").map((para, i) => (
                 <p key={i} className="text-sm text-muted-foreground leading-relaxed mb-3 last:mb-0">{para}</p>

@@ -43,7 +43,7 @@ export default function LandingPage({
 
   return (
     <div className="min-h-screen">
-      <SEO title={title} description={description} keywords={keywords} />
+      <SEO title={title} description={description} keywords={keywords} noindex={true} />
       <ScraperShield />
 
       {/* ─── PAGE HERO ─── */}
@@ -58,7 +58,7 @@ export default function LandingPage({
         <div className="container relative z-10 max-w-4xl text-center">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-primary/30 bg-primary/10 text-primary text-xs font-bold uppercase tracking-widest mb-5">
             <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-            BrowserGames100 · Cloud Gaming Platform
+            BrowserGames100 · Instant Web Gaming
           </div>
           <h1 className="text-4xl md:text-6xl font-black tracking-tight text-foreground mb-5 leading-tight">
             {title}
@@ -94,9 +94,6 @@ export default function LandingPage({
           </div>
         </div>
       </section>
-
-      {/* ─── TOP AD ─── */}
-      <AdPlacement size="728x90" className="my-6" slot="leaderboard-category-top" />
 
       <main className="container max-w-5xl py-8">
 
@@ -167,19 +164,19 @@ export default function LandingPage({
           </div>
         </section>
 
-        {/* ─── WHY CLOUDPLAYHUB TRUST BLOCK ─── */}
+        {/* ─── PLATFORM HIGHLIGHTS ─── */}
         <section className="mb-12 p-6 rounded-2xl bg-primary/5 border border-primary/15">
           <h2 className="text-xl font-black text-foreground mb-4">
             ✅ Why Choose BrowserGames100?
           </h2>
           <ul className="grid sm:grid-cols-2 gap-3">
             {[
-              "Completely free — no subscriptions, no hidden fees, no sign-up required.",
-              "28,000+ hand-tested games across every genre imaginable.",
-              "Fully functional on restricted school and library networks.",
-              "Optimized for slow WiFi — most games are under 5MB to load.",
-              "Chromebook-first design: every game tested on ChromeOS hardware.",
-              "Safe content: all titles reviewed for age-appropriateness.",
+              "Completely free — no subscriptions, no downloads, no sign-up required.",
+              "Thousands of browser games across action, arcade, puzzle, and racing.",
+              "Runs directly in standard web browser tabs without plugins or installers.",
+              "Lightweight HTML5 and WebGL canvas technology with quick launch times.",
+              "Compatible across Chromebooks, Windows PCs, Macs, and mobile devices.",
+              "Casual titles suited for family and general audience gaming.",
             ].map((item) => (
               <li key={item} className="flex items-start gap-2.5 text-sm text-muted-foreground">
                 <CheckCircle2 className="w-4 h-4 text-primary shrink-0 mt-0.5" />
@@ -188,9 +185,6 @@ export default function LandingPage({
             ))}
           </ul>
         </section>
-
-        {/* ─── BOTTOM AD ─── */}
-        <AdPlacement size="728x90" className="mt-4" slot="leaderboard-homepage-top" />
       </main>
     </div>
   );

@@ -1,7 +1,7 @@
 import SEO from "@/components/SEO";
 import { Link } from "react-router-dom";
 
-const CONTACT_EMAIL = "dmca@cloudplayhub.com";
+const CONTACT_EMAIL = "dmca@browsergames100.com";
 const EFFECTIVE_DATE = "July 24, 2026";
 
 export default function Disclaimer() {

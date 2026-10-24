@@ -1,26 +1,33 @@
 # BrowserGames100 — robots.txt
-# Last updated: 2026-08-03
+# Policy-Compliant Crawl Directives
 
-# ─── Google ─────────────────────────────────────────────────
+# ─── Search Engines ─────────────────────────────────────────
 User-agent: Googlebot
 Allow: /
 Disallow: /admin/
 Disallow: /api/
+Disallow: /search
+Disallow: /favorites
+Disallow: /landing
 
-# ─── Bing ───────────────────────────────────────────────────
 User-agent: Bingbot
 Allow: /
 Disallow: /admin/
 Disallow: /api/
+Disallow: /search
+Disallow: /favorites
+Disallow: /landing
 
 # ─── Social Media Crawlers ──────────────────────────────────
 User-agent: Twitterbot
 Allow: /
 Disallow: /admin/
+Disallow: /api/
 
 User-agent: facebookexternalhit
 Allow: /
 Disallow: /admin/
+Disallow: /api/
 
 User-agent: WhatsApp
 Allow: /
@@ -38,7 +45,7 @@ User-agent: Discordbot
 Allow: /
 Disallow: /admin/
 
-# ─── AI Crawlers (allowed for GEO/AEO indexing) ─────────────
+# ─── AI & Answer Engine Crawlers (AEO / GEO Indexing) ───────
 User-agent: GPTBot
 Allow: /
 Disallow: /admin/
@@ -74,19 +81,19 @@ Allow: /
 Disallow: /admin/
 Disallow: /api/
 
+# ─── Aggressive Scrapers Blocked ───────────────────────────
 User-agent: Bytespider
 Disallow: /
 
-# ─── All other crawlers ─────────────────────────────────────
+# ─── All Other Crawlers ─────────────────────────────────────
 User-agent: *
 Allow: /
 Disallow: /admin/
 Disallow: /api/
+Disallow: /search
+Disallow: /favorites
+Disallow: /landing
 Crawl-delay: 5
 
-# ─── Sitemaps ───────────────────────────────────────────────
+# ─── Sitemap Index (References all sub-sitemaps) ────────────
 Sitemap: https://browsergames100.com/sitemap.xml
-Sitemap: https://browsergames100.com/sitemap-static.xml
-Sitemap: https://browsergames100.com/sitemap-categories.xml
-Sitemap: https://browsergames100.com/sitemap-games.xml
-Sitemap: https://browsergames100.com/sitemap-blog.xml

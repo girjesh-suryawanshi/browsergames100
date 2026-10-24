@@ -80,7 +80,7 @@ export default function SEO({
 }: SEOProps) {
   const siteName = "BrowserGames100";
   const fullTitle = title
-    ? `${title} | ${siteName}`
+    ? (title.includes(siteName) ? title : `${title} | ${siteName}`)
     : `${siteName} - Play Free Online Browser Games No Download`;
   const fullDescription =
     description ||

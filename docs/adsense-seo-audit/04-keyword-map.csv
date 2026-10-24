@@ -1,0 +1,33 @@
+URL,Target Primary Keyword,Secondary Keywords,Intent Type,Index Status,Content Tier,Schema Type
+/,free online browser games,instant play web games; play browser games no download,Commercial/Navigational,index,Tier 1 (Core),WebSite + Organization
+/categories,browser games categories,all game genres online; puzzle racing action games,Curated Hub,index,Tier 1 (Core),CollectionPage
+/category/action-games,action browser games,free action web games; html5 action games,Curated Hub,index,Tier 1 (Core),CollectionPage
+/category/racing-games,racing browser games,car driving games online; drift games no download,Curated Hub,index,Tier 1 (Core),CollectionPage
+/category/puzzle-games,puzzle browser games,logic brain teaser games; math puzzle web games,Curated Hub,index,Tier 1 (Core),CollectionPage
+/category/sports-games,sports browser games,online football games; basketball browser games,Curated Hub,index,Tier 1 (Core),CollectionPage
+/category/shooting-games,shooting browser games,free fps browser games; gun games no download,Curated Hub,index,Tier 1 (Core),CollectionPage
+/category/multiplayer-games,multiplayer browser games,io games with friends; 2 player online games,Curated Hub,index,Tier 1 (Core),CollectionPage
+/category/arcade-games,arcade browser games,retro classic games; free retro games online,Curated Hub,index,Tier 1 (Core),CollectionPage
+/category/adventure-games,adventure browser games,quest exploration games; story web games,Curated Hub,index,Tier 1 (Core),CollectionPage
+/category/hypercasual-games,hypercasual web games,one tap games; quick browser games,Curated Hub,index,Tier 1 (Core),CollectionPage
+/category/bejeweled-games,match 3 browser games,bejeweled games online; gem matching games,Curated Hub,index,Tier 1 (Core),CollectionPage
+/category/beauty-games,dress up browser games,fashion games online; makeover web games,Curated Hub,index,Tier 1 (Core),CollectionPage
+/category/clicker-games,clicker games online,idle games browser; incremental web games,Curated Hub,index,Tier 1 (Core),CollectionPage
+/category/cooking-games,cooking games browser,restaurant cooking games online; recipe web games,Curated Hub,index,Tier 1 (Core),CollectionPage
+/game/slope,slope game controls,slope game online; play slope free unblocked,Informational/Play,index,Tier 1 (Verified),VideoGame
+/game/retro-bowl,retro bowl unblocked,retro bowl browser controls; retro bowl free online,Informational/Play,index,Tier 1 (Verified),VideoGame
+/game/run-3,run 3 browser game,run 3 unblocked; how to unlock characters in run 3,Informational/Play,index,Tier 1 (Verified),VideoGame
+/game/2048,2048 game online,how to win 2048; 2048 puzzle strategies,Informational/Play,index,Tier 1 (Verified),VideoGame
+/game/drift-hunters,drift hunters browser,drift hunters controls; drift hunters car tuning tips,Informational/Play,index,Tier 1 (Verified),VideoGame
+/game/geometry-dash,geometry dash web,geometry dash online browser; rhythm platformer game,Informational/Play,index,Tier 1 (Verified),VideoGame
+/game/subway-surfers,subway surfers browser,subway surfers unblocked online; subway surfers keyboard controls,Informational/Play,index,Tier 1 (Verified),VideoGame
+/game/cookie-clicker,cookie clicker browser,cookie clicker unblocked; cookie clicker golden cookie tips,Informational/Play,index,Tier 1 (Verified),VideoGame
+/blog,browser gaming guides,chromebook game guides; html5 gaming news,Educational Hub,index,Tier 1 (Core),Blog
+/about,about browsergames100,who owns browsergames100; browsergames100 editorial standards,Trust/E-E-A-T,index,Tier 1 (Core),AboutPage
+/contact,contact browsergames100,browsergames100 support; report broken game email,Trust/E-E-A-T,index,Tier 1 (Core),ContactPage
+/privacy,browsergames100 privacy policy,privacy and cookies policy; gdpr ccpa compliance,Legal,index,Tier 1 (Core),WebPage
+/terms,browsergames100 terms of service,terms of use; browser gaming licensing terms,Legal,index,Tier 1 (Core),WebPage
+/dmca,browsergames100 dmca policy,copyright removal agent; report copyright infringement,Legal,index,Tier 1 (Core),WebPage
+/search,search browser games,find games online,Utility,noindex,Tier 4 (Utility),None
+/favorites,my favorite games,saved browser games,Utility,noindex,Tier 4 (Utility),None
+/landing,play instant games,instant browser games,Doorway/Filter,noindex,Tier 4 (Doorway),None

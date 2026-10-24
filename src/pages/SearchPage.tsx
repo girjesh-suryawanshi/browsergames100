@@ -88,8 +88,8 @@ export default function SearchPage() {
             ? `Found ${results.length} unblocked games for "${query}". Play free online games instantly — no download needed.`
             : "Search 28,000+ free unblocked games. Find your favorite game instantly and play in your browser."
         }
-        canonical={query ? `/search?q=${encodeURIComponent(query)}` : "/search"}
-        noindex={!query}
+        canonical="/search"
+        noindex={true}
       />
 
       <div className="container py-8">

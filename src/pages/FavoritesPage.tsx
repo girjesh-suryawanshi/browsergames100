@@ -4,6 +4,7 @@ import { Heart, Loader2 } from "lucide-react";
 import { getGamesPage, type GameCompact } from "@/data/games";
 import { useFavorites } from "@/hooks/useFavorites";
 import GameCard from "@/components/GameCard";
+import SEO from "@/components/SEO";
 
 export default function FavoritesPage() {
   const { favorites, isFavorite, toggleFavorite } = useFavorites();
@@ -31,6 +32,7 @@ export default function FavoritesPage() {
 
   return (
     <div className="container py-8">
+      <SEO title="My Favorite Games" noindex={true} canonical="/favorites" />
       <div className="flex items-center gap-3 mb-8">
         <Heart className="w-7 h-7 text-destructive fill-destructive" />
         <h1 className="text-3xl font-black text-foreground">My Favorites</h1>

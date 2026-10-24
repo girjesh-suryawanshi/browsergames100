@@ -1,7 +1,7 @@
 import SEO from "@/components/SEO";
 import { Mail, AlertTriangle, FileText, Clock, CheckCircle2 } from "lucide-react";
 
-const CONTACT_EMAIL = "dmca@cloudplayhub.com";
+const CONTACT_EMAIL = "dmca@browsergames100.com";
 
 export default function DMCAPolicy() {
   return (

@@ -58,9 +58,15 @@ export default function BlogPost() {
     "image": post.coverImage ? [post.coverImage] : [],
     "datePublished": post.publishedAt,
     "dateModified": post.updatedAt,
+    "mainEntityOfPage": `https://browsergames100.com/blog/${slug}`,
+    "publisher": {
+      "@type": "Organization",
+      "name": "BrowserGames100",
+      "url": "https://browsergames100.com",
+    },
     "author": {
       "@type": "Person",
-      "name": post.authorName
+      "name": post.authorName || "Editorial Team"
     }
   };
 
@@ -77,20 +83,26 @@ export default function BlogPost() {
     }))
   } : null;
 
+  const breadcrumbs = [
+    { name: "Home", url: "/" },
+    { name: "Blog", url: "/blog" },
+    { name: post.title, url: `/blog/${slug}` },
+  ];
+
   return (
     <main className="bg-background pt-24 pb-16 min-h-screen">
       <SEO 
-        title={post.seoTitle || `${post.title} | BrowserGames100`}
+        title={post.seoTitle || post.title}
         description={post.seoDescription || post.excerpt}
         keywords={post.seoKeywords}
+        canonical={`/blog/${slug}`}
         ogImage={post.ogImage || post.coverImage}
         ogType="article"
+        publishedTime={post.publishedAt}
+        modifiedTime={post.updatedAt}
+        breadcrumbs={breadcrumbs}
+        schema={[schemaJson, ...(faqSchema ? [faqSchema] : [])]}
       />
-      {/* Inject JSON-LD Schema */}
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaJson) }} />
-      {faqSchema && (
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
-      )}
 
       <article className="container mx-auto max-w-7xl px-4">
         {/* Header */}

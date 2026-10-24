@@ -91,6 +91,20 @@ export default function ContactUs() {
     }
   };
 
+  const contactSchema = {
+    "@context": "https://schema.org",
+    "@type": "ContactPage",
+    "name": "Contact BrowserGames100 Support",
+    "description": "Get in touch with the BrowserGames100 editorial and support team for bug reports, game suggestions, and DMCA inquiries.",
+    "url": "https://browsergames100.com/contact",
+    "mainEntity": {
+      "@type": "Organization",
+      "name": "BrowserGames100",
+      "url": "https://browsergames100.com",
+      "email": CONTACT_EMAIL,
+    }
+  };
+
   return (
     <div className="min-h-screen py-12">
       <SEO
@@ -98,6 +112,7 @@ export default function ContactUs() {
         description="Get in touch with the BrowserGames100 team. Report bugs, suggest games, submit DMCA notices, or ask any question. We respond within 48–72 hours."
         canonical="/contact"
         breadcrumbs={breadcrumbs}
+        schema={contactSchema}
       />
       <div className="container max-w-4xl">
         <div className="mb-10">

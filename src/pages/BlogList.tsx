@@ -31,12 +31,32 @@ export default function BlogList() {
     fetchPosts();
   }, []);
 
+  const breadcrumbs = [
+    { name: "Home", url: "/" },
+    { name: "Blog", url: "/blog" },
+  ];
+
+  const blogSchema = {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    "name": "BrowserGames100 Gaming Blog & Guides",
+    "description": "Explore BrowserGames100's gaming blog for tips, game guides, top picks, and technical guides on free browser games.",
+    "url": "https://browsergames100.com/blog",
+    "publisher": {
+      "@type": "Organization",
+      "name": "BrowserGames100",
+      "url": "https://browsergames100.com"
+    }
+  };
+
   return (
     <main className="bg-background pt-24 pb-16 min-h-screen">
       <SEO
-        title="Gaming Blog & Tips | BrowserGames100"
+        title="Gaming Blog & Tips — Browser Gaming Guides"
         description="Explore BrowserGames100's gaming blog for tips, game guides, top picks, and the latest news on free browser games you can play anywhere."
         canonical="/blog"
+        breadcrumbs={breadcrumbs}
+        schema={blogSchema}
       />
       <div className="container mx-auto px-4 max-w-6xl">
         <div className="text-center mb-16">

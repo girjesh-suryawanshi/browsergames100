@@ -1,27 +1,30 @@
 /**
- * BrowserGames100 — Sitemap Generator
+ * BrowserGames100 — Policy-Compliant Sitemap Generator
  *
- * Generates a SPLIT sitemap index + sub-sitemaps to avoid the 5.7 MB
- * single-file problem. Google processes each sub-sitemap independently
- * which speeds up indexing.
+ * Generates a clean, lean sitemap index + sub-sitemaps.
+ * Avoids mass-submitting 28,000 raw thin URLs by prioritizing:
+ *   1. Core site pages & legal/E-E-A-T foundations (no doorway / noindex routes)
+ *   2. The 14 verified categories
+ *   3. Editorial Tier 1 verified games + top played category games (~400 high-intent games)
+ *   4. Verified blog guides
  *
  * Output:
- *   public/sitemap.xml          ← Sitemap Index (references all sub-sitemaps)
- *   public/sitemap-static.xml   ← Homepage + legal + landing pages
- *   public/sitemap-categories.xml ← Category pages
- *   public/sitemap-games.xml    ← All game pages (paginated by priority)
+ *   public/sitemap.xml            ← Sitemap Index (references all sub-sitemaps)
+ *   public/sitemap-static.xml     ← Homepage, categories hub, blog hub, legal/about
+ *   public/sitemap-categories.xml ← 14 verified category hubs
+ *   public/sitemap-games.xml      ← Curated, verified and top-played games
+ *   public/sitemap-blog.xml       ← Blog articles
  *
  * Run: node generate-sitemap.cjs
  */
 
-const fs   = require('fs');
+const fs = require('fs');
 const path = require('path');
 
-const BASE_URL  = 'https://browsergames100.com';
+const BASE_URL = 'https://browsergames100.com';
 const publicDir = path.join(__dirname, 'public');
-const dataDir   = path.join(publicDir, 'data');
-const now       = new Date().toISOString();
-const today     = now.split('T')[0]; // YYYY-MM-DD
+const dataDir = path.join(publicDir, 'data');
+const today = new Date().toISOString().split('T')[0]; // YYYY-MM-DD
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 
@@ -63,28 +66,20 @@ function sitemapIndexEntry(loc, lastmod) {
   ].join('\n') + '\n';
 }
 
-// ─── 1. Static Pages Sitemap ─────────────────────────────────────────────────
+// ─── 1. Static Pages Sitemap (No Noindex / Doorway Routes) ───────────────────
 
 function buildStaticSitemap() {
   const pages = [
-    // Core — highest priority
+    // Core Navigation & Content Hubs
     { url: '/',           freq: 'daily',   pri: '1.0' },
-    { url: '/trending',   freq: 'daily',   pri: '0.9' },
-    { url: '/categories', freq: 'weekly',  pri: '0.8' },
-    { url: '/blog',       freq: 'weekly',  pri: '0.7' },
-    // EEAT / Legal — required for AdSense
-    { url: '/about',      freq: 'monthly', pri: '0.6' },
-    { url: '/contact',    freq: 'monthly', pri: '0.6' },
+    { url: '/categories', freq: 'weekly',  pri: '0.9' },
+    { url: '/blog',       freq: 'weekly',  pri: '0.8' },
+    // Trust, E-E-A-T & Legal Foundations
+    { url: '/about',      freq: 'monthly', pri: '0.7' },
+    { url: '/contact',    freq: 'monthly', pri: '0.7' },
     { url: '/privacy',    freq: 'monthly', pri: '0.5' },
     { url: '/terms',      freq: 'monthly', pri: '0.5' },
-    { url: '/disclaimer', freq: 'monthly', pri: '0.4' },
-    { url: '/dmca',       freq: 'monthly', pri: '0.4' },
-    // SEO Landing Pages
-    { url: '/play-html5-games',        freq: 'weekly', pri: '0.7' },
-    { url: '/free-browser-games',      freq: 'weekly', pri: '0.7' },
-    { url: '/cloud-gaming-unblocked',  freq: 'weekly', pri: '0.7' },
-    { url: '/poki-alternative',        freq: 'weekly', pri: '0.7' },
-    { url: '/unblocked-racing-games',  freq: 'weekly', pri: '0.7' },
+    { url: '/dmca',       freq: 'monthly', pri: '0.5' },
   ];
 
   let entries = '';
@@ -92,10 +87,11 @@ function buildStaticSitemap() {
     entries += urlEntry(`${BASE_URL}${url}`, today, freq, pri);
   });
 
+  console.log(`  ✓ ${pages.length} core static/E-E-A-T pages`);
   return wrapUrlset(entries);
 }
 
-// ─── 2. Categories Sitemap ───────────────────────────────────────────────────
+// ─── 2. Categories Sitemap (Verified 14 Categories) ──────────────────────────
 
 function buildCategoriesSitemap() {
   const catFile = path.join(dataDir, 'categories.json');
@@ -106,35 +102,63 @@ function buildCategoriesSitemap() {
 
   const categories = JSON.parse(fs.readFileSync(catFile, 'utf8'));
   let entries = '';
+  let count = 0;
+
   categories.forEach(cat => {
     if (cat.total_games > 0) {
       entries += urlEntry(`${BASE_URL}/category/${cat.slug}`, today, 'weekly', '0.8');
+      count++;
     }
   });
-  console.log(`  ✓ ${categories.filter(c => c.total_games > 0).length} category pages`);
+
+  console.log(`  ✓ ${count} verified category pages`);
   return wrapUrlset(entries);
 }
 
-// ─── 3. Games Sitemap ────────────────────────────────────────────────────────
+// ─── 3. Curated Games Sitemap (Tier 1 Verified + Top Played) ─────────────────
 
 function buildGamesSitemap() {
-  const slugFile = path.join(dataDir, 'slug-map.json');
-  if (!fs.existsSync(slugFile)) {
-    console.warn('⚠️  slug-map.json not found — skipping games sitemap');
-    return null;
+  const curatedSlugs = new Set();
+
+  // A. Extract all manually verified game slugs from game-descriptions.ts
+  const descFile = path.join(__dirname, 'src', 'data', 'game-descriptions.ts');
+  if (fs.existsSync(descFile)) {
+    const content = fs.readFileSync(descFile, 'utf8');
+    const slugMatches = content.matchAll(/(?:^|\n)\s*(?:["']([^"']+)["']|([a-zA-Z0-9_-]+))\s*:\s*\{/g);
+    for (const m of slugMatches) {
+      const slug = m[1] || m[2];
+      if (slug && slug !== 'gameDescriptions') {
+        curatedSlugs.add(slug);
+      }
+    }
   }
 
-  const slugMap = JSON.parse(fs.readFileSync(slugFile, 'utf8'));
-  const slugs   = Object.keys(slugMap);
+  // B. Extract top 25 most-played games from each of the 14 confirmed category files
+  const catFile = path.join(dataDir, 'categories.json');
+  if (fs.existsSync(catFile)) {
+    const categories = JSON.parse(fs.readFileSync(catFile, 'utf8'));
+    for (const cat of categories) {
+      const catDataPath = path.join(dataDir, `cat-${cat.id}.json`);
+      if (fs.existsSync(catDataPath)) {
+        try {
+          const games = JSON.parse(fs.readFileSync(catDataPath, 'utf8'));
+          games.sort((a, b) => (b.p || 0) - (a.p || 0));
+          for (const g of games.slice(0, 25)) {
+            if (g.s) curatedSlugs.add(g.s);
+          }
+        } catch (e) {
+          // Ignore malformed category data
+        }
+      }
+    }
+  }
 
   let entries = '';
-  slugs.forEach(slug => {
-    // Game pages: priority 0.7 (lower than categories — category pages are the
-    // "silo" pages that pass link equity down to individual games)
-    entries += urlEntry(`${BASE_URL}/game/${slug}`, today, 'monthly', '0.7');
+  curatedSlugs.forEach(slug => {
+    entries += urlEntry(`${BASE_URL}/game/${slug}`, today, 'weekly', '0.7');
   });
 
-  console.log(`  ✓ ${slugs.length} game pages`);
+  console.log(`  ✓ ${curatedSlugs.size} curated and verified game pages`);
   return wrapUrlset(entries);
 }
 
@@ -163,14 +187,14 @@ function buildBlogSitemap() {
     count++;
   }
 
-  console.log(`  ✓ ${count} blog pages`);
+  console.log(`  ✓ ${count} blog article pages`);
   return wrapUrlset(entries);
 }
 
 // ─── Main ────────────────────────────────────────────────────────────────────
 
 function generate() {
-  console.log('\n🗺  BrowserGames100 — Sitemap Generator\n');
+  console.log('\n🗺  BrowserGames100 — Policy-Compliant Sitemap Generator\n');
 
   const files = {
     'sitemap-static.xml':     buildStaticSitemap(),
@@ -185,7 +209,7 @@ function generate() {
     if (!content) continue;
     const outPath = path.join(publicDir, filename);
     fs.writeFileSync(outPath, content, 'utf8');
-    const sizeKB = Math.round(Buffer.byteLength(content, 'utf8') / 1024);
+    const sizeKB = (Buffer.byteLength(content, 'utf8') / 1024).toFixed(1);
     console.log(`  📄 ${filename} — ${sizeKB} KB`);
     written.push(filename);
   }

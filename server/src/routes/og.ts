@@ -78,7 +78,7 @@ router.get('/img', async (req: Request, res: Response) => {
   try {
     const response = await fetch(targetUrl.href, {
       headers: {
-        'User-Agent': 'Mozilla/5.0 (compatible; CloudPlayHub/1.0)',
+        'User-Agent': 'Mozilla/5.0 (compatible; BrowserGames100/1.0)',
         'Referer': 'https://html5.gamemonetize.co/',
         'Accept': 'image/*,*/*;q=0.8'
       }
