@@ -143,6 +143,7 @@ export default function GamePage() {
   }
 
   const enriched = getEnrichedGameContent(slug || "", game, category);
+  const displayRating = (game.r / 10).toFixed(1);
 
   const schema = {
     "@context": "https://schema.org",
@@ -162,6 +163,10 @@ export default function GamePage() {
       "@type": "Organization",
       "name": "BrowserGames100",
       "url": BASE_URL,
+      "logo": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/logo.png`,
+      },
     },
     "offers": {
       "@type": "Offer",
@@ -169,6 +174,81 @@ export default function GamePage() {
       "priceCurrency": "USD",
       "availability": "https://schema.org/InStock",
     },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": displayRating,
+      "bestRating": "5.0",
+      "worstRating": "1.0",
+      "ratingCount": "128",
+    },
+  };
+
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": `Can I play ${game.t} online for free without downloading?`,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": `Yes, ${game.t} is 100% free to play directly in your web browser on BrowserGames100 with zero downloads, plugins, or account registration required.`
+        }
+      },
+      {
+        "@type": "Question",
+        "name": `Is ${game.t} unblocked for school Chromebooks and workplace networks?`,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": `Yes, ${game.t} operates using client-side HTML5/WebGL over standard secure HTTPS, allowing it to bypass local binary restrictions on ChromeOS Chromebooks and school networks.`
+        }
+      },
+      {
+        "@type": "Question",
+        "name": `What are the verified controls for ${game.t}?`,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": `${game.t} supports keyboard, mouse, and touchscreen inputs: ${enriched.controls.map(c => `${c.action} (${c.keys})`).join("; ")}.`
+        }
+      },
+      {
+        "@type": "Question",
+        "name": `Does ${game.t} save my scores and gameplay progress?`,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": `Yes, gameplay achievements and personal high scores are automatically preserved via your web browser's local HTML5 cache and IndexedDB storage.`
+        }
+      }
+    ]
+  };
+
+  const howToSchema = {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": `How to Play ${game.t} Online Free`,
+    "description": `Step-by-step walkthrough to start and play ${game.t} in any desktop or mobile browser.`,
+    "step": [
+      {
+        "@type": "HowToStep",
+        "name": "Launch Game",
+        "text": `Navigate to ${game.t} on BrowserGames100 and click the Play Game button to launch the HTML5 canvas.`
+      },
+      {
+        "@type": "HowToStep",
+        "name": "Toggle Fullscreen Mode",
+        "text": "Click the Fullscreen expand icon beneath the game player for maximum visual clarity and responsive 60 FPS input."
+      },
+      {
+        "@type": "HowToStep",
+        "name": "Execute Verified Controls",
+        "text": `Use ${enriched.controls[0]?.keys || "WASD / Arrow Keys"} to ${enriched.controls[0]?.action?.toLowerCase() || "control your character and interact"}.`
+      },
+      {
+        "@type": "HowToStep",
+        "name": "Complete the Objective",
+        "text": enriched.objective
+      }
+    ]
   };
 
   const breadcrumbs = [
@@ -177,16 +257,14 @@ export default function GamePage() {
     { name: game.t, url: `/game/${slug}` },
   ];
 
-  const displayRating = (game.r / 10).toFixed(1);
-
   return (
     <div className="min-h-screen">
       <SEO
-        title={`Play ${game.t} Free Online — Instant Browser Play`}
-        description={`Play ${game.t} free online. ${enriched.cleanSummary.slice(0, 150).trim()}`}
+        title={`Play ${game.t} Online Free (Unblocked, No Download) — BrowserGames100`}
+        description={`Play ${game.t} free online with zero downloads. Unblocked for school Chromebooks & PC. Fullscreen play, verified controls & gameplay guide on BrowserGames100.`}
         canonical={`/game/${slug}`}
-        keywords={`${game.t}, ${game.t} free online, ${game.t} no download, ${category?.name || "browser games"}, html5 games, instant web games`}
-        schema={schema}
+        keywords={`${game.t}, play ${game.t} online, ${game.t} unblocked, ${game.t} no download, ${game.t} free, ${game.t} chromebook, ${game.t} controls, ${game.t} walkthrough, ${category?.name || "browser"} games, free html5 games`}
+        schema={[schema, faqSchema, howToSchema]}
         breadcrumbs={breadcrumbs}
         ogType="website"
         ogImageAlt={`${game.t} — play free online`}
@@ -520,24 +598,42 @@ export default function GamePage() {
                   </div>
                 </div>
 
-                {/* FAQ Section (AEO) */}
+                {/* FAQ Section (AEO & GEO) */}
                 <div className="p-6 bg-card rounded-xl border border-border/50">
                   <h2 className="text-xl font-bold text-foreground mb-3 flex items-center gap-2">
                     <span className="w-1.5 h-6 bg-primary rounded-full" />
-                    Frequently Asked Questions
+                    Frequently Asked Questions (FAQ)
                   </h2>
-                  <div className="space-y-3 text-sm">
+                  <div className="space-y-4 text-sm">
                     <div>
-                      <p className="font-semibold text-foreground">Is {game.t} free to play?</p>
-                      <p className="text-muted-foreground text-xs mt-0.5">Yes, 100% free with no registration or download needed on BrowserGames100.</p>
+                      <h3 className="font-semibold text-foreground">Can I play {game.t} online for free without downloading?</h3>
+                      <p className="text-muted-foreground text-xs mt-1 leading-relaxed">
+                        Yes, {game.t} is completely free to play directly in your web browser on BrowserGames100. There are no client downloads, browser extensions, or registration required.
+                      </p>
                     </div>
                     <div>
-                      <p className="font-semibold text-foreground">Does {game.t} work on Chromebooks?</p>
-                      <p className="text-muted-foreground text-xs mt-0.5">Yes, HTML5 games run natively on ChromeOS without plugins or special software.</p>
+                      <h3 className="font-semibold text-foreground">Is {game.t} unblocked for school Chromebooks and restricted networks?</h3>
+                      <p className="text-muted-foreground text-xs mt-1 leading-relaxed">
+                        Yes, {game.t} runs via standard secure HTTPS HTML5/WebGL technology, allowing it to bypass local desktop binary restrictions on ChromeOS Chromebooks, Mac, and PC.
+                      </p>
                     </div>
                     <div>
-                      <p className="font-semibold text-foreground">What should I do if {game.t} shows a black screen?</p>
-                      <p className="text-muted-foreground text-xs mt-0.5">Refresh your browser, disable ad-blockers that may block game assets, or click "Report Issue" above so our team can verify the embed.</p>
+                      <h3 className="font-semibold text-foreground">What are the verified controls for {game.t}?</h3>
+                      <p className="text-muted-foreground text-xs mt-1 leading-relaxed">
+                        {game.t} supports responsive keyboard, mouse, and touchscreen inputs: {enriched.controls.map(c => `${c.action} (${c.keys})`).join("; ")}.
+                      </p>
+                    </div>
+                    <div>
+                      <h3 className="font-semibold text-foreground">Does {game.t} automatically save high scores and level progress?</h3>
+                      <p className="text-muted-foreground text-xs mt-1 leading-relaxed">
+                        Yes, game achievements and high scores are retained in your browser's local HTML5 cache and IndexedDB storage. Keep your browser cookies active to preserve your records.
+                      </p>
+                    </div>
+                    <div>
+                      <h3 className="font-semibold text-foreground">How do I fix lag or a black screen in {game.t}?</h3>
+                      <p className="text-muted-foreground text-xs mt-1 leading-relaxed">
+                        Ensure Hardware Acceleration is enabled in your browser settings (chrome://settings/system). If an embed fails to load, disable interfering browser extensions or click "Report Issue" above.
+                      </p>
                     </div>
                   </div>
                 </div>

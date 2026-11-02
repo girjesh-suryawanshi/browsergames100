@@ -73,6 +73,7 @@ function buildStaticSitemap() {
     // Core Navigation & Content Hubs
     { url: '/',           freq: 'daily',   pri: '1.0' },
     { url: '/categories', freq: 'weekly',  pri: '0.9' },
+    { url: '/trending',   freq: 'daily',   pri: '0.9' },
     { url: '/blog',       freq: 'weekly',  pri: '0.8' },
     // Trust, E-E-A-T & Legal Foundations
     { url: '/about',      freq: 'monthly', pri: '0.7' },
@@ -80,6 +81,13 @@ function buildStaticSitemap() {
     { url: '/privacy',    freq: 'monthly', pri: '0.5' },
     { url: '/terms',      freq: 'monthly', pri: '0.5' },
     { url: '/dmca',       freq: 'monthly', pri: '0.5' },
+    { url: '/disclaimer', freq: 'monthly', pri: '0.5' },
+    // High-Value Thematic Gaming Hubs
+    { url: '/play-html5-games',       freq: 'weekly', pri: '0.8' },
+    { url: '/free-browser-games',     freq: 'weekly', pri: '0.8' },
+    { url: '/cloud-gaming-unblocked', freq: 'weekly', pri: '0.8' },
+    { url: '/poki-alternative',       freq: 'weekly', pri: '0.8' },
+    { url: '/unblocked-racing-games', freq: 'weekly', pri: '0.8' },
   ];
 
   let entries = '';
@@ -153,12 +161,20 @@ function buildGamesSitemap() {
     }
   }
 
+  // Filter against slug-map.json to strictly guarantee zero dead 404 links
+  const slugMapPath = path.join(dataDir, 'slug-map.json');
+  const slugMap = fs.existsSync(slugMapPath) ? JSON.parse(fs.readFileSync(slugMapPath, 'utf8')) : {};
+
   let entries = '';
+  let validCount = 0;
   curatedSlugs.forEach(slug => {
-    entries += urlEntry(`${BASE_URL}/game/${slug}`, today, 'weekly', '0.7');
+    if (slugMap[slug]) {
+      entries += urlEntry(`${BASE_URL}/game/${slug}`, today, 'weekly', '0.7');
+      validCount++;
+    }
   });
 
-  console.log(`  ✓ ${curatedSlugs.size} curated and verified game pages`);
+  console.log(`  ✓ ${validCount} curated and verified game pages (verified against database)`);
   return wrapUrlset(entries);
 }
 
@@ -172,19 +188,29 @@ function buildBlogSitemap() {
   }
 
   const content = fs.readFileSync(blogsFile, 'utf8');
-  const postRegex = /\{\s*id:\s*"([^"]+)"[\s\S]*?slug:\s*"([^"]+)"[\s\S]*?publishedAt:\s*"([^"]+)"/g;
-
-  let match;
+  const jsonStart = content.indexOf('[');
+  const jsonEnd = content.lastIndexOf(']');
   let entries = '';
   let count = 0;
 
-  while ((match = postRegex.exec(content)) !== null) {
-    const slug = match[2];
-    const publishedAt = match[3];
-    const lastmod = publishedAt ? publishedAt.split('T')[0] : today;
-
-    entries += urlEntry(`${BASE_URL}/blog/${slug}`, lastmod, 'weekly', '0.8');
-    count++;
+  if (jsonStart !== -1 && jsonEnd !== -1) {
+    try {
+      const posts = JSON.parse(content.substring(jsonStart, jsonEnd + 1));
+      for (const p of posts) {
+        if (p.slug) {
+          const lastmod = p.updatedAt ? p.updatedAt.split('T')[0] : (p.publishedAt ? p.publishedAt.split('T')[0] : today);
+          entries += urlEntry(`${BASE_URL}/blog/${p.slug}`, lastmod, 'weekly', '0.8');
+          count++;
+        }
+      }
+    } catch (e) {
+      console.warn('Fallback regex for blog sitemap due to parse error:', e.message);
+      const slugMatches = content.matchAll(/"slug":\s*"([^"]+)"/g);
+      for (const m of slugMatches) {
+        entries += urlEntry(`${BASE_URL}/blog/${m[1]}`, today, 'weekly', '0.8');
+        count++;
+      }
+    }
   }
 
   console.log(`  ✓ ${count} blog article pages`);

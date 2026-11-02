@@ -124,6 +124,11 @@ if (foundDistDir) {
         if (req.path.startsWith('/api') || req.path.includes('.')) {
             return next();
         }
+        const cleanPath = req.path.replace(/^\/+|\/+$/g, '');
+        const preRenderedFile = path_1.default.join(foundDistDir, cleanPath, 'index.html');
+        if (cleanPath && fs_1.default.existsSync(preRenderedFile)) {
+            return res.sendFile(preRenderedFile);
+        }
         res.sendFile(path_1.default.join(foundDistDir, 'index.html'));
     });
 }

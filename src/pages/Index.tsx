@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import {
   Play, TrendingUp, Zap, Globe, Loader2, Heart, Sparkles, Clock,
-  Monitor, Shield, Wifi, Trophy, ChevronRight, Star, Users, Gamepad2
+  Monitor, Shield, Wifi, Trophy, ChevronRight, Star, Users, Gamepad2, BookOpen, Cpu, ShieldCheck
 } from "lucide-react";
 import GameCard from "@/components/GameCard";
 import AdPlacement from "@/components/AdPlacement";
@@ -19,6 +19,7 @@ import { useRecentlyPlayed } from "@/hooks/useRecentlyPlayed";
 import SEO, { buildWebSiteSchema } from "@/components/SEO";
 import ScraperShield from "@/components/ScraperShield";
 import InstallBanner from "@/components/InstallBanner";
+import { staticBlogPosts } from "@/data/static-blogs";
 
 const BASE_URL = "https://browsergames100.com";
 

@@ -13,8 +13,8 @@ function isSocialBot(userAgent) {
     const bots = [
         'whatsapp', 'facebookexternalhit', 'facebot', 'twitterbot',
         'telegrambot', 'linkedinbot', 'slackbot', 'discordbot',
-        'pinterest', 'googlebot', 'bingbot', 'applebot', 'redditbot',
-        'vkshare', 'w3c_validator', 'curl', 'python', 'axios',
+        'pinterest', 'redditbot',
+        'vkshare',
         'preview', 'link preview', 'iframely', 'embedly'
     ];
     return bots.some(bot => userAgent.toLowerCase().includes(bot));

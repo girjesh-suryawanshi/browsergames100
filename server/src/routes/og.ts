@@ -13,8 +13,8 @@ function isSocialBot(userAgent: string): boolean {
   const bots = [
     'whatsapp', 'facebookexternalhit', 'facebot', 'twitterbot',
     'telegrambot', 'linkedinbot', 'slackbot', 'discordbot',
-    'pinterest', 'googlebot', 'bingbot', 'applebot', 'redditbot',
-    'vkshare', 'w3c_validator', 'curl', 'python', 'axios',
+    'pinterest', 'redditbot',
+    'vkshare',
     'preview', 'link preview', 'iframely', 'embedly'
   ];
   return bots.some(bot => userAgent.toLowerCase().includes(bot));
@@ -92,7 +92,7 @@ router.get('/img', async (req: Request, res: Response) => {
     const contentType = response.headers.get('content-type') || 'image/jpeg';
     res.setHeader('Content-Type', contentType);
     res.setHeader('Cache-Control', 'public, max-age=86400');
-    
+
     // Convert WebStream to Node Stream
     if (response.body) {
       const reader = response.body.getReader();
@@ -186,8 +186,8 @@ router.get('/game/:slug', (req: Request, res: Response) => {
   // In Docker, process.cwd() is /app. We will mount the data directory to /app/public/data.
   // Locally, process.cwd() is the server directory, so we go up one level.
   const isDocker = process.env.NODE_ENV === 'production' || fs.existsSync('/.dockerenv');
-  const publicDir = isDocker 
-    ? path.join(process.cwd(), 'public') 
+  const publicDir = isDocker
+    ? path.join(process.cwd(), 'public')
     : path.join(process.cwd(), '../public');
 
   const gameData = getGameData(slug, publicDir);

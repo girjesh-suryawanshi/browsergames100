@@ -5,6 +5,7 @@ import SEO from "@/components/SEO";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { API_BASE } from "@/lib/api";
 import { staticBlogPosts } from "@/data/static-blogs";
+import { getAuthorProfile } from "@/data/author-profiles";
 
 export default function BlogPost() {
   const { slug } = useParams();
@@ -201,22 +202,27 @@ export default function BlogPost() {
             />
 
             {/* E-E-A-T Author Bio Box */}
-            <div className="mt-12 p-6 rounded-2xl bg-card border border-border/80 flex flex-col sm:flex-row items-center sm:items-start gap-4">
-              <div className="w-14 h-14 rounded-full bg-primary/20 flex items-center justify-center shrink-0 border-2 border-primary/40 font-black text-xl text-primary select-none">
-                {post.authorName ? post.authorName.charAt(0) : "M"}
-              </div>
-              <div className="text-center sm:text-left flex-1">
-                <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2 mb-1">
-                  <h4 className="font-extrabold text-foreground text-base">{post.authorName || "Marcus Vance"}</h4>
-                  <span className="text-[10px] font-bold uppercase tracking-wider bg-primary/10 text-primary px-2 py-0.5 rounded-full">
-                    Verified Gaming Journalist
-                  </span>
+            {(() => {
+              const author = getAuthorProfile(post.authorName);
+              return (
+                <div className="mt-12 p-6 rounded-2xl bg-card border border-border/80 flex flex-col sm:flex-row items-center sm:items-start gap-4">
+                  <div className="w-14 h-14 rounded-full bg-primary/20 flex items-center justify-center shrink-0 border-2 border-primary/40 font-black text-xl text-primary select-none">
+                    {author.name.charAt(0)}
+                  </div>
+                  <div className="text-center sm:text-left flex-1">
+                    <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2 mb-1">
+                      <h4 className="font-extrabold text-foreground text-base">{author.name}</h4>
+                      <span className="text-[10px] font-bold uppercase tracking-wider bg-primary/10 text-primary px-2 py-0.5 rounded-full">
+                        {author.role}
+                      </span>
+                    </div>
+                    <p className="text-xs text-muted-foreground leading-relaxed">
+                      {author.bio}
+                    </p>
+                  </div>
                 </div>
-                <p className="text-xs text-muted-foreground leading-relaxed">
-                  Senior Gaming Journalist and Web Technology Specialist at BrowserGames100. Specializing in HTML5 gaming architecture, web game performance tuning, and unblocked gaming strategy guides.
-                </p>
-              </div>
-            </div>
+              );
+            })()}
           </div>
 
           {/* Right Sidebar */}

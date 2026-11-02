@@ -137,6 +137,91 @@ function getGenreDefaults(categorySlug?: string) {
     };
   }
 
+  if (slug.includes("io")) {
+    return {
+      objective: "Grow your avatar, absorb resources on the arena grid, outmaneuver rival players, and dominate the global leaderboard.",
+      controls: [
+        { action: "Steer / Navigate", keys: "Mouse Cursor Position", device: "mouse" as const },
+        { action: "Speed Boost / Dash", keys: "Left Click / Spacebar", device: "all" as const },
+        { action: "Split / Eject Mass", keys: "W / Spacebar", device: "keyboard" as const },
+        { action: "Touch Movement", keys: "Drag Finger across Screen", device: "touch" as const },
+      ],
+      tips: [
+        "Avoid aggressive boosts early in the match as boosting depletes your character mass.",
+        "Patrol the edges of the map to gather pellets safely before engaging center-arena battles.",
+        "Anticipate other players' trajectory angles to encircle or trap smaller opponents.",
+      ],
+    };
+  }
+
+  if (slug.includes("clicker") || slug.includes("idle")) {
+    return {
+      objective: "Tap to generate resources, purchase automated production buildings, research upgrades, and prestige for permanent multipliers.",
+      controls: [
+        { action: "Generate Resource", keys: "Left Mouse Click / Screen Tap", device: "all" as const },
+        { action: "Buy Upgrades", keys: "Click Item in Shop Menu", device: "mouse" as const },
+        { action: "Bulk Purchase (10x/100x)", keys: "Hold Shift + Click", device: "keyboard" as const },
+        { action: "Prestige / Ascend", keys: "Click Ascension Button", device: "all" as const },
+      ],
+      tips: [
+        "Prioritize upgrades that boost your base production per click before heavily investing in idle automation.",
+        "Watch for temporary bonus golden items that appear across the screen for massive multiplier spikes.",
+        "Prestige as soon as bonus multipliers slow down to unlock permanent heavenly upgrades.",
+      ],
+    };
+  }
+
+  if (slug.includes("fighting")) {
+    return {
+      objective: "Deplete your rival's health bar using martial arts strikes, combo sequences, and defensive blocks before the round timer expires.",
+      controls: [
+        { action: "Move / Jump / Crouch", keys: "Arrow Keys / W, A, S, D", device: "keyboard" as const },
+        { action: "Light & Heavy Punch", keys: "J, K Keys / Left Click", device: "keyboard" as const },
+        { action: "Kick & Special Strike", keys: "U, I Keys / Right Click", device: "keyboard" as const },
+        { action: "Block Defense", keys: "Hold Backward Key (Away from Foe)", device: "keyboard" as const },
+      ],
+      tips: [
+        "Master blocking high and low attacks to negate enemy combo damage.",
+        "Do not jump in recklessly; grounded attacks offer faster recovery frames.",
+        "Cancel basic attacks into special moves to execute unblockable juggle combos.",
+      ],
+    };
+  }
+
+  if (slug.includes("adventure")) {
+    return {
+      objective: "Explore immersive game worlds, collect keys and artifacts, bypass environmental traps, and unravel the storyline.",
+      controls: [
+        { action: "Movement & Climbing", keys: "Arrow Keys / W, A, S, D", device: "keyboard" as const },
+        { action: "Interact / Open Doors", keys: "E Key / Spacebar", device: "keyboard" as const },
+        { action: "Inventory / Items", keys: "I Key / Tab", device: "keyboard" as const },
+        { action: "Mobile Directional Pad", keys: "On-Screen Touch D-Pad", device: "touch" as const },
+      ],
+      tips: [
+        "Inspect unusual wall textures or hidden alcoves for secret treasures and health packs.",
+        "Talk to all non-player characters (NPCs) to receive critical quest clues and map markers.",
+        "Save your progress at checkpoints before entering boss arenas or trap corridors.",
+      ],
+    };
+  }
+
+  if (slug.includes("3d")) {
+    return {
+      objective: "Navigate 3D polygon environments, manage camera perspectives, and complete objective-based challenges with 60 FPS precision.",
+      controls: [
+        { action: "Move in 3D Space", keys: "W, A, S, D Keys", device: "keyboard" as const },
+        { action: "Camera Look / Aim", keys: "Mouse Movement", device: "mouse" as const },
+        { action: "Jump / Ascend", keys: "Spacebar", device: "keyboard" as const },
+        { action: "Sprint / Accelerate", keys: "Shift Key", device: "keyboard" as const },
+      ],
+      tips: [
+        "Adjust your mouse sensitivity in the game options for smoother camera tracking.",
+        "Keep your eye on the horizon line rather than looking down to anticipate terrain changes.",
+        "Play in fullscreen mode for lower input latency and full 3D WebGL immersion.",
+      ],
+    };
+  }
+
   // Default Action / Arcade fallback
   return {
     objective: "Navigate levels, avoid obstacles, defeat enemies or clear hazards, and reach the highest score possible.",

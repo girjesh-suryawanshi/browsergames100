@@ -1,6 +1,13 @@
 # BrowserGames100 — robots.txt
 # Policy-Compliant Crawl Directives
 
+# ─── Google AdSense Crawlers ────────────────────────────────
+User-agent: Mediapartners-Google
+Allow: /
+
+User-agent: Google-Display-Ads-Bot
+Allow: /
+
 # ─── Search Engines ─────────────────────────────────────────
 User-agent: Googlebot
 Allow: /

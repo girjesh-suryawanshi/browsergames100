@@ -1,0 +1,26 @@
+{
+  "totalDiscovered": 428,
+  "totalSuccessHtml": 415,
+  "totalUniqueIndexable": 412,
+  "totalUniqueNonIndexable": 16,
+  "totalRedirects": 0,
+  "totalDuplicatesOrCanonicalized": 0,
+  "totalErrors": 0,
+  "totalExcluded": 16,
+  "sitemapCount": 407,
+  "sitemapOrphansCount": 0,
+  "missingFromSitemapCount": 18,
+  "sitemapOrphans": [],
+  "missingFromSitemap": [
+    "https://browsergames100.com/favicon.svg",
+    "https://browsergames100.com/favicon.ico",
+    "https://browsergames100.com/manifest.json",
+    "https://browsergames100.com/rss.xml",
+    "https://browsergames100.com/loading.css",
+    "https://browsergames100.com/assets/react-core-Bks_VvQG.js",
+    "https://browsergames100.com/assets/query-VRF2IW5d.js",
+    "https://browsergames100.com/assets/router-DQaKe0S3.js",
+    "https://browsergames100.com/assets/ui-utils-CfSC9vyW.js",
+    "https://browsergames100.com/assets/radix-ui-Cp4SuaiD.js"
+  ]
+}
