@@ -19,7 +19,9 @@ export default function BlogList() {
           const data = await response.json();
           const published = data.filter((p: any) => p.isPublished);
           if (published.length > 0) {
-            setPosts(published);
+            const staticSlugs = new Set(staticBlogPosts.map(p => p.slug));
+            const customDbPosts = published.filter((p: any) => !staticSlugs.has(p.slug));
+            setPosts([...staticBlogPosts, ...customDbPosts]);
           }
         }
       } catch (err) {

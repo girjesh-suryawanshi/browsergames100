@@ -14,6 +14,12 @@ export default function BlogPost() {
   const [loading, setLoading] = useState<boolean>(!initialPost);
 
   useEffect(() => {
+    if (initialPost) {
+      setPost(initialPost);
+      setLoading(false);
+      return;
+    }
+
     const fetchPost = async () => {
       try {
         const response = await fetch(`${API_BASE}/api/blog/posts/${slug}`);
@@ -32,7 +38,7 @@ export default function BlogPost() {
       }
     };
     fetchPost();
-  }, [slug]);
+  }, [slug, initialPost]);
 
   if (loading) {
     return (
