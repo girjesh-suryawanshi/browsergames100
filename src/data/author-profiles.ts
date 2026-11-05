@@ -24,6 +24,11 @@ export const AUTHOR_PROFILES: Record<string, AuthorProfile> = {
     name: "Sarah Jenkins",
     role: "Editorial Director & Accessibility Lead",
     bio: "Editorial Director at BrowserGames100, championing web accessibility, family-friendly gaming safety, and zero-barrier educational web play."
+  },
+  "Alex Torres": {
+    name: "Alex Torres",
+    role: "Tactical & Combat Gaming Specialist",
+    bio: "Competitive shooter and arena combat specialist focusing on FPS mechanics, pointer-lock precision aiming, and martial arts physics brawlers."
   }
 };
 
@@ -37,4 +42,3 @@ export function getAuthorProfile(name?: string): AuthorProfile {
     bio: "Senior Gaming Journalist and Web Technology Specialist at BrowserGames100. Specializing in HTML5 gaming architecture, web game performance tuning, and unblocked gaming strategy guides."
   };
 }
-

@@ -660,17 +660,20 @@ writePage('blog', buildPageHtml({
       <p class="text-muted-foreground mb-10 max-w-2xl">Expert walkthroughs, curated game rankings, web gaming history, and performance tips for HTML5 gaming.</p>
       
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-        ${staticBlogPosts.map(post => `
+        ${[...staticBlogPosts].sort((a, b) => new Date(b.publishedAt || 0).getTime() - new Date(a.publishedAt || 0).getTime()).map(post => `
           <article class="bg-card rounded-xl border border-border/50 overflow-hidden flex flex-col hover:border-primary/50 transition-colors">
             ${post.coverImage ? `<img src="${escapeHtml(post.coverImage)}" alt="${escapeHtml(post.title)}" class="w-full aspect-[16/9] object-cover" loading="lazy" />` : ''}
             <div class="p-6 flex-1 flex flex-col">
-              <span class="text-xs text-primary font-semibold mb-2">${escapeHtml(post.category || 'Gaming')} · ${escapeHtml(post.readingTime || '4 min read')}</span>
+              <div class="flex items-center justify-between text-xs text-muted-foreground mb-2">
+                <span class="text-primary font-semibold">${escapeHtml(post.category?.name || (typeof post.category === 'string' ? post.category : 'Gaming'))}</span>
+                <span>${escapeHtml((post.publishedAt || '').split('T')[0] || '')}</span>
+              </div>
               <h2 class="text-lg font-bold text-foreground mb-2 hover:text-primary">
                 <a href="/blog/${post.slug}">${escapeHtml(post.title)}</a>
               </h2>
               <p class="text-xs text-muted-foreground mb-4 line-clamp-3 leading-relaxed">${escapeHtml(post.excerpt || '')}</p>
               <div class="mt-auto pt-4 border-t border-border/30 text-xs text-muted-foreground flex justify-between">
-                <span>By ${escapeHtml(post.authorName || 'Editor')}</span>
+                <span>By ${escapeHtml(post.authorName || 'Editor')} · ${escapeHtml(post.readingTime || '5 min')}</span>
                 <a href="/blog/${post.slug}" class="text-primary font-semibold hover:underline">Read Article →</a>
               </div>
             </div>
@@ -682,13 +685,13 @@ writePage('blog', buildPageHtml({
 }));
 generatedCount++;
 
-// All Blog Posts
+// All Blog Posts (Enriched with BlogPosting, FAQPage, and BreadcrumbList schemas)
 for (const post of staticBlogPosts) {
   const articleSchema = {
     '@context': 'https://schema.org',
     '@type': 'BlogPosting',
     'headline': post.title,
-    'description': post.excerpt || post.title,
+    'description': post.seoDescription || post.excerpt || post.title,
     'author': {
       '@type': 'Person',
       'name': post.authorName || 'BrowserGames100 Editorial Team'
@@ -707,13 +710,41 @@ for (const post of staticBlogPosts) {
     }
   };
 
+  const faqSchema = post.faq && post.faq.length > 0 ? {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    'mainEntity': post.faq.map(item => ({
+      '@type': 'Question',
+      'name': item.question,
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': item.answer
+      }
+    }))
+  } : null;
+
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    'itemListElement': [
+      { '@type': 'ListItem', 'position': 1, 'name': 'Home', 'item': `${BASE_URL}/` },
+      { '@type': 'ListItem', 'position': 2, 'name': 'Blog', 'item': `${BASE_URL}/blog` },
+      { '@type': 'ListItem', 'position': 3, 'name': post.title, 'item': `${BASE_URL}/blog/${post.slug}` }
+    ]
+  };
+
+  const schemas = [articleSchema];
+  if (faqSchema) schemas.push(faqSchema);
+  schemas.push(breadcrumbSchema);
+
   writePage(`blog/${post.slug}`, buildPageHtml({
-    title: `${post.title} — BrowserGames100 Blog`,
-    description: post.excerpt || `${post.title} — in-depth guide on BrowserGames100.`,
+    title: post.seoTitle || `${post.title} — BrowserGames100 Blog`,
+    description: post.seoDescription || post.excerpt || `${post.title} — in-depth guide on BrowserGames100.`,
     canonicalUrl: `${BASE_URL}/blog/${post.slug}`,
     ogType: 'article',
     ogImage: post.coverImage,
-    jsonLd: articleSchema,
+    keywords: post.tags || `${post.title}, browser games, html5 games, walkthrough, gaming guide`,
+    jsonLd: schemas,
     bodyContent: `
       <article class="max-w-4xl mx-auto px-4 py-12">
         <nav class="text-xs text-muted-foreground mb-6">
@@ -723,7 +754,7 @@ for (const post of staticBlogPosts) {
         </nav>
 
         <header class="mb-8">
-          <span class="text-xs font-bold uppercase tracking-wider text-primary">${escapeHtml(post.category || 'Guides')}</span>
+          <span class="text-xs font-bold uppercase tracking-wider text-primary">${escapeHtml(post.category?.name || (typeof post.category === 'string' ? post.category : 'Guides'))}</span>
           <h1 class="text-3xl md:text-5xl font-black text-foreground mt-2 mb-4 leading-tight">${escapeHtml(post.title)}</h1>
           <div class="flex items-center gap-4 text-xs text-muted-foreground border-y border-border/40 py-3">
             <span>By <strong class="text-foreground">${escapeHtml(post.authorName || 'BrowserGames100 Staff')}</strong></span>

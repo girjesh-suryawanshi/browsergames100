@@ -188,7 +188,7 @@ function buildBlogSitemap() {
   }
 
   const content = fs.readFileSync(blogsFile, 'utf8');
-  const jsonStart = content.indexOf('[');
+  const marker = 'export const staticBlogPosts: StaticBlogPost[] = '; const markerIdx = content.indexOf(marker); const jsonStart = markerIdx !== -1 ? content.indexOf('[', markerIdx + marker.length - 2) : content.indexOf('[');
   const jsonEnd = content.lastIndexOf(']');
   let entries = '';
   let count = 0;
